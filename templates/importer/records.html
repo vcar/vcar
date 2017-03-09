@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% from "importer/macros.html" import render_field, info_box, box_header %}
+
+{% block title %}
+    vCar importer manager :: Records | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+    <section class="content-header">
+        <h1>
+        Import wizard
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('carboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li><a href="#">Importer</a></li>
+            <li class="active">Import wizard</li>
+        </ol>
+    </section>
+{% endblock content_header %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="callout callout-vcar">
+            <i class="callout-icon">Step 4 of 5</i>
+            <h4>Upload trace files</h4>
+            <p>Upload one or multiple trace files according to the choosed platform.</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-solid vcar-box">
+            {{ box_header('Uploader manager') }}
+            <div class="box-body">
+                <form id="upload" method="post" action="{{ url_for('importer.getfile') }}" enctype="multipart/form-data">
+                    <div id="drop">
+                        Drop Here<br>
+                        <a>Browse</a>
+                        <input type="file" name="openxc" multiple />
+                    </div>
+                    <ul><!-- The file uploads will be shown here --></ul>
+                </form>
+            </div>
+            <div class="box-footer">
+                <a class="pull-right btn btn-vcar-action" href="#" id="next">
+                    <i class="fa fa-chevron-right"></i>
+                    Submit
+                </a>
+            </div>
+            <form id="send_files" method="post" action="{{ url_for('importer.records') }}">
+                <!-- hidden inputs goes here -->
+            </form>
+        </div>
+        </form>
+    </div>
+</div>
+{%- endblock content %}
+
+{%- block styles %}
+    {{ super() }}
+    <link href="/static/css/dashboard/uploader{{ minified }}.css" rel="stylesheet" type="text/css" />
+{%- endblock styles %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="/static/js/plugins/Fileupload/jquery.fileupload{{ minified }}.js"></script>
+    <script src="/static/js/plugins/Fileupload/jquery.fileupload-process{{ minified }}.js"></script>
+    <script src="/static/js/plugins/Fileupload/jquery.fileupload-validate{{ minified }}.js"></script>
+    <script src="/static/js/plugins/jQuery-Knob/jquery.knob{{ minified }}.js"></script>
+    <script src="/static/js/dashboard/uploader{{ minified }}.js"></script>
+    <script type="text/javascript">
+        $(function() {
+           $('#next').click(function(e) {
+                e.preventDefault();
+                $("#send_files").submit();
+            });
+        });
+    </script>
+{% endblock %}
