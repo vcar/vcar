@@ -1,0 +1,12 @@
+{% macro breadcrumb(title='Dashboard', subtitle='Home page', breadcrumb=['Home', 'Dashboard']) %}
+    <h1>
+        {{ title }}
+        <small>{{ subtitle }}</small>
+    </h1>
+    <ol class="breadcrumb">
+        {% for item in breadcrumb %}
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        {% endfor %}
+        <li class="active">Dashboard</li>
+    </ol>
+{% endmacro %}

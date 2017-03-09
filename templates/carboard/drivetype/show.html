@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% from "carboard/macros.html" import render_pagination %}
+
+{% block title %}
+    Drive type details | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+	<section class="content-header">
+		<h1>
+		Drive type details
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+			<li><a href="#">Drive type</a></li>
+			<li class="active">Drive type details</li>
+		</ol>
+	</section>
+{% endblock content_header %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title">Drive type : {{ drivetype.title }}</h3>
+                </div>
+
+                <div class="box-body">
+
+                    <div class="line">
+                        <strong class="line-title">ID</strong>
+                        <p class="line-body">{{ drivetype.id }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Type</strong>
+                        <p class="line-body">{{ drivetype.name }}</p>
+                    </div>
+
+                </div>
+
+                <div class="box-footer form-footer">
+                    <a href="{{ url_for('carboard.editDriveType', id=drivetype.id) }}" class="btn btn-success" >Edit</a>
+                    <a href="{{ url_for('carboard.deleteDriveType', id=drivetype.id) }}" class="btn btn-danger" >Delete</a>
+                    <a href="{{ url_for('carboard.indexDriveType') }}" class="btn btn-default pull-right">Back to list</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

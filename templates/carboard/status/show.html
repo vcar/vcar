@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% from "carboard/macros.html" import render_pagination %}
+
+{% block title %}
+    Status details | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+	<section class="content-header">
+		<h1>
+		Status details
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+			<li><a href="#">Status</a></li>
+			<li class="active">Status details</li>
+		</ol>
+	</section>
+{% endblock content_header %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title">Status : {{ status.title }}</h3>
+                </div>
+
+                <div class="box-body">
+
+                    <div class="line">
+                        <strong class="line-title">ID</strong>
+                        <p class="line-body">{{ status.id }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Class color</strong>
+                        <p class="line-body">{{ status.title }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Title</strong>
+                        <p class="line-body"><span class="label bg-{{ status.color }}"> {{ status.color }} </span></p>
+                    </div>
+
+                </div>
+
+                <div class="box-footer form-footer">
+                    <a href="{{ url_for('carboard.editStatus', id=status.id) }}" class="btn btn-success" >Edit</a>
+                    <a href="{{ url_for('carboard.deleteStatus', id=status.id) }}" class="btn btn-danger" >Delete</a>
+                    <a href="{{ url_for('carboard.indexStatus') }}" class="btn btn-default pull-right">Back to list</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

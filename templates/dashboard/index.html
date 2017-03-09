@@ -1,0 +1,109 @@
+{% extends "layouts/default.html" %}
+
+{% block content %}
+
+<h4 class="page-header"><i class="fa fa-area-chart"></i> Engine Speed</h4>
+<iframe class="iframe" src="http://localhost:5601/app/kibana#/visualize/edit/Engine-Speed?embed=true&_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2013-03-26T18:47:26.123Z',mode:quick,to:'2013-03-26T19:29:54.035Z'))&_a=(filters:!(),linked:!t,query:(query_string:(query:'*')),uiState:(vis:(legendOpen:!f)),vis:(aggs:!((id:'1',params:(field:value),schema:metric,type:max),(id:'2',params:(customInterval:'2h',extended_bounds:(),field:'@timestamp',interval:s,min_doc_count:1),schema:segment,type:date_histogram)),listeners:(),params:(addLegend:!t,addTimeMarker:!f,addTooltip:!f,defaultYExtents:!f,interpolate:linear,mode:stacked,scale:linear,setYExtents:!f,shareYAxis:!t,smoothLines:!t,times:!(),yAxis:()),title:'Engine%20Speed',type:area))" height="400" width="100%"></iframe>
+
+<h4 class="page-header"><i class="fa fa-area-chart"></i> Vehicle Speed</h4>
+<iframe class="iframe" src="http://localhost:5601/app/kibana#/visualize/edit/Vehicle-Speed?embed=true&_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2013-03-26T18:47:26.123Z',mode:quick,to:'2013-03-26T19:29:54.035Z'))&_a=(filters:!(),linked:!t,query:(query_string:(query:'*')),uiState:(vis:(colors:('Max%20value':%23CCA300),legendOpen:!f)),vis:(aggs:!((id:'1',params:(field:value),schema:metric,type:max),(id:'2',params:(customInterval:'2h',extended_bounds:(),field:'@timestamp',interval:s,min_doc_count:1),schema:segment,type:date_histogram)),listeners:(),params:(addLegend:!t,addTimeMarker:!f,addTooltip:!t,defaultYExtents:!f,interpolate:linear,mode:stacked,scale:linear,setYExtents:!f,shareYAxis:!t,smoothLines:!f,times:!(),yAxis:()),title:'Vehicle%20Speed',type:area))" height="400" width="100%"></iframe>
+
+<br>
+<div class="row">
+	<div class="col-md-6">
+		<div class="box box-info">
+			<div class="box-header with-border">
+				<h3 class="box-title"><i class="fa fa-area-chart"></i>  All Signals</h3>
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+					</button>
+					<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+				</div>
+			</div>
+			<div class="box-body">
+				<iframe src="http://localhost:5601/app/kibana#/visualize/edit/All-Signals?embed=true&_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2013-03-26T18:47:26.123Z',mode:quick,to:'2013-03-26T19:29:54.035Z'))&_a=(filters:!(),linked:!t,query:(query_string:(query:'*')),uiState:(spy:(mode:(fill:!f,name:!n))),vis:(aggs:!((id:'1',params:(),schema:metric,type:count),(id:'2',params:(field:name,order:desc,orderBy:'1',size:10),schema:segment,type:terms)),listeners:(),params:(addLegend:!t,addTooltip:!t,isDonut:!f,shareYAxis:!t),type:pie))" height="400" width="100%"></iframe>
+			</div>
+			<div class="box-footer clearfix">
+				<i>Here are my litle notes :) :)
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="box box-info">
+			<div class="box-header with-border">
+				<h3 class="box-title"><i class="fa fa-area-chart"></i> Accelerator pedal position</h3>
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+					</button>
+					<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+				</div>
+			</div>
+			<div class="box-body">
+				<iframe src="http://localhost:5601/app/kibana#/visualize/edit/Accelerator-pedal-position?embed=true&_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2013-03-26T18:47:26.123Z',mode:quick,to:'2013-03-26T19:29:54.035Z'))&_a=(filters:!(),linked:!t,query:(query_string:(query:'*')),uiState:(vis:(colors:('Max%20value':%23052B51))),vis:(aggs:!((id:'1',params:(field:value),schema:metric,type:max),(id:'2',params:(customInterval:'2h',extended_bounds:(),field:'@timestamp',interval:s,min_doc_count:1),schema:segment,type:date_histogram)),listeners:(),params:(addLegend:!t,addTimeMarker:!f,addTooltip:!t,defaultYExtents:!f,interpolate:linear,mode:stacked,scale:linear,setYExtents:!f,shareYAxis:!t,smoothLines:!f,times:!(),yAxis:()),type:area))" height="400" width="100%"></iframe>
+			</div>
+			<div class="box-footer clearfix">
+				<i>Here are my litle notes :) :)
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-4">
+		<div class="box box-info">
+			<div class="box-header with-border">
+				<h3 class="box-title"><i class="fa fa-area-chart"></i>  Odometer</h3>
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+					</button>
+					<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+				</div>
+			</div>
+			<div class="box-body">
+				<iframe src="http://localhost:5601/app/kibana#/visualize/edit/Odometer?embed=true&_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2013-03-26T18:47:26.123Z',mode:quick,to:'2013-03-26T19:29:54.035Z'))&_a=(filters:!(),linked:!t,query:(query_string:(query:'*')),uiState:(vis:(colors:('Max%20value':%23BF1B00))),vis:(aggs:!((id:'1',params:(field:value),schema:metric,type:max),(id:'2',params:(customInterval:'2h',extended_bounds:(),field:'@timestamp',interval:s,min_doc_count:1),schema:segment,type:date_histogram)),listeners:(),params:(addLegend:!t,addTimeMarker:!f,addTooltip:!t,defaultYExtents:!f,interpolate:linear,mode:stacked,scale:linear,setYExtents:!t,shareYAxis:!t,smoothLines:!f,times:!(),yAxis:(max:13977,min:13965)),type:area))"height="auto" width="100%"></iframe>
+			</div>
+			<div class="box-footer clearfix">
+				<i>Here are my litle notes :) :)
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="box box-info">
+			<div class="box-header with-border">
+				<h3 class="box-title"><i class="fa fa-area-chart"></i> Fuel consumed since restart</h3>
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+					</button>
+					<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+				</div>
+			</div>
+			<div class="box-body">
+				<iframe src="http://localhost:5601/app/kibana#/visualize/edit/Fuel-consumed-since-restart?embed=true&_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2013-03-26T18:47:26.123Z',mode:quick,to:'2013-03-26T19:29:54.035Z'))&_a=(filters:!(),linked:!t,query:(query_string:(query:'*')),uiState:(spy:(mode:(fill:!f,name:!n))),vis:(aggs:!((id:'1',params:(field:value),schema:metric,type:max),(id:'2',params:(customInterval:'2h',extended_bounds:(),field:'@timestamp',interval:s,min_doc_count:1),schema:segment,type:date_histogram)),listeners:(),params:(addLegend:!t,addTimeMarker:!f,addTooltip:!t,defaultYExtents:!f,interpolate:linear,mode:overlap,scale:linear,setYExtents:!t,shareYAxis:!t,smoothLines:!t,times:!(),yAxis:(max:10,min:6)),type:area))" height="auto" width="100%"></iframe>
+			</div>
+			<div class="box-footer clearfix">
+				<i>Here are my litle notes :) :)
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="box box-info">
+			<div class="box-header with-border">
+				<h3 class="box-title"><i class="fa fa-area-chart"></i> Torque at transmission</h3>
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+					</button>
+					<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+				</div>
+			</div>
+			<div class="box-body">
+				<iframe src="http://localhost:5601/app/kibana#/visualize/edit/Torque-at-transmission?embed=true&_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2013-03-26T18:47:26.123Z',mode:quick,to:'2013-03-26T19:29:54.035Z'))&_a=(filters:!(),linked:!t,query:(query_string:(query:'*')),uiState:(vis:(colors:('Max%20value':%2365C5DB,'Min%20value':%233F2B5B),legendOpen:!f)),vis:(aggs:!((id:'1',params:(field:value),schema:metric,type:min),(id:'2',params:(customInterval:'2h',extended_bounds:(),field:'@timestamp',interval:s,min_doc_count:1),schema:segment,type:date_histogram)),listeners:(),params:(addLegend:!t,addTimeMarker:!f,addTooltip:!t,defaultYExtents:!f,interpolate:linear,mode:stacked,scale:linear,setYExtents:!f,shareYAxis:!t,smoothLines:!f,times:!(),yAxis:()),type:area))" height="auto" width="100%"></iframe>
+			</div>
+			<div class="box-footer clearfix">
+				<i>Here are my litle notes :) :)
+			</div>
+		</div>
+	</div>
+
+</div>
+
+{%- endblock content %}

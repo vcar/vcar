@@ -1,0 +1,14 @@
+{% macro vcarBoxHeader(title='Chart', subtitle='', label='', label_title='hits count') %}
+    <div class="box-header">
+        <h3 class="box-title">
+            {{ title|e }}
+            <span class="subtitle">{{ subtitle|safe}}</span>
+        </h3>
+        <div class="box-tools pull-right">
+            <span data-toggle="tooltip" title="{{ label_title }}" class="badge bg-light-blue">{{ label }}</span>
+            <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse chart"><i class="fa fa-minus"></i></button>
+            <button class="btn btn-box-tool full" data-widget="fullscreen" data-toggle="tooltip" title="Full screen"><i class="fa fa-expand"></i></button>
+            <button class="btn btn-box-tool" data-widget="remove"  data-toggle="tooltip" title="Remove chart"><i class="fa fa-times"></i></button>
+        </div>
+    </div>
+{% endmacro %}

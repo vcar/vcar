@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+
+{% from "carboard/macros.html" import render_field, box_header %}
+
+{% block title %}
+	Feed dataset : {{ dataset.name }} | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+	<section class="content-header">
+		<h1>
+		Feed dataset
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+			<li><a href="#">Dataset</a></li>
+			<li class="active">Feed dataset</li>
+		</ol>
+	</section>
+{% endblock content_header %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box box-solid vcar-box">
+
+				{{ box_header('Feed dataset : ' ~ dataset.name) }}
+
+				<div class="box-body">
+
+					<form id="form" action="{{ url_for('carboard.feedDataset', id=dataset.id) }}" method="POST" enctype="multipart/form-data">                        
+						{{ form.hidden_tag() }}
+
+						{{ render_field(form.where, label=True) }}
+
+						<!-- Local machine (hidden inputs) -->
+						<div id="send_files" >
+							<!-- successfully upload files goes here as hidden inputs -->
+						</div>
+
+						<!-- Remote server -->
+						<div class="conditional" data-cond-option="where" data-cond-value="2">
+							<p class="y-notice">
+								<i class="fa fa-info"></i>
+								To feed the dataset with multiple remote files, they must be archived in one zip archive.
+							</p>
+							{{ render_field(form.remote, label=True) }}
+						</div>
+
+						<!-- vCar platform  -->
+						<div class="conditional" data-cond-option="where" data-cond-value="3">
+							<p class="y-notice">
+								<i class="fa fa-info"></i>
+								You can provide the path to either a file, an archive or a folder.
+							</p>
+							{{ render_field(form.vcar, label=True) }}
+						</div>
+
+					</form>
+
+					<!-- Local machine (uploader with its own form)-->
+					<div class="conditional" data-cond-option="where" data-cond-value="1">
+						<p class="y-notice">
+							<i class="fa fa-info"></i>
+							Awesome, but note that this may take a while to upload large files.
+						</p><br>
+						<form id="upload" action="{{ url_for('carboard.getFileDataset', id=dataset.id) }}" method="POST" enctype="multipart/form-data"> 
+							<div id="drop">
+								Drop Here<br>
+								<a>Browse</a>
+								<input type="file" name="file" multiple />
+							</div>
+							<ul><!-- The file uploads will be shown here --></ul>
+						</form>
+					</div>
+				</div>
+
+				<div class="box-footer form-footer">
+					<button id="submit" class="btn btn-primary">Feed dataset</button>
+					<button id="reset" class="btn btn-success">Reset</button>
+					<a href="{{ url_for('carboard.indexDataset') }}" class="btn btn-default pull-right">Back to list</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{%- block styles %}
+	{{ super() }}
+	<link href="/static/css/dashboard/uploader{{ minified }}.css" rel="stylesheet" type="text/css" />
+{%- endblock styles %}
+
+{% block scripts %}
+	{{ super() }}
+	<script src="/static/js/plugins/Conditionize/conditionize.jquery{{ minified }}.js"></script>
+	<script src="/static/js/plugins/Fileupload/jquery.fileupload{{ minified }}.js"></script>
+	<script src="/static/js/plugins/Fileupload/jquery.fileupload-process{{ minified }}.js"></script>
+	<script src="/static/js/plugins/Fileupload/jquery.fileupload-validate{{ minified }}.js"></script>
+	<script src="/static/js/plugins/jQuery-Knob/jquery.knob{{ minified }}.js"></script>
+	<script src="/static/js/dashboard/uploader{{ minified }}.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$('.conditional').conditionize();
+		$('#submit').click(function(e) {
+			e.preventDefault();
+			$("#form").submit();
+		});
+		$('#reset').click(function(e) {
+			e.preventDefault();
+			$("#form").reset();
+		});
+	});
+	</script>
+{% endblock %}

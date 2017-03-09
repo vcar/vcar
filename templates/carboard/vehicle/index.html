@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% from "carboard/macros.html" import render_pagination %}
+
+{% block title %}
+    List of vehicles | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+	<section class="content-header">
+		<h1>
+		List of vehicles
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ url_for('carboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+			<li><a href="{{ url_for('carboard.indexVehicle') }}">Vehicle</a></li>
+			<li class="active">List of vehicles</li>
+		</ol>
+	</section>
+{% endblock content_header %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="box-actions">
+                        <a href="{{ url_for('carboard.newVehicle') }}" class="btn btn-primary">
+                            Add new vehicle
+                        </a>
+                    </div>
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>ID</th>
+                            <th>Image</th>
+                            <th>Brand</th>
+                            <th>User</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    {% for vehicle in vehicles.items %}
+                        <tr>
+                            <td><a href="{{ url_for('carboard.showVehicle', id=vehicle.id) }}">{{ vehicle.id }}</a></td>
+                            <td><a href="{{ url_for('carboard.showVehicle', id=vehicle.id) }}">
+                            {% if vehicle.image %}
+                                <img class="avatar table-avatar" src="{{ resized_img_src(config.UPLOAD_VEHICLE + vehicle.image, width=60) }}" alt="{{ vehicle.vehiclename }}">
+                            {% else %}
+                                <img class="avatar table-avatar" src="/static{{ config.UPLOAD_VEHICLE}}default.png">
+                            {% endif %}
+                            </a></td>
+                            <td>{{ vehicle.brand }}</td>
+                            <td>{{ vehicle.user.fullname }}</td>
+                            <td><span class="label bg-{{ vehicle.status.color }}">{{ vehicle.status.title }}</span></td>
+                            <td>
+                                <a href="{{ url_for('carboard.showVehicle', id=vehicle.id) }}" class="btn btn-default btn-sm" data-toggle="tooltip" title="Show"><i class="fa fa-eye"></i></a>
+
+                                <a href="{{ url_for('carboard.toggleVehicle', id=vehicle.id) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Toggle status"><i class="fa fa-toggle-on"></i></a>
+
+                                <a href="{{ url_for('carboard.editVehicle', id=vehicle.id) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>
+
+                                <a href="{{ url_for('carboard.deleteVehicle', id=vehicle.id) }}" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Remove"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </table>
+                </div>
+                <div class="box-footer clearfix">
+                    {{render_pagination(vehicles)}}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "layout_lite.html" %}
+{% from "carboard/macros.html" import render_field %}
+
+{% block title %}
+	Log In | {{ super() }}
+{% endblock %}
+
+{%- block styles %}
+	{{ super() }}
+    <!-- User style  -->
+    <link href="/static/css/user{{ minified }}.css" rel="stylesheet" type="text/css" />
+{%- endblock styles %}
+
+{% block bodyclass %}
+    login-page
+{% endblock %}
+
+{% block body %}
+<div class="login-box">
+	<div class="login-logo">
+		v<strong>C</strong>ar
+	</div>
+	<div class="login-box-body">
+		<p class="login-box-msg">Log into your account</p>
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+			<ul>
+				{% for message in messages %}
+					<li>{{ message }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+		{% endwith %}
+
+		{# <form action="{{ url_for('carboard.login') }}" method="POST" enctype="multipart/form-data"> #}
+		<form method="POST" enctype="multipart/form-data">
+			{{ form.hidden_tag() }}
+			{% for field in form %}
+				{{ render_field(field) }}
+			{% endfor %}
+			<div class="row">
+				<div class="col-xs-12">
+					<button type="submit" class="btn btn-primary btn-block btn-flat">Log In</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}

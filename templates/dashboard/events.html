@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+    <script>
+        var source = new EventSource(
+            "/events"
+        );
+        source.onmessage = function(event)
+        {
+            console.log(event);
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>

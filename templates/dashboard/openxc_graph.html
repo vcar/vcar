@@ -1,0 +1,68 @@
+{% extends "layouts/dashboard.html" %}
+{% from "dashboard/macros.html" import vcarBoxHeader %}
+
+{%- block styles %}
+	{{ super() }}
+    <link href="/static/css/libraries/Vis/vis{{ minified }}.css" rel="stylesheet" type="text/css" />
+{%- endblock styles %}
+
+{% block content %}
+    <div class="vcar">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="callout callout-vcar">
+                        <i class="icon fa fa-info-circle callout-icon"></i>
+                    <h4>OpenXC Dashboard</h4>
+                    <p>Explore and visualize your uploader Openxc vehicle trace files.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-solid vcar-box vcar-chartbox">
+                    {{ vcarBoxHeader(
+                        'Driver Graph',
+                        'Tracked way while driving'
+                    )}}
+                    <div class="box-body vcar-task">
+                        <div id="graph" class="vcar-vis"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endblock content %}
+
+{%- block scripts %}
+	{{ super() }}
+    <script src="/static/js/libraries/Vis/vis{{ minified }}.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(window).load(function() {
+            // $('.full').click(function(e){
+            //     $('.vcar-box').toggleClass('fullscreen');
+            // });
+        });
+        var nodes = new vis.DataSet({{ graph.nodes|safe }});
+        var edges = new vis.DataSet({{ graph.edges|safe }});
+        var container = document.getElementById("graph");
+        var data = {nodes: nodes, edges: edges};
+        var options = {
+            nodes: { size: 25, font: {size: 14} },
+            edges: {
+                font: {size: 10, align: 'middle'},
+                color: 'gray',
+                arrows: { to: {enabled: true, scaleFactor: 0.5} },
+                smooth: {enabled: true}
+            },
+            layout:{
+                hierarchical: false
+            },
+            physics: {
+                enabled: {{ graph.physics|safe }},
+                "timestep": 1,
+                stabilization: true
+            }
+        };
+        var network = new vis.Network(container, data, options);
+    </script>
+{%- endblock scripts %}

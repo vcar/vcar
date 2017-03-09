@@ -1,0 +1,43 @@
+{% extends "layouts/dashboard.html" %}
+{% from "dashboard/macros.html" import vcarBoxHeader %}
+
+{%- block styles %}
+	{{ super() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/leaflet/1.0.0-rc.1/leaflet.css" />
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+{%- endblock styles %}
+
+{% block content %}
+    <div class="vcar">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="callout callout-vcar">
+                        <i class="icon fa fa-info-circle callout-icon"></i>
+                    <h4>OpenXC Map Tracker</h4>
+                    <p>Explore and visualize the path taken by the Openxc Vehicle Interface Hardware (VI) while recording.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-solid vcar-box vcar-chartbox">
+                    {{ vcarBoxHeader(
+                        'vCar Map',
+                        'Tracked way while driving'
+                    )}}
+                    <div class="box-body vcar-task">
+                        <div id="map" class="vcar-vis"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endblock content %}
+
+{%- block scripts %}
+	{{ super() }}
+    <script src="/static/js/libraries/Elasticsearch/elasticsearch.jquery{{ minified }}.js"></script>
+    <script src="https://cdn.jsdelivr.net/leaflet/1.0.0-rc.1/leaflet-src.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <script src="/static/js/dashboard/map{{ minified }}.js"></script>
+{%- endblock scripts %}

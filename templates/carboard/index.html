@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+
+{% from "carboard/macros.html" import small_box, box_header %}
+
+{% block title %}
+    vCar Dashboard | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+	<section class="content-header">
+		<h1>
+		Dashboard
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ url_for('carboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+		</ol>
+	</section>
+{% endblock content_header %}
+
+{% block content %}
+<div class="intro">
+	<!-- <div class="row">
+	    <a href="{{ url_for('importboard.index') }}" class="col-md-offset-4 col-md-4">
+	        <div class="box-widget widget-user-2">
+	            <div class="widget-user-header bg-yellow">
+                    <div class="widget-user-image">
+                       <img src="{{resized_img_src(config.UPLOAD_USER+ 'default.png', width=160, mode='crop')}}" class="img-circle">
+                    </div>
+	                <h3 class="widget-user-username">Uplaod Wizard</h3>
+	                <h5 class="widget-user-desc">Testing the uplaod wizard ....</h5>
+	            </div>
+	        </div>
+	    </a>
+	</div>
+    <br><br><br><br> -->
+    <div class="callout callout-vcar-border">
+        <p>Start importing your record files using one of the available models listed below.</p>
+        <div class="row">
+            <div class="col-lg-3 col-xs-6">
+                {{ small_box("OpenXC", "Ford OpenXc Project", "Get started", url_for('dashboard.import_openxc'), "ion-bag", "bg-aqua") }}
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                {{ small_box("Hum", "Smarter car, Smarter you", "More info", "#", "ion-stats-bars", "bg-green") }}
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                {{ small_box("Vinli", "Your Car Connected", "More info", "#", "ion-person-add", "bg-yellow") }}
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                {{ small_box("Vyncs", "The vyncs link", "More info", "#", "ion-pie-graph", "bg-red") }}
+            </div>
+        </div>
+    </div>
+    <hr class="divider">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="box vcar-box vcar-box-sm">
+                {{ box_header('Latest Records') }}
+                <div class="box-body">
+                    {% for record in records %}
+                    <div class="line-sm">
+                        <div class="line-body">
+                            <div class="line-icon">
+                                <a href="/static{{ config.UPLOAD_RECORDS}}{{ record.trace}}" target="_blank">
+                                    <i class="fa fa-cloud-download"></i>
+                                </a>
+                            </div>
+                            <a href="{{ url_for('carboard.showRecord', id=record.id) }}">
+                                {{ record.name }}
+                                , by <i class="fa fa-male"> {{ record.driver }}</i>
+                                , using <i class="fa fa-car"> {{ record.vehicle.brand }}</i>.
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class='selector'>
+                <button>vCar</button>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="box vcar-box vcar-box-sm">
+                {{ box_header('Latest vehicles & drivers added') }}
+                <div class="box-body">
+                    {% for vehicle in vehicles %}
+                    <div class="line-sm">
+                        <div class="line-body">
+                            <div class="line-icon">
+                                {% set image=vehicle.image if vehicle.image  else 'default.png' %}
+                                <img class="avatar" src="{{ resized_img_src(config.UPLOAD_VEHICLE + image, width=20, height=20, mode='crop') }}">
+                            </div>
+                            <a href="{{ url_for('carboard.showVehicle', id=vehicle.id) }}">
+                                {{ vehicle.brand }} ({{ vehicle.model }})
+                                , by <i class="fa fa-male"> {{ vehicle.driver}}</i>.
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="divider">
+    <div class="callout callout-vcar-border">
+        <p>Statistics about your activity</p>
+        <div class="row text-left">
+            <div class="col-lg-3 col-xs-6">
+                Records:<br>
+                - All time : <b>20</b> <br>
+                - Last month : <b>80</b> <br>
+                - last week : <b>4</b> <br>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                Vehicles<br>
+                - All time :  <b>8</b> <br>
+                - Last month : <b>2</b> <br>
+                - last week : <b>1</b> <br>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                Drivers<br>
+                - All time :  <b>4</b> <br>
+                - Last month : <b>3</b> <br>
+                - last week : <b>0</b> <br>
+            </div>
+        </div>
+    </div>
+</div>
+{%- endblock content %}

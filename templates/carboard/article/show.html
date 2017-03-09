@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% from "carboard/macros.html" import render_pagination %}
+
+{% block title %}
+    Article details | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+	<section class="content-header">
+		<h1>
+		Article details
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+			<li><a href="#">Article</a></li>
+			<li class="active">Article details</li>
+		</ol>
+	</section>
+{% endblock content_header %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title"><b>Article</b> : {{ article.name }}</h3>
+                </div>
+
+                <div class="box-body">
+
+                    <div class="line">
+                        <strong class="line-title">ID</strong>
+                        <p class="line-body">{{ article.id }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Name</strong>
+                        <p class="line-body"><b>{{ article.name }}</b></p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Authors</strong>
+                        <p class="line-body"><b>{{ article.authors }}</b></p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Date of publication</strong>
+                        <p class="line-body">{{ article.publication_date.strftime('%d-%m-%Y') }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Keywords</strong>
+                        <p class="line-body">{{ article.keywords }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Abstract</strong>
+                        <p class="line-body">{{ article.abstract }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Reference</strong>
+                        <p class="line-body">{{ article.reference }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">view article</strong>
+                        <p class="line-body"> <a href="{{ article.link }}">{{ article.link }}</a></p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Linked to dataset</strong>
+                        <p class="line-body">
+                            {% if article.dataset %}
+                                <a href="{{ url_for('carboard.showDataset', id=article.dataset.id) }}">{{ article.dataset }}</a></p>
+                            {% else %}
+                                --
+                            {% endif %}
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Creation</strong>
+                        <p class="line-body">{{ article.created.strftime('%d-%m-%Y')}}</p>
+                    </div>
+
+                </div>
+
+                <div class="box-footer form-footer">
+                    <a href="{{ url_for('carboard.editArticle', id=article.id) }}" class="btn btn-success" >Edit</a>
+                    <a href="{{ url_for('carboard.deleteArticle', id=article.id) }}" class="btn btn-danger" >Delete</a>
+                    <a href="{{ url_for('carboard.indexArticle') }}" class="btn btn-default pull-right">Back to list</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+{% from "carboard/macros.html" import render_pagination %}
+
+{% block title %}
+    List of drivers | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+	<section class="content-header">
+		<h1>
+		List of drivers
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ url_for('carboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+			<li><a href="{{ url_for('carboard.indexDriver') }}">Driver</a></li>
+			<li class="active">List of drivers</li>
+		</ol>
+	</section>
+{% endblock content_header %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="box-actions">
+                        <a href="{{ url_for('carboard.newDriver') }}" class="btn btn-primary">
+                            Add new driver
+                        </a>
+                    </div>
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>ID</th>
+                            <th>Avatar</th>
+                            <th>Fullname</th>
+                            <th>User</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    {% for driver in drivers.items %}
+                        <tr>
+                            <td><a href="{{ url_for('carboard.showDriver', id=driver.id) }}">{{ driver.id }}</a></td>
+                            <td><a href="{{ url_for('carboard.showDriver', id=driver.id) }}">
+                            {% if driver.avatar %}
+                                <img class="avatar table-avatar" src="{{ resized_img_src(config.UPLOAD_DRIVER + driver.avatar, width=60) }}" alt="{{ driver.drivername }}">
+                            {% else %}
+                                <img class="avatar table-avatar" src="/static{{ config.UPLOAD_DRIVER}}default.png">
+                            {% endif %}
+                            </a></td>
+                            <td>{{ driver.fullname }}</td>
+                            <td>{{ driver.user.fullname }}</td>
+                            <td>
+                                {% if driver.status == 1 %}
+                                    <span class="label bg-green">Activated</span>
+                                {% else %}
+                                    <span class="label bg-red">Disabled</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ url_for('carboard.showDriver', id=driver.id) }}" class="btn btn-default btn-sm" data-toggle="tooltip" title="Show"><i class="fa fa-eye"></i></a>
+
+                                <a href="{{ url_for('carboard.toggleDriver', id=driver.id) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Toggle status"><i class="fa fa-toggle-on"></i></a>
+
+                                <a href="{{ url_for('carboard.editDriver', id=driver.id) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>
+
+                                <a href="{{ url_for('carboard.deleteDriver', id=driver.id) }}" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Remove"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </table>
+                </div>
+                <div class="box-footer clearfix">
+                    {{render_pagination(drivers)}}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

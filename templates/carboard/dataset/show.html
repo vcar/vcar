@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+
+{% from "carboard/macros.html" import render_pagination %}
+
+{% block title %}
+    Dataset details | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+	<section class="content-header">
+		<h1>
+		Dataset details
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+			<li><a href="#">Dataset</a></li>
+			<li class="active">Dataset details</li>
+		</ol>
+	</section>
+{% endblock content_header %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title">Dataset : {{ dataset.name }}</h3>
+                    <div class="box-actions pull-right">
+                        <a href="{{ url_for('carboard.feedDataset', id=dataset.id) }}" class="btn btn-primary">
+                            <i class="fa fa-puzzle-piece"></i> Fead dataset
+                        </a>
+                    </div>
+                </div>
+
+                <div class="box-body">
+
+                    <div class="line">
+                        <strong class="line-title">ID</strong>
+                        <p class="line-body">{{ dataset.id }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Name</strong>
+                        <p class="line-body"><b>{{ dataset.name }}</b></p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Description</strong>
+                        <p class="line-body"><b>{{ dataset.description }}</b></p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Author</strong>
+                        <p class="line-body">{{ dataset.author }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Lab</strong>
+                        <p class="line-body">{{ dataset.lab }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Website</strong>
+                        <p class="line-body">{{ dataset.website }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Related article</strong>
+                        <p class="line-body">
+                            {% if dataset.article %}
+                                <a href="{{ url_for('carboard.showArticle', id=dataset.article.id) }}">{{ dataset.article }}</a>
+                            {% else %}
+                                <a href="{{ url_for('carboard.newArticle', dataset_id=dataset.id) }}">Add new article</a>
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Status</strong>
+                        <p class="line-body">
+                            {% if dataset.status == 1 %}
+                                <span class="label bg-green">Activated</span>
+                            {% else %}
+                                <span class="label bg-red">Disabled</span>
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Creation</strong>
+                        <p class="line-body">{{ dataset.created.strftime('%d-%m-%Y')}}</p>
+                    </div>
+
+                </div>
+
+                <div class="box-footer form-footer">
+                    <a href="{{ url_for('carboard.editDataset', id=dataset.id) }}" class="btn btn-success" >Edit</a>
+                    <a href="{{ url_for('carboard.deleteDataset', id=dataset.id) }}" class="btn btn-danger" >Delete</a>
+                    <a href="{{ url_for('carboard.indexDataset') }}" class="btn btn-default pull-right">Back to list</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

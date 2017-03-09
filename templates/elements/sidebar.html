@@ -1,0 +1,99 @@
+<a class="user-panel" href="{{ url_for('importboard.index') }}">
+    <div class="pull-left image import-icon">
+        <i class="fa fa-download" aria-hidden="true"></i>
+    </div>
+    <div class="pull-left info">
+        <p>IMPORT DATA</p>
+    </div>
+</a>
+
+<ul class="sidebar-menu">
+    <LI CLASS="header">OPEN<strong>XC</strong> DASHBOARD</LI>
+    <li class="active">
+        <a href="{{ url_for('dashboard.openxc') }}">
+            <i class="fa fa-dashboard"></i> <span>Car Signals</span>
+        </a>
+    </li>
+    <li class="">
+        <a href="{{ url_for('dashboard.openxc_map') }}">
+            <i class="fa fa-map-o"></i> <span>Google Map</span>
+        </a>
+    </li>
+    <li class="">
+        <a href="{{ url_for('dashboard.openxc_graph') }}">
+            <i class="fa fa-share-alt"></i> <span>Driver Graph</span>
+        </a>
+    </li>
+
+    <li class="header">
+        CONFIGURATION</li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-car"></i> <span>Vehicles</span> <i class="fa fa-chevron-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{{ url_for('carboard.indexBrand') }}"><i class="fa fa-square"></i> Brands</a></li>
+            <li><a href="{{ url_for('carboard.indexModel') }}"><i class="fa fa-cubes"></i> Models</a></li>
+            <li><a href="{{ url_for('carboard.indexVehicle') }}"><i class="fa fa-bus"></i> Users vehicles</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-user"></i> <span>Members</span> <i class="fa fa-chevron-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{{ url_for('carboard.indexUser') }}"><i class="fa fa-neuter"></i> Users</a></li>
+            <li><a href="{{ url_for('carboard.indexDriver') }}"><i class="fa fa-cubes"></i> Drivers</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-road"></i> <span>Driving Records</span> <i class="fa fa-chevron-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{{ url_for('carboard.indexRecord') }}"><i class="fa fa-rocket"></i> Records</a></li>
+            <li><a href="{{ url_for('carboard.indexDriveType') }}"><i class="fa fa-sort"></i> Drive types</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-database"></i> <span>Data storage</span> <i class="fa fa-chevron-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li>
+                <a href="#">
+                    <i class="fa fa-cube"></i> Platforms<i class="fa fa-chevron-down pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url_for('carboard.indexPlatform') }}"><i class="fa fa-leaf"></i> Platforms</a></li>
+                    <li><a href="{{ url_for('carboard.indexSignal') }}"><i class="fa fa-star"></i>Main signals</a></li>
+                    <li><a href="{{ url_for('carboard.indexExtrasignal') }}"><i class="fa fa-star-half-o"></i> Extra signals</a></li>
+                    <li><a href="{{ url_for('carboard.indexSignalclass') }}"><i class="fa fa-tags"></i>Signal classes</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-cube"></i> Datasets<i class="fa fa-chevron-down pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url_for('carboard.indexDataset') }}"><i class="fa fa-leaf"></i> Datasets</a></li>
+                    <li><a href="{{ url_for('carboard.indexArticle') }}"><i class="fa fa-book"></i>Related articles</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-cogs"></i> <span>Configuration</span> <i class="fa fa-chevron-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{{ url_for('carboard.indexCountry') }}"><i class="fa fa-globe"></i> Countries</a></li>
+            <li><a href="{{ url_for('carboard.indexStatus') }}"><i class="fa fa-toggle-off"></i> Status</a></li>
+        </ul>
+    </li>
+    <br>
+    <small style="color: gray"></i>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a style="color: red" href="/kill">KILL</a> SERVER?
+    </small>
+</ul>

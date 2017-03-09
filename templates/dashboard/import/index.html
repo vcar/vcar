@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Realtimer</title>
+    </head>
+
+    <body>
+        <script type="text/javascript">
+        var source = new EventSource('/dashboard/stream');
+        source.onmessage = function (event) {
+             console.log(event.data);
+        };
+        </script>
+    </body>
+</html>

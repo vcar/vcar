@@ -1,0 +1,4 @@
+# Update all packages in Venv
+
+pip freeze > requirements.txt
+pip install -r requirements.txt --upgrade

@@ -1,0 +1,137 @@
+{% from "layouts/macros.html" import breadcrumb %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+    {%- block head %}
+        <title>{% block title %}{% endblock title %}</title>
+
+        {%- block metas %}
+            <meta charset="UTF-8">
+            <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        {%- endblock metas %}
+
+        {%- block styles %}
+            <!-- bootstrap-->
+            <link href="/static/css/libraries/Bootstrap/bootstrap{{ minified }}.css" rel="stylesheet" type="text/css" />
+            <!-- Toastr Notifications -->
+            <link href="/static/css/plugins/Toastr/toastr{{ minified }}.css" rel="stylesheet" />
+            <!-- font Awesome -->
+            <link href="/static/css/libraries/FontAwesome/font-awesome{{ minified }}.css" rel="stylesheet" type="text/css" />
+            <!-- Ionicons -->
+            <link href="/static/css/libraries/IonIcons/ionicons{{ minified }}.css" rel="stylesheet" type="text/css" />
+            <!-- Theme style -->
+            <link href="/static/css/libraries/AdminLTE/AdminLTE{{ minified }}.css" rel="stylesheet" type="text/css" />
+            <!-- Skin  -->
+            <link href="/static/css/libraries/AdminLTE/skins/skin-blue.min{{ minified }}.css" rel="stylesheet" type="text/css" />
+            <!-- Pace -->
+            <link href="/static/css/plugins/Pace/pace{{ minified }}.css" rel="stylesheet" type="text/css">
+            <!-- Global -->
+            <link href="/static/css/global{{ minified }}.css" rel="stylesheet" type="text/css">
+            <!-- Global -->
+            <link href="/static/css/dashboard/dashboard{{ minified }}.css" rel="stylesheet" type="text/css">
+        {%- endblock styles %}
+    {%- endblock head %}
+    </head>
+
+    <body class="{% block skin %}skin-blue{% endblock %} sidebar-mini sidebar-collapse">
+
+        <noscript>
+            {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+            <div class="row">
+                <div class="container">
+                    <div class="col-1-1">
+                        {% for category, message in messages %}
+                        <div class="alert-box {{ category }} banner">
+                            {{ message|safe }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %} {% endwith %}
+        </noscript>
+
+        {% block page_body %}
+        <div class="wrapper">
+            <header class="main-header">
+                {% block brand %}
+                <a href="{{ url_for('dashboard.index') }}" class="logo">
+                    <span class="logo-mini"><strong><i class="ion-model-s"></i></strong></span>
+                    <span class="logo-lg">Zcar | <strong><i class="fa fa-car"></i></strong></span>
+                </a>
+                {% endblock %}
+                <nav class="navbar navbar-static-top" role="navigation">
+                    {% block navbar %}
+                        {% include 'elements/navbar.html' %}
+                    {%- endblock navbar %}
+                </nav>
+            </header>
+
+            <aside class="main-sidebar">
+                <section class="sidebar">
+                    {% block sidebar -%}
+                        {% include 'elements/sidebar.html' %}
+                    {%- endblock sidebar %}
+                </section>
+            </aside>
+
+            <div class="content-wrapper">
+                <!-- <section class="content-header">
+                    {% block content_header -%}
+                        {% include 'elements/breadcrumb.html' %}
+                    {%- endblock content_header %}
+                </section> -->
+                <section class="content">
+                    {% block content -%}
+                        <!-- page content -->
+                    {%- endblock content %}
+                </section>
+            </div>
+
+            <footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                    {% block version %}
+                        <b>Version</b> 0.0.1
+                    {% endblock %}
+                </div>
+                {% block copyright %}
+                    <strong>Copyright © 2016</strong> some rights reserved.
+                {% endblock %}
+            </footer>
+        </div>
+        {% endblock %}
+
+        {% block tail %} {% endblock %}
+
+        {% block scripts %}
+            <!-- jQuery -->
+            <script src="/static/js/libraries/jQuery/jquery.js"></script>
+            <!-- jQuery UI 1.11.4 -->
+            <script src="/static/js/libraries/jQueryUI/jquery-ui.js"></script>
+            <!-- Bootstrap -->
+            <script src="/static/js/libraries/Bootstrap/bootstrap.js"></script>
+            <!-- Toastr Notifications -->
+            <script src="/static/js/plugins/Toastr/toastr{{ minified }}.js"></script>
+            <!-- PACE -->
+            <script src="/static/js/plugins/Pace/pace.js"></script>
+            <!-- Slimscroll -->
+            <script src="/static/js/plugins/SlimScroll/jquery.slimscroll.js"></script>
+            <!-- Fastclick -->
+            <script src="/static/js/plugins/Fastclick/fastclick.js"></script>
+            <!-- AdminLTE App -->
+            <script src="/static/js/adminlte/AdminLTE/app.js"></script>
+            <!-- Sparkline -->
+            <script src="/static/js/plugins/Sparkline/jquery.sparkline.js"></script>
+            <!-- ChartJS 1.0.1 -->
+            <script src="/static/js/plugins/Chartjs/Chart.js"></script>
+            <script>
+                /* turning flask flash messages into js popup notifications */
+                window.popupMessages = {{ get_flashed_messages(with_categories=True) | tojson | safe }};
+            </script>
+            <!-- Local application JS -->
+            <script src="/static/js/adminlte/app.js"></script>
+        {%- endblock scripts %}
+
+    </body>
+</html>
