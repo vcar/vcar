@@ -1,16 +1,18 @@
 from flask import (
-    render_template, request, flash, redirect, url_for
+    render_template, request, flash, redirect, url_for, jsonify
 )
 from flask_login import login_required
 
 from . import carboard
-from ..models.platform import Platform
+from ..models.platform import Platform, PlatformSchema
+from ..models.extrasignal import ExtrasignalSchema
 from ..forms.platform import PlatformForm
 from ..helpers import paginate, upload_file
 from ..constants import PER_PAGE, PLATFORM_LOGO_DIR
 from ...extensions import db
 
 # --------------------- /carboard/platform/ : List of platforms ------------------ #
+
 
 @carboard.route('/platform/')
 @login_required
@@ -29,6 +31,23 @@ def indexPlatform():
 def showPlatform(id):
     platform = Platform.query.get_or_404(id)
     return render_template('carboard/platform/show.html', platform=platform)
+
+# ----------------------- /carboard/platform/id/json : Json platform object ------- #
+
+
+@carboard.route('/platform/<int:id>/json', methods=['GET'])
+@login_required
+def jsonPlatform(id):
+    platform = Platform.query.get_or_404(id)
+    platform_schema = PlatformSchema()
+    extrasignal_eschema = ExtrasignalSchema(many=True)
+    platform_result = platform_schema.dump(platform)
+    extrasignal_result = extrasignal_eschema.dump(platform.signals)
+
+    return jsonify({
+        'platform': platform_result.data,
+        'signals': extrasignal_result.data
+    })
 
 # ---------------------- /carboard/platform/new : Add platform -------------------- #
 

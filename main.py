@@ -6,7 +6,7 @@ from config.mail import MailConfig
 
 from app.frontend import frontend
 from app.carboard import carboard
-from app.importboard import importboard
+from app.importer import importer
 from app.vizboard import vizboard
 from app.dashboard import dashboard
 from app.api import api
@@ -27,7 +27,7 @@ DEFAULT_BLUEPRINTS = (
     frontend,
     carboard,
     dashboard,
-    importboard,
+    importer,
     vizboard,
     filters
 )

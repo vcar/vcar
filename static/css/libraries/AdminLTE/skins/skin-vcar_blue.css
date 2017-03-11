@@ -231,6 +231,29 @@ a {
     background-color: #3b8ab8
 }
 /*
+* Modal Action -----------------------------------------------------------------
+*/
+.modal-vcar .modal-dialog{
+    width: 75%;
+}
+.modal-vcar .modal-body {
+	background-color: #2e2e2e !important;
+    color: #ddd;
+}
+.modal-vcar .modal-body b {
+    color: #fff;
+}
+.modal-vcar .modal-header {
+    background-color: #1e282c !important;
+	border-color: #1e282c !important;
+}
+.modal-vcar .modal-body hr {
+    border-color: #7289da;
+}
+.modal-vcar .table-bordered td,.modal-vcar .table-bordered th{
+    border: 1px solid #374850;
+}
+/*
 * Show Action -----------------------------------------------------------------
 */
 .toast-info {

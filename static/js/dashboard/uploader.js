@@ -46,7 +46,7 @@ $(function() {
             } else {
                 // if Error
                 var tpl = $('<li class="error working"><div class="bad-extension"></div><p></p><span></span></li>');
-                tpl.find('p').text(data.files[0].name).append('<i>Extension not allowed</i>');
+                tpl.find('p').text(data.files[0].name).append('<i>Extension not supported</i>');
                 data.context = tpl.appendTo(ul);
                 tpl.find('span').click(function() {
                     tpl.fadeOut(function() {

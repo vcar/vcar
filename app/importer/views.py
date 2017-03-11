@@ -27,7 +27,7 @@ from .constants import VEHICLE_LOGO_DIR, DRIVER_LOGO_DIR
 
 from .platforms.openxc.indexing import task_info
 
-importer = Blueprint('importmanager', __name__, url_prefix='/carboard/import')
+importer = Blueprint('importer', __name__, url_prefix='/carboard/import')
 
 
 # -------------------- /stream : Redis stream server ------------------------ #

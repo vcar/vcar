@@ -1,3 +1,4 @@
+from marshmallow import Schema, fields
 from ..constants import STRING_LEN, ACTIVE
 from ..helpers import get_current_time
 from ...extensions import db
@@ -27,3 +28,16 @@ class Signal(db.Model):
 
     def __repr__(self):
         return str(self.name)
+
+
+
+
+# -------------------------------- Signal Model ----------------------------- #
+
+
+class SignalSchema(Schema):
+    """ Extra signals schema """
+
+    id = fields.Int(dump_only=True)
+    name = fields.Str()
+    signalclass = fields.Str()

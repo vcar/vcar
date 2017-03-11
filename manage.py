@@ -15,20 +15,21 @@ def run():
     """Run in local machine."""
     app.config['TEMPLATES_AUTO_RELOAD'] = True
 
+    # Extrafiles are just used to track changer in template folder
+    # thus our application is forced to reload.
+    extra_dirs = [
+        '/home/karim/OpenXC/Dashboard/Flask/vcar/templates',
+    ]
+    extra_files = extra_dirs[:]
+    for extra_dir in extra_dirs:
+        for dirname, dirs, files in os.walk(extra_dir):
+            for filename in files:
+                filename = os.path.join(dirname, filename)
+                if os.path.isfile(filename):
+                    extra_files.append(filename)
 
-extra_dirs = [
-    '/home/karim/OpenXC/Dashboard/Flask/vcar/templates',
-]
-extra_files = extra_dirs[:]
-for extra_dir in extra_dirs:
-    for dirname, dirs, files in os.walk(extra_dir):
-        for filename in files:
-            filename = os.path.join(dirname, filename)
-            if os.path.isfile(filename):
-                extra_files.append(filename)
-
-    app.run(threaded=True, extra_files=extra_files)
-    # app.run()
+    # app.run(threaded=True, extra_files=extra_files)
+    app.run(extra_files=extra_files)
 
 
 @manager.command

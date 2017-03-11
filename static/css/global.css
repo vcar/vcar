@@ -306,11 +306,12 @@ hr.divider {
     border-style: solid;
     display: inline-block;
     border-radius: 50%;
-    background-color: rgba(249, 106, 106, 0.8);
-    color: rgb(255, 255, 255);
+    background-color: #7289da;
+    color: #FFEB3B;
     font-size: 20px;
-    border-color: rgb(168, 140, 213) rgb(168, 140, 213) rgb(250, 212, 107) rgb(250, 212, 107);
+    border-color: #000 #555 #AAA #fff;
     margin-top: 105px;
+    font-weight: 700;
 }
 .overflow-y-500{
     max-height: 500px;
@@ -459,4 +460,15 @@ hr.divider {
     padding-right: 5px;
     color: #ff0;
     font-size: 110%;
+}
+.info-link {
+    display: inline-block;
+    /* font-weight: bold; */
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    color: #AED581;
+}
+.info-link:hover {
+    text-decoration: underline;
 }

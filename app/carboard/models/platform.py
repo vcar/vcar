@@ -1,3 +1,5 @@
+from marshmallow import Schema, fields
+from .extrasignal import ExtrasignalSchema
 from ..constants import STRING_LEN, ACTIVE
 from ..helpers import get_current_time, slugify
 from ...extensions import db
@@ -30,3 +32,18 @@ class Platform(db.Model):
 
     def __repr__(self):
         return self.name
+
+# -------------------------------- Brand Schema ------------------------------- #
+
+
+class PlatformSchema(Schema):
+    """ Platform Schema """
+
+    id = fields.Int(dump_only=True)
+    name = fields.Str()
+    slug = fields.Str()
+    logo = fields.Str()
+    signals = fields.Nested(ExtrasignalSchema)
+    description = fields.Str()
+    website = fields.Str()
+    created = fields.DateTime(dump_only=True)

@@ -1,3 +1,5 @@
+from marshmallow import Schema, fields
+from .signal import SignalSchema
 from ..constants import STRING_LEN, ACTIVE
 from ..helpers import get_current_time
 from ...extensions import db
@@ -29,3 +31,13 @@ class Extrasignal(db.Model):
 
     def __repr__(self):
         return str(self.name)
+
+# -------------------------------- Extrasignal Model ------------------------------- #
+
+
+class ExtrasignalSchema(Schema):
+    """ Extra signals schema """
+
+    id = fields.Int(dump_only=True)
+    name = fields.Str()
+    signal = fields.Nested(SignalSchema)
