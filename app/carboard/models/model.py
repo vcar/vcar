@@ -1,5 +1,4 @@
-from ..constants import STRING_LEN, ACTIVE
-from ..helpers import get_current_time
+from datetime import datetime
 from ...extensions import db
 
 # -------------------------------- Driver Model ------------------------------- #
@@ -10,13 +9,13 @@ class Model(db.Model):
     __tablename__ = 'models'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(STRING_LEN))
+    name = db.Column(db.String(255))
 
     brand_id = db.Column(db.Integer, db.ForeignKey('brands.id'))
     brand = db.relationship('Brand', backref='model')
 
-    status = db.Column(db.SmallInteger, default=ACTIVE)
-    created = db.Column(db.DateTime(), default=get_current_time())
+    status = db.Column(db.SmallInteger, default=1)
+    created = db.Column(db.DateTime(), default=datetime.utcnow())
 
     def __init__(self, name, brand_id):
         self.name = name

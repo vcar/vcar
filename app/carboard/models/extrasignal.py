@@ -1,7 +1,6 @@
+from datetime import datetime
 from marshmallow import Schema, fields
 from .signal import SignalSchema
-from ..constants import STRING_LEN, ACTIVE
-from ..helpers import get_current_time
 from ...extensions import db
 
 # -------------------------------- Extrasignal Model ------------------------------- #
@@ -12,7 +11,7 @@ class Extrasignal(db.Model):
     __tablename__ = 'extrasignals'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(STRING_LEN))
+    name = db.Column(db.String(255))
 
     signal_id = db.Column(db.Integer, db.ForeignKey('signals.id'))
     signal = db.relationship("Signal", back_populates="extrasignals")
@@ -20,10 +19,10 @@ class Extrasignal(db.Model):
     platform_id = db.Column(db.Integer, db.ForeignKey('platforms.id'))
     platform = db.relationship('Platform', back_populates="signals")
 
-    status = db.Column(db.SmallInteger, default=ACTIVE)
-    created = db.Column(db.DateTime(), default=get_current_time())
+    status = db.Column(db.SmallInteger, default=1)
+    created = db.Column(db.DateTime(), default=datetime.utcnow())
 
-    def __init__(self, name, signal_id, platform_id, status=ACTIVE):
+    def __init__(self, name, signal_id, platform_id, status=1):
         self.name = name
         self.signal_id = signal_id
         self.platform_id = platform_id

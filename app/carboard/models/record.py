@@ -1,5 +1,4 @@
-from ..constants import STRING_LEN, DEFAULT_AVATAR, INACTIVE
-from ..helpers import get_current_time
+from datetime import datetime
 from ...extensions import db
 
 # -------------------------------- Record Model ------------------------------- #
@@ -11,7 +10,7 @@ class Record(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    name = db.Column(db.String(STRING_LEN))
+    name = db.Column(db.String(255))
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User')
@@ -28,11 +27,11 @@ class Record(db.Model):
     status_id = db.Column(db.Integer, db.ForeignKey('status.id'))
     status = db.relationship('Status')
 
-    trace = db.Column(db.String(STRING_LEN))
+    trace = db.Column(db.String(255))
     start = db.Column(db.DateTime(), nullable=True)
     end = db.Column(db.DateTime(), nullable=True)
-    description = db.Column(db.String(STRING_LEN), nullable=True)
-    created = db.Column(db.DateTime(), default=get_current_time())
+    description = db.Column(db.String(255), nullable=True)
+    created = db.Column(db.DateTime(), default=datetime.utcnow())
 
     def __init__(self, user_id, drivetype_id, trace, **kwargs):
         self.vars = kwargs

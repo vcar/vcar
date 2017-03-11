@@ -1,7 +1,7 @@
 import jinja2
 import flask
 
-from .carboard.constants import USER_ROLES
+from .carboard.constants import ROLES
 
 filters = flask.Blueprint('filters', __name__)
 

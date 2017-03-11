@@ -1,20 +1,17 @@
 import os
 from config.config import DefaultConfig
-# ------------------------------ Database constants ------------------------- #
-STRING_LEN = 255
 # ------------------------------ Default constants -------------------------- #
 DEFAULT_AVATAR = "default.png"
-DEFAULT_YEAR_ID = 1
-DEFAULT_MODEL_ID = 1
-# ------------------------------ User role ---------------------------------- #
-USER = 0
-ADMIN = 1
-RESEARCHER = 2
-USER_ROLES = [
+
+# ------------------------------ Roles ---------------------------------- #
+ROLE_USER = 0
+ROLE_ADMIN = 1
+ROLE_RESEARCHER = 2
+ROLES = [
     (0, 'Select an option ...'),
     (1, 'ADMIN'),
     (2, 'USER'),
-    (3, 'Driver')
+    (3, 'RESEARCHER')
 ]
 # ------------------------------ User status -------------------------------- #
 DEFAULT_STATUS = 1

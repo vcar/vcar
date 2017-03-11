@@ -1,5 +1,4 @@
-from ..constants import STRING_LEN, DEFAULT_AVATAR, DEFAULT_STATUS, INACTIVE
-from ..helpers import get_current_time
+from datetime import datetime
 from ...extensions import db
 
 # -------------------------------- Driver Model ------------------------------- #
@@ -13,9 +12,9 @@ class Driver(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     gender = db.Column(db.SmallInteger, default=0)
-    fullname = db.Column(db.String(STRING_LEN), default='Anonyme')
-    avatar = db.Column(db.String(STRING_LEN), nullable=True)
-    city = db.Column(db.String(STRING_LEN), nullable=True)
+    fullname = db.Column(db.String(255), default='Anonyme')
+    avatar = db.Column(db.String(255), nullable=True)
+    city = db.Column(db.String(255), nullable=True)
 
     status_id = db.Column(db.SmallInteger, db.ForeignKey('status.id'))
     status = db.relationship('Status')
@@ -26,7 +25,7 @@ class Driver(db.Model):
     country_id = db.Column(db.Integer, db.ForeignKey('countries.id'))
     country = db.relationship('Country')
 
-    created = db.Column(db.DateTime(), default=get_current_time())
+    created = db.Column(db.DateTime(), default=datetime.utcnow())
 
     def __init__(self, user_id, country_id, **kwargs):
         self.vars = kwargs

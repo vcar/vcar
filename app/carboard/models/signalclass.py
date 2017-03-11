@@ -1,5 +1,4 @@
-from ..constants import STRING_LEN, ACTIVE
-from ..helpers import get_current_time
+from datetime import datetime
 from ...extensions import db
 
 # -------------------------------- Signalclass Model ------------------------------- #
@@ -10,14 +9,14 @@ class Signalclass(db.Model):
     __tablename__ = 'signalclasses'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(STRING_LEN))
+    name = db.Column(db.String(255))
 
     signals = db.relationship("Signal")
 
-    status = db.Column(db.SmallInteger, default=ACTIVE)
-    created = db.Column(db.DateTime(), default=get_current_time())
+    status = db.Column(db.SmallInteger, default=1)
+    created = db.Column(db.DateTime(), default=datetime.utcnow())
 
-    def __init__(self, name, status=ACTIVE):
+    def __init__(self, name, status=1):
         self.name = name
         self.status = status
 

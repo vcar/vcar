@@ -1,5 +1,4 @@
-from ..constants import STRING_LEN, ACTIVE
-from ..helpers import get_current_time
+from datetime import datetime
 from ...extensions import db
 
 # -------------------------------- Driver Model ------------------------------- #
@@ -10,10 +9,10 @@ class Country(db.Model):
     __tablename__ = 'countries'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(STRING_LEN), index=True)
-    code = db.Column(db.String(STRING_LEN))
-    status = db.Column(db.SmallInteger, default=ACTIVE)
-    created = db.Column(db.DateTime(), default=get_current_time())
+    title = db.Column(db.String(255), index=True)
+    code = db.Column(db.String(255))
+    status = db.Column(db.SmallInteger, default=1)
+    created = db.Column(db.DateTime(), default=datetime.utcnow())
 
 
     def __init__(self, title, code):

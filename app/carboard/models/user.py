@@ -1,10 +1,8 @@
 from uuid import uuid4
-
+from datetime import datetime
 from flask_login import UserMixin
 from flask_bcrypt import generate_password_hash, check_password_hash
-
-from ..constants import STRING_LEN, DEFAULT_AVATAR, USER, ADMIN, INACTIVE
-from ..helpers import get_current_time
+from ..constants import DEFAULT_AVATAR, ROLE_USER, ROLE_ADMIN
 from ...extensions import db
 
 
@@ -18,18 +16,18 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    fullname = db.Column(db.String(STRING_LEN))
-    username = db.Column(db.String(STRING_LEN), nullable=False, unique=True)
-    email = db.Column(db.String(STRING_LEN), nullable=False, unique=True)
-    password = db.Column(db.String(STRING_LEN), nullable=False)
-    avatar = db.Column(db.String(STRING_LEN), nullable=True, default=DEFAULT_AVATAR)
-    role = db.Column(db.SmallInteger, default=USER)
-    activation = db.Column(db.String(STRING_LEN))
-    status = db.Column(db.SmallInteger, default=INACTIVE)
-    last_login = db.Column(db.DateTime(), default=get_current_time())
-    created = db.Column(db.DateTime(), default=get_current_time())
+    fullname = db.Column(db.String(255))
+    username = db.Column(db.String(255), nullable=False, unique=True)
+    email = db.Column(db.String(255), nullable=False, unique=True)
+    password = db.Column(db.String(255), nullable=False)
+    avatar = db.Column(db.String(255), nullable=True, default=DEFAULT_AVATAR)
+    role = db.Column(db.SmallInteger, default=ROLE_USER)
+    activation = db.Column(db.String(255))
+    status = db.Column(db.SmallInteger, default=1)
+    last_login = db.Column(db.DateTime(), default=datetime.utcnow())
+    created = db.Column(db.DateTime(), default=datetime.utcnow())
 
-    def __init__(self, username, email, password, fullname=None, avatar=None, role=USER, status=INACTIVE):
+    def __init__(self, username, email, password, fullname=None, avatar=None, role=ROLE_USER, status=1):
         self.fullname = fullname or username
         self.username = username
         self.email = email.lower()
@@ -56,7 +54,7 @@ class User(db.Model, UserMixin):
         return False
 
     def is_admin(self):
-        return self.role == ADMIN
+        return self.role == ROLE_ADMIN
 
     def get_id(self):
         return self.id
@@ -65,10 +63,10 @@ class User(db.Model, UserMixin):
         return '{} ({})'.format(self.username, self.email)
 
     def get_role(self):
-        return USER_ROLE[self.role]
+        return self.role
 
     def get_status(self):
-        return USER_STATUS[self.status]
+        return self.status
 
     @classmethod
     def check_username(cls, username):

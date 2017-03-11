@@ -1,5 +1,5 @@
-from ..constants import STRING_LEN, ACTIVE
-from ..helpers import get_current_time, slugify
+from datetime import datetime
+from ..helpers import slugify
 from ...extensions import db
 
 # -------------------------------- Brand Model ------------------------------ #
@@ -10,17 +10,17 @@ class Dataset(db.Model):
     __tablename__ = 'datasets'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(STRING_LEN))
-    slug = db.Column(db.String(STRING_LEN))
-    description = db.Column(db.String(STRING_LEN))
-    author = db.Column(db.String(STRING_LEN), nullable=True)
-    lab = db.Column(db.String(STRING_LEN), nullable=True)
-    website = db.Column(db.String(STRING_LEN), nullable=True)
+    name = db.Column(db.String(255))
+    slug = db.Column(db.String(255))
+    description = db.Column(db.String(255))
+    author = db.Column(db.String(255), nullable=True)
+    lab = db.Column(db.String(255), nullable=True)
+    website = db.Column(db.String(255), nullable=True)
 
     article = db.relationship("Article", uselist=False, back_populates="dataset")
 
-    status = db.Column(db.SmallInteger, default=ACTIVE)
-    created = db.Column(db.DateTime(), default=get_current_time())
+    status = db.Column(db.SmallInteger, default=1)
+    created = db.Column(db.DateTime(), default=datetime.utcnow())
 
     def __init__(self, name, description, author=None, lab=None, website=None):
         self.name = name

@@ -5,7 +5,7 @@ from wtforms.validators import (
 )
 from flask_wtf.file import FileAllowed, FileField
 from ..models.user import User
-from ..constants import USER_ROLES
+from ..constants import ROLES
 
 # ------------------------ custom validation methods ------------------------ #
 
@@ -76,7 +76,7 @@ class UserForm(Form):
     role = SelectField(
         'Role',
         coerce=int,
-        choices=USER_ROLES,
+        choices=ROLES,
         validators=[
             DataRequired(),
         ]

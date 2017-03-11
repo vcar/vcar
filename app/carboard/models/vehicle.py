@@ -1,5 +1,4 @@
-from ..constants import STRING_LEN, DEFAULT_AVATAR, INACTIVE
-from ..helpers import get_current_time
+from datetime import datetime
 from ...extensions import db
 
 # -------------------------------- Vehicle Model ------------------------------- #
@@ -17,7 +16,7 @@ class Vehicle(db.Model):
     model_id = db.Column(db.Integer, db.ForeignKey('models.id'), nullable=True)
     model = db.relationship('Model')
 
-    image = db.Column(db.String(STRING_LEN), nullable=True)
+    image = db.Column(db.String(255), nullable=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User', backref=db.backref('vehicles', lazy='dynamic'))
@@ -28,7 +27,7 @@ class Vehicle(db.Model):
     status_id = db.Column(db.Integer, db.ForeignKey('status.id'))
     status = db.relationship('Status')
 
-    created = db.Column(db.DateTime(), default=get_current_time())
+    created = db.Column(db.DateTime(), default=datetime.utcnow())
 
     def __init__(self, brand_id, user_id, **kwargs):
         self.vars = kwargs

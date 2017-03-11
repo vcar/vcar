@@ -1,5 +1,5 @@
-from ..constants import STRING_LEN, ACTIVE
-from ..helpers import get_current_time, slugify
+from datetime import datetime
+from ..helpers import slugify
 from ...extensions import db
 
 # -------------------------------- Brand Model ------------------------------- #
@@ -10,12 +10,12 @@ class Brand(db.Model):
     __tablename__ = 'brands'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(STRING_LEN))
-    slug = db.Column(db.String(STRING_LEN))
-    logo = db.Column(db.String(STRING_LEN), nullable=True)
-    code = db.Column(db.String(STRING_LEN))
-    status = db.Column(db.SmallInteger, default=ACTIVE)
-    created = db.Column(db.DateTime(), default=get_current_time())
+    name = db.Column(db.String(255))
+    slug = db.Column(db.String(255))
+    logo = db.Column(db.String(255), nullable=True)
+    code = db.Column(db.String(255))
+    status = db.Column(db.SmallInteger, default=1)
+    created = db.Column(db.DateTime(), default=datetime.utcnow())
 
     def __init__(self, name, code, logo=None):
         self.name = name
