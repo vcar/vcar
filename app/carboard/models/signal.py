@@ -17,12 +17,16 @@ class Signal(db.Model):
     signalclass_id = db.Column(db.Integer, db.ForeignKey('signalclasses.id'))
     signalclass = db.relationship("Signalclass", back_populates="signals")
 
+    signalsource_id = db.Column(db.Integer, db.ForeignKey('signalsources.id'))
+    signalsource = db.relationship("Signalsource", back_populates="signals")
+
     status = db.Column(db.SmallInteger, default=1)
     created = db.Column(db.DateTime(), default=datetime.utcnow())
 
-    def __init__(self, name, signalclass_id, status=1):
+    def __init__(self, name, signalclass_id, signalsource_id, status=1):
         self.name = name
         self.signalclass_id = signalclass_id
+        self.signalsource_id = signalsource_id
         self.status = status
 
     def __repr__(self):
@@ -37,3 +41,4 @@ class SignalSchema(Schema):
     id = fields.Int(dump_only=True)
     name = fields.Str()
     signalclass = fields.Str()
+    signalsource = fields.Str()

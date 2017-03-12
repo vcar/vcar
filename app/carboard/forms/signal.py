@@ -29,3 +29,10 @@ class SignalForm(Form):
             DataRequired(),
         ]
     )
+    signalsource_id = SelectField(
+        'Signal source',
+        coerce=int,
+        validators=[
+            DataRequired(),
+        ]
+    )

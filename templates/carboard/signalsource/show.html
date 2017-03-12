@@ -3,18 +3,18 @@
 {% from "carboard/macros.html" import render_pagination %}
 
 {% block title %}
-    Signal details | {{ super() }}
+    Signal source details | {{ super() }}
 {% endblock %}
 
 {% block content_header %}
 	<section class="content-header">
 		<h1>
-		Signal details
+		Signal source details
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="{{ url_for('carboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
-			<li><a href="{{ url_for('carboard.indexSignal') }}">Signal</a></li>
-			<li class="active">Signal details</li>
+			<li><a href="{{ url_for('carboard.indexSignalsource') }}">Signalsource</a></li>
+			<li class="active">Signal source details</li>
 		</ol>
 	</section>
 {% endblock content_header %}
@@ -26,40 +26,30 @@
             <div class="box">
 
                 <div class="box-header with-border">
-                    <h3 class="box-title">Signal : {{ signal.name }}</h3>
+                    <h3 class="box-title">Signal source : {{ signalsource.name }}</h3>
                 </div>
 
                 <div class="box-body">
 
                     <div class="line">
                         <strong class="line-title">ID</strong>
-                        <p class="line-body">{{ signal.id }}</p>
+                        <p class="line-body">{{ signalsource.id }}</p>
                     </div>
 
                     <div class="line">
                         <strong class="line-title">Name</strong>
-                        <p class="line-body">{{ signal.name }}</p>
+                        <p class="line-body">{{ signalsource.name }}</p>
                     </div>
 
                     <div class="line">
-                        <strong class="line-title">Class</strong>
-                        <p class="line-body">{{ signal.signalclass }}</p>
-                    </div>
-
-                    <div class="line">
-                        <strong class="line-title">Source</strong>
-                        <p class="line-body">{{ signal.signalsource | default('--', true) }}</p>
-                    </div>
-
-                    <div class="line">
-                        <strong class="line-title">Extra signals</strong>
-                        <p class="line-body">{{ signal.extrasignals }}</p>
+                        <strong class="line-title">Signals</strong>
+                        <p class="line-body">{{ signalsource.signals }}</p>
                     </div>
 
                     <div class="line">
                         <strong class="line-title">Status</strong>
                         <p class="line-body">
-                            {% if signal.status == 1 %}
+                            {% if signalsource.status == 1 %}
                                 <span class="label bg-green">Activated</span>
                             {% else %}
                                 <span class="label bg-red">Disabled</span>
@@ -69,15 +59,15 @@
 
                     <div class="line">
                         <strong class="line-title">Creation</strong>
-                        <p class="line-body">{{ signal.created.strftime('%d-%m-%Y')}}</p>
+                        <p class="line-body">{{ signalsource.created.strftime('%d-%m-%Y')}}</p>
                     </div>
 
                 </div>
 
                 <div class="box-footer form-footer">
-                    <a href="{{ url_for('carboard.editSignal', id=signal.id) }}" class="btn btn-success" >Edit</a>
-                    <a href="{{ url_for('carboard.deleteSignal', id=signal.id) }}" class="btn btn-danger" >Delete</a>
-                    <a href="{{ url_for('carboard.indexSignal') }}" class="btn btn-default pull-right">Back to list</a>
+                    <a href="{{ url_for('carboard.editSignalsource', id=signalsource.id) }}" class="btn btn-success" >Edit</a>
+                    <a href="{{ url_for('carboard.deleteSignalsource', id=signalsource.id) }}" class="btn btn-danger" >Delete</a>
+                    <a href="{{ url_for('carboard.indexSignalsource') }}" class="btn btn-default pull-right">Back to list</a>
                 </div>
             </div>
         </div>

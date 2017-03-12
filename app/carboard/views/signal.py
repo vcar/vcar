@@ -6,6 +6,7 @@ from flask_login import login_required
 from . import carboard
 from ..models.signal import Signal
 from ..models.signalclass import Signalclass
+from ..models.signalsource import Signalsource
 from ..forms.signal import SignalForm
 from ..helpers import paginate, choices
 from ..constants import PER_PAGE
@@ -41,10 +42,12 @@ def newSignal():
     """ Add new signal """
     form = SignalForm()
     form.signalclass_id.choices = choices(Signalclass, 'Select signal class', 1)
+    form.signalsource_id.choices = choices(Signalsource, 'Select signal source', 1)
     if form.validate_on_submit():
         signal = Signal(
             name=form.name.data,
             signalclass_id=form.signalclass_id.data,
+            signalsource_id=form.signalsource_id.data,
         )
         db.session.add(signal)
         db.session.commit()
@@ -63,6 +66,7 @@ def editSignal(id):
     signal = Signal.query.get_or_404(id)
     form = SignalForm(obj=signal)
     form.signalclass_id.choices = choices(Signalclass, 'Select signal class', 1)
+    form.signalsource_id.choices = choices(Signalsource, 'Select signal source', 1)
     if form.validate_on_submit():
         form.populate_obj(signal)
         db.session.commit()

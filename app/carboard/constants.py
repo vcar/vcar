@@ -2,6 +2,7 @@ import os
 from config.config import DefaultConfig
 # ------------------------------ Default constants -------------------------- #
 DEFAULT_AVATAR = "default.png"
+DEFAULT_PHOTO = "default.png"
 
 # ------------------------------ Roles ---------------------------------- #
 ROLE_USER = 0

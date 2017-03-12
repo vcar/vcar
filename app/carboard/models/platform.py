@@ -1,6 +1,7 @@
 from datetime import datetime
 from marshmallow import Schema, fields
 from .extrasignal import ExtrasignalSchema
+from ..constants import DEFAULT_PHOTO
 from ..helpers import slugify
 from ...extensions import db
 
@@ -26,7 +27,7 @@ class Platform(db.Model):
     def __init__(self, name, description, website, logo=None):
         self.name = name
         self.slug = slugify(name)
-        self.logo = logo
+        self.logo = logo or DEFAULT_PHOTO
         self.description = description
         self.website = website
 
