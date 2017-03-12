@@ -18,7 +18,7 @@
 		<li class="dropdown user user-menu">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 				<img src="{{resized_img_src(avatar_dir+current_user.avatar, width=160, mode='crop')}}" class="user-image" alt="User Image">
-				<span><i class="caret"></i></span>
+                <span class="hidden-xs">{{ current_user.fullname | upper}}</span>
 			</a>
 			<ul class="dropdown-menu">
 				<!-- User image -->
@@ -28,12 +28,12 @@
 				</li>
 				<!-- Menu Body -->
 				<li class="user-body">
-					<div class="col-xs-6 text-center">
+					<!-- <div class="col-xs-6 text-center">
 						<a href="#">Followers</a>
 					</div>
 					<div class="col-xs-6 text-center">
 						<a href="#">Friends</a>
-					</div>
+					</div> -->
 				</li>
 				<!-- Menu Footer-->
 				<li class="user-footer">
@@ -46,5 +46,9 @@
 				</li>
 			</ul>
 		</li>
+        <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-sliders"></i></a>
+        </li>
+
 	</ul>
 </div>

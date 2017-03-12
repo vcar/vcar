@@ -1,7 +1,9 @@
 /*
 * Show Action -----------------------------------------------------------------
 */
-
+.control-sidebar {
+	height: 100%;
+}
 .line-right {
     float: right !important;
     margin: -11px -10px 0 0;

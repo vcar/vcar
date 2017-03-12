@@ -20,9 +20,9 @@
     <!-- Global -->
     <link rel="stylesheet" href="/static/css/global{{ minified }}.css">
     <!-- Skin  -->
-    <!-- <link rel="stylesheet" href="/static/css/libraries/AdminLTE/skins/skin-light{{ minified }}.css"/> -->
+    <link rel="stylesheet" href="/static/css/libraries/AdminLTE/skins/skin-light{{ minified }}.css"/>
     <!-- Skin  vCar-->
-    <link rel="stylesheet" href="/static/css/libraries/AdminLTE/skins/skin-vcar_blue{{ minified }}.css"/>
+    <!-- <link rel="stylesheet" href="/static/css/libraries/AdminLTE/skins/skin-vcar_blue{{ minified }}.css"/> -->
     <!-- Pace -->
     <link rel="stylesheet" href="/static/css/plugins/Pace/pace{{ minified }}.css">
     <!-- iCheck -->
@@ -101,6 +101,10 @@
                 <strong>Copyright © 2016</strong> some rights reserved.
             {% endblock %}
         </footer>
+
+        {% block settings -%}
+            {% include 'elements/settings.html' %}
+        {%- endblock %}
     </div>
 {% endblock %}
 
