@@ -14,7 +14,7 @@ from app.filters import filters
 
 from app.carboard.models.user import User
 from app.extensions import (
-    db, migrate, mail, cache, toolbar, images, login_manager#, socketio, session
+    db, migrate, mail, cache, toolbar, images, login_manager, redis #, session
 )
 
 
@@ -128,6 +128,8 @@ def configure_extensions(app):
     toolbar.init_app(app)
     # initialize Images utils
     images.init_app(app)
+    # initialize FlaskRedis
+    redis.init_app(app)
     # initialize SocketIO
     # socketio.init_app(app)
     # initialize Session

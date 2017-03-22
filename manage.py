@@ -28,8 +28,8 @@ def run():
                 if os.path.isfile(filename):
                     extra_files.append(filename)
 
-    # app.run(threaded=True, extra_files=extra_files)
-    app.run(extra_files=extra_files)
+    app.run(threaded=True, extra_files=extra_files)
+    # app.run(extra_files=extra_files)
 
 
 @manager.command

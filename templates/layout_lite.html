@@ -7,37 +7,27 @@
 
 
  {%- block styles %}
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="/static/css/libraries/Bootstrap/bootstrap{{ minified }}.css"/>
-    <!-- Theme style -->
-    <link rel="stylesheet" href="/static/css/libraries/AdminLTE/AdminLTE{{ minified }}.css"/>
-    <!-- Toastr Notifications -->
-    <link rel="stylesheet" href="/static/css/plugins/Toastr/toastr{{ minified }}.css"/>
-    <!-- iCheck -->
-    <link rel="stylesheet" href="/static/css/plugins/iCheck/orange{{ minified }}.css"/>
-    <!-- Global -->
-    <link rel="stylesheet" href="/static/css/global{{ minified }}.css">
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="/static/css/vendor{{ minified }}.css"/>
+    <!-- App styles -->
+    <link rel="stylesheet" href="/static/css/app{{ minified }}.css"/>
 {%- endblock styles %}
 
 
 {% block bodyclass %}
-    hold-transition skin-blue sidebar-mini
+    hold-transition skin-vcar sidebar-mini
 {% endblock %}
 
 {% block body %} {% endblock %}
 
 
  {% block scripts %}
-    <!-- jQuery -->
-    <script src="/static/js/libraries/jQuery/jquery{{ minified }}.js"></script>
-    <!-- Toastr Notifications -->
-    <script src="/static/js/plugins/Toastr/toastr{{ minified }}.js"></script>
-    <!-- iCheck -->
-    <script src="/static/js/plugins/iCheck/icheck{{ minified }}.js"></script>
+    <!-- Vendor scripts -->
+    <script src="/static/js/vendor{{ minified }}.js"></script>
     <script>
         /* turning flask flash messages into js popup notifications */
         window.popupMessages = {{ get_flashed_messages(with_categories = True) | tojson | safe }};
     </script>
-    <!-- Local application JS -->
-    <script src="/static/js/adminlte/app{{ minified }}.js"></script>
+    <!-- App scripts -->
+    <script src="/static/js/app{{ minified }}.js"></script>
 {%- endblock scripts %}

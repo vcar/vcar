@@ -17,3 +17,6 @@ migrations/
 
 # Ignore uploaded files
 static/uploads/
+
+# Node packages
+node_modules/

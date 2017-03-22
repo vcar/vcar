@@ -6,13 +6,14 @@ from flask_login import LoginManager
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_socketio import SocketIO
 from flask_images import Images
+from flask_redis import FlaskRedis
 from flask_session import Session
 
-# ------------------------ Inisialize Database object ----------------------- #
+# ------------------------- Inisialize Database object ---------------------- #
 
 db = SQLAlchemy()
 
-# ------------------------ Inisialize Database object ----------------------- #
+# ------------------------- Inisialize Database object ---------------------- #
 
 migrate = Migrate()
 
@@ -20,7 +21,7 @@ migrate = Migrate()
 
 cache = Cache()
 
-# -------------------------- Inisialize Mail object ------------------------- #
+# ------------------------- Inisialize Mail object -------------------------- #
 
 mail = Mail()
 
@@ -28,7 +29,7 @@ mail = Mail()
 
 login_manager = LoginManager()
 
-# ---------------------- Inisialize DebugToolbar object --------------------- #
+# ------------------------- Inisialize DebugToolbar object ------------------ #
 
 toolbar = DebugToolbarExtension()
 
@@ -36,11 +37,15 @@ toolbar = DebugToolbarExtension()
 
 images = Images()
 
-# ------------------------ Inisialize SocketIO object ----------------------- #
+# ------------------------- Inisialize SocketIO object ---------------------- #
 
 # socketio = SocketIO()
 
-# ------------------------ Inisialize Session object ----------------------- #
+# ------------------------- Inisialize Redis object ------------------------- #
+
+redis = FlaskRedis()
+
+# ------------------------- Inisialize Session object ----------------------- #
 """
 	Flask-Session save session data on server with many options: filesystem,
 	Redis, Sqlite, ...

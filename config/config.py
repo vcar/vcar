@@ -9,6 +9,9 @@ class DefaultConfig(object):
     DEBUG = True
     # secret key
     SECRET_KEY = "Zfe&45f4y5fhgse6f4e&@+-%_r4oij5hgfa&#@"
+    # Redis database url
+    REDIS_URL = "redis://:password@localhost:6379/0"
+    # Flask Session type
     SESSION_TYPE = 'filesystem'
     # Configuration for the Flask-Bcrypt extension
     BCRYPT_LEVEL = 12

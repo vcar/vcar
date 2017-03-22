@@ -9,7 +9,7 @@ red = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 
 def task_info(name='info'):
-    pubsub = red.pubsub()
+    pubsub = red.pubsub(ignore_subscribe_messages=True)
     pubsub.subscribe(name)
     for message in pubsub.listen():
         # print("[+] Message: {}".format(message))
