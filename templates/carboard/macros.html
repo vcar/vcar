@@ -10,7 +10,7 @@
               </label>
             </div>
 		{% else %}
-            {% if label %}
+            {% if label and field.label.text != 'Csrf Token' %}
                 {{ field.label(class="control-label") }}
             {% endif %}
             {{ field(placeholder = field.label.text, class = "form-control") }}

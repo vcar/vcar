@@ -1,5 +1,6 @@
 var gulp = require('gulp');
-var concat = require('gulp-concat');
+var concatJs = require('gulp-concat');
+var concatCss = require('gulp-concat-css');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var cleanCSS = require('gulp-clean-css');
@@ -13,17 +14,17 @@ var js_dist = 'static/js/';
 
 var app_css_files = [
     'static/css/styles/global.css',
+    'static/css/skins/skin-vcar_blue.css',
     'static/css/styles/uploader.css',
-    'static/css/skins/skin-vcar_blue.css'
 ];
 
 var vendor_css_files = [
     'static/vendor/bootstrap/bootstrap.css',
+    'static/vendor/adminlte/adminlte.css',
     'static/vendor/font-awesome/font-awesome.css',
     'static/vendor/toastr/toastr.css',
     'static/vendor/pace/pace.css',
     'static/vendor/icheck/icheck.css',
-    'static/vendor/adminlte/adminlte.css'
 ];
 
 var app_js_files = [
@@ -71,10 +72,10 @@ var front_css_files = [
 
 gulp.task('js_vendor', function() {
     return gulp.src(vendor_js_files)
-        .pipe(concat('vendor.js'))
+        .pipe(concatJs('vendor.js'))
         .pipe(gulp.dest(js_dist))
         .pipe(uglify())
-        .pipe(concat('vendor.min.js'))
+        .pipe(concatJs('vendor.min.js'))
         .pipe(gulp.dest(js_dist));
 });
 
@@ -82,10 +83,10 @@ gulp.task('js_vendor', function() {
 
 gulp.task('js_app', function() {
     return gulp.src(app_js_files)
-        .pipe(concat('app.js'))
+        .pipe(concatJs('app.js'))
         .pipe(gulp.dest(js_dist))
         .pipe(uglify())
-        .pipe(concat('app.min.js'))
+        .pipe(concatJs('app.min.js'))
         .pipe(gulp.dest(js_dist));
 });
 
@@ -93,10 +94,10 @@ gulp.task('js_app', function() {
 
 gulp.task('css_vendor', function() {
     return gulp.src(vendor_css_files)
-        .pipe(concat('vendor.css'))
+        .pipe(concatCss('vendor.css'))
         .pipe(gulp.dest(css_dist))
         .pipe(cleanCSS())
-        .pipe(concat('vendor.min.css'))
+        .pipe(concatCss('vendor.min.css'))
         .pipe(gulp.dest(css_dist));
 });
 
@@ -104,10 +105,10 @@ gulp.task('css_vendor', function() {
 
 gulp.task('css_app', function() {
     return gulp.src(app_css_files)
-        .pipe(concat('app.css'))
+        .pipe(concatCss('app.css'))
         .pipe(gulp.dest(css_dist))
         .pipe(cleanCSS())
-        .pipe(concat('app.min.css'))
+        .pipe(concatCss('app.min.css'))
         .pipe(gulp.dest(css_dist));
 });
 
@@ -115,10 +116,10 @@ gulp.task('css_app', function() {
 
 gulp.task('js_front', function() {
     return gulp.src(front_js_files)
-        .pipe(concat('frontend.js'))
+        .pipe(concatJs('frontend.js'))
         .pipe(gulp.dest(js_dist))
         .pipe(cleanCSS())
-        .pipe(concat('frontend.min.js'))
+        .pipe(concatJs('frontend.min.js'))
         .pipe(gulp.dest(js_dist));
 });
 
@@ -126,10 +127,10 @@ gulp.task('js_front', function() {
 
 gulp.task('css_front', function() {
     return gulp.src(front_css_files)
-        .pipe(concat('frontend.css'))
+        .pipe(concatCss('frontend.css'))
         .pipe(gulp.dest(css_dist))
         .pipe(cleanCSS())
-        .pipe(concat('frontend.min.css'))
+        .pipe(concatCss('frontend.min.css'))
         .pipe(gulp.dest(css_dist));
 });
 

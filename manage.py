@@ -28,6 +28,13 @@ def run():
                 if os.path.isfile(filename):
                     extra_files.append(filename)
 
+    """ 
+        Get informed : Flask development server can handle only one request :)
+            * processes = x   : allow x processes (forks) means x clients
+                                Windows sorry you can't fork :)
+            * threaded = Bool : allow or not multiple threads.
+    """
+    # app.run(processes=4, extra_files=extra_files)
     app.run(threaded=True, extra_files=extra_files)
     # app.run(extra_files=extra_files)
 

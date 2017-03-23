@@ -15,6 +15,7 @@ class Platform(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     slug = db.Column(db.String(255))
+    mimetype = db.Column(db.SmallInteger)
     logo = db.Column(db.String(255), nullable=True)
     description = db.Column(db.String(255))
     website = db.Column(db.String(255), nullable=True)
@@ -24,9 +25,10 @@ class Platform(db.Model):
     status = db.Column(db.SmallInteger, default=1)
     created = db.Column(db.DateTime(), default=datetime.utcnow())
 
-    def __init__(self, name, description, website, logo=None):
+    def __init__(self, name, mimetype, description, website, logo=None):
         self.name = name
         self.slug = slugify(name)
+        self.mimetype = mimetype
         self.logo = logo or DEFAULT_PHOTO
         self.description = description
         self.website = website
@@ -43,6 +45,7 @@ class PlatformSchema(Schema):
     id = fields.Int(dump_only=True)
     name = fields.Str()
     slug = fields.Str()
+    mimetype = fields.Str()
     logo = fields.Str()
     signals = fields.Nested(ExtrasignalSchema)
     description = fields.Str()

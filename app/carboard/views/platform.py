@@ -63,6 +63,7 @@ def newPlatform():
         logo = upload_file(form.logo.data, PLATFORM_LOGO_DIR)
         platform = Platform(
             name=form.name.data,
+            mimetype=form.mimetype.data,
             website=form.website.data,
             description=form.description.data,
             logo=logo

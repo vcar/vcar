@@ -1,33 +1,38 @@
-/*! Flask-AdminLTE app.js
- * ======================
- * Main JS application file for Flask-AdminLTE v2. This file
- * should be included in all pages. It handles Flask-Admin
- * specific options and plugins.
- *
- * @Author  Justus Luthy
- * @Email   <justus@luthyenterprises.com>
- * @version 2.3.3
- * @license MIT <http://opensource.org/licenses/MIT>
+/*
+ * Main JS application file :  app.js
+ * =========================
  */
 
 var toastr = window.toastr;
 toastr.options = {
-	closeButton: true,
+	closeButton: false,
 	closeEasing: 'swing',
-	closeMethod: 'slideUp',
-	positionClass: 'toast-top-center',
-	showMethod: 'slideDown',
-	progressBar: true
+	// showMethod: 'slideUp',
+	closeMethod: 'slideDown',
+	positionClass: 'toast-bottom-right',
+	progressBar: false
 };
 
 /* turning flask flash messages into js popup notifications */
+
 window.popupMessages.forEach(function(m, i) {
-	var category = m[0] || 'success';
+	var category = m[0];
 	var text = m[1];
-	console.log(category);
-	console.log(text);
 	setTimeout(function() {
-		toastr.info(text);
+		switch(category){
+			case 'success':
+				toastr.success(text);
+				break;
+			case 'warning':
+				toastr.warning(text);
+				break;
+			case 'error':
+				toastr.error(text);
+				break;
+			default:
+				toastr.info(text);
+				break;
+		}
 	}, (1 + i) * 1500);
 });
 
@@ -54,6 +59,7 @@ $(function() {
 	// }
 
 });
+
 $(function() {
 
     var ul = $('#upload ul');

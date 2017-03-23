@@ -22,6 +22,16 @@ USER_STATUS = {
     INACTIVE: 'inactive',
     ACTIVE: 'active',
 }
+# ------------------------------ User status -------------------------------- #
+MIMETYPE = [
+    (0, 'Select an option ...'),
+    (1, 'CSV'),
+    (2, 'XML'),
+    (3, 'Json'),
+    (4, 'Custom format')
+]
+
+
 # ------------------------------ Form validation configuration -------------- #
 USERNAME_LEN_MIN = 4
 USERNAME_LEN_MAX = 25
