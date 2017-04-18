@@ -7,14 +7,14 @@ from config.mail import MailConfig
 from app.frontend import frontend
 from app.carboard import carboard
 from app.importer import importer
-from app.vizboard import vizboard
+from app.explorer import explorer
 from app.dashboard import dashboard
 from app.api import api
 from app.filters import filters
 
 from app.carboard.models.user import User
 from app.extensions import (
-    db, migrate, mail, cache, toolbar, images, login_manager, redis #, session
+    db, migrate, mail, cache, toolbar, images, login_manager, redis  # , session
 )
 
 
@@ -28,7 +28,7 @@ DEFAULT_BLUEPRINTS = (
     carboard,
     dashboard,
     importer,
-    vizboard,
+    explorer,
     filters
 )
 

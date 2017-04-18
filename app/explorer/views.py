@@ -1,5 +1,5 @@
 from flask import (
-    render_template, request, flash, redirect, url_for
+    Blueprint, render_template, request, flash, redirect, url_for
 )
 from flask_login import (
     login_required, current_user
@@ -9,37 +9,49 @@ from .models import Chart
 from .forms import ChartForm
 from .helpers import choices
 
-from .. import vizboard
-
-from ...carboard.models.vehicle import Vehicle
-from ...carboard.models.driver import Driver
-from ...extensions import db
-
-# --------------------- /vizboard/explorer/ : List of charts ------------------- #
+from ..carboard.models.vehicle import Vehicle
+from ..carboard.models.driver import Driver
+from ..extensions import db
 
 
-@vizboard.route('/chart', methods=['GET'])
+# Declaring Explorer blueprint
+
+explorer = Blueprint('explorer', __name__, url_prefix='/explorer')
+
+# --------------------- /explorer/ : List of charts ------------------- #
+
+
+@explorer.route('/', methods=['GET'])
+@login_required
+def index():
+
+    return render_template('explorer/explorer.html')
+
+# --------------------- /explorer/ : List of charts ------------------- #
+
+
+@explorer.route('/chart', methods=['GET'])
 @login_required
 def indexChart():
     charts = Chart.query.paginate(
         page=request.args.get('page', 1, type=int),
         per_page=request.args.get('per_page', 10, type=int),
     )
-    return render_template('vizboard/explorer/index.html', charts=charts)
+    return render_template('explorer/index.html', charts=charts)
 
-# ----------------------- /vizboard/explorer/id : Show chart ------------------- #
+# ----------------------- /explorer/id : Show chart ------------------- #
 
 
-@vizboard.route('/chart/<int:id>', methods=['GET'])
+@explorer.route('/chart/<int:id>', methods=['GET'])
 @login_required
 def showChart(id):
     chart = Chart.query.get_or_404(id)
-    return render_template('vizboard/explorer/show.html', chart=chart)
+    return render_template('explorer/show.html', chart=chart)
 
-# ---------------------- /vizboard/explorer/new : Add new chart ----------- #
+# ---------------------- /explorer/new : Add new chart ----------- #
 
 
-@vizboard.route('/chart/new', methods=['GET', 'POST'])
+@explorer.route('/chart/new', methods=['GET', 'POST'])
 @login_required
 def newChart():
     """ Add new chart"""
@@ -57,17 +69,16 @@ def newChart():
             isValid=False,
             error="Not initialized yet"
         )
-
         db.session.add(chart)
         db.session.commit()
         return redirect(url_for('carboard.explorerChart'))
 
-    return render_template('vizboard/explorer/new.html', form=form)
+    return render_template('explorer/new.html', form=form)
 
-# -------------------- /vizboard/explorer/id/edit : Edit chart ----------------- #
+# -------------------- /explorer/id/edit : Edit chart ----------------- #
 
 
-@vizboard.route('/chart/<int:id>/explorer', methods=['GET', 'POST'])
+@explorer.route('/chart/<int:id>/explorer', methods=['GET', 'POST'])
 @login_required
 def explorerChart():
     """Setup chart via explorer """
@@ -86,12 +97,12 @@ def explorerChart():
     #     db.session.commit()
     #     return redirect(url_for('carboard.explorerChart'))
 
-    return render_template('vizboard/explorer/new.html', chart=chart)
+    return render_template('explorer/new.html', chart=chart)
 
-# ------------------ /vizboard/explorer/id/delete : Delete chart --------------- #
+# ------------------ /explorer/id/delete : Delete chart --------------- #
 
 
-@vizboard.route('/chart/<int:id>/toggle', methods=['GET', 'POST'])
+@explorer.route('/chart/<int:id>/toggle', methods=['GET', 'POST'])
 @login_required
 def toggleChart(id):
     chart = Chart.query.get_or_404(id)
@@ -102,10 +113,10 @@ def toggleChart(id):
     flash('Chart {}, {} successfully.'.format(chart.name, msg), 'info')
     return redirect(url_for('carboard.indexChart'))
 
-# ------------------ /vizboard/explorer/id/delete : Delete chart --------------- #
+# ------------------ /explorer/id/delete : Delete chart --------------- #
 
 
-@vizboard.route('/chart/<int:id>/delete', methods=['GET'])
+@explorer.route('/chart/<int:id>/delete', methods=['GET'])
 @login_required
 def deleteChart(id):
     chart = Chart.query.get_or_404(id)

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&subset=latin-ext);
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -8288,7 +8288,7 @@ html {
 }
 
 body {
-  font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: Ubuntu,sans-serif;
   font-weight: 400;
   overflow-x: hidden;
   overflow-y: auto;

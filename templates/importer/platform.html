@@ -93,7 +93,7 @@
                         var body =
                             "<b>Description</b> : " + platform.description + "<br><br>" +
                             "<b>Website</b> : <a href='"+platform.website+"' target='_blank'>"+platform.website+"</a><br><br>" +
-                            "<b>File format</b> : " + platform.format + "<br><br>" +
+                            "<b>File format</b> : Json" + platform.mimetype + "<br><br>" +
                             "<b>List of supported signals</b><br><br>"
                         ;
                         var table =
@@ -116,7 +116,7 @@
                             ;
                         }
                         table+="</table>";
-                        body+= table + "* <i>Only signals available in this table will be taken into account while parsing platform data.</i>";
+                        body+= table + "* <small>Only signals available in this table will be taken into account while parsing platform data.</small>";
                         $('#info-modal .modal-body').html(body);
                     }
                 });

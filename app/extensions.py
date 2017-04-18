@@ -4,10 +4,11 @@ from flask_cache import Cache
 from flask_mail import Mail
 from flask_login import LoginManager
 from flask_debugtoolbar import DebugToolbarExtension
-from flask_socketio import SocketIO
 from flask_images import Images
 from flask_redis import FlaskRedis
-from flask_session import Session
+from flask_plugins import PluginManager
+# from flask_session import Session
+# from flask_socketio import SocketIO
 
 # ------------------------- Inisialize Database object ---------------------- #
 
@@ -45,10 +46,14 @@ images = Images()
 
 redis = FlaskRedis()
 
+# ------------------------- Inisialize PluginManager object ----------------- #
+
+redis = FlaskRedis()
+
 # ------------------------- Inisialize Session object ----------------------- #
 """
-	Flask-Session save session data on server with many options: filesystem,
-	Redis, Sqlite, ...
+    Flask-Session save session data on server with many options: filesystem,
+    Redis, Sqlite, ...
 """
 # session = Session()
 
