@@ -14,7 +14,8 @@ from app.filters import filters
 
 from app.carboard.models.user import User
 from app.extensions import (
-    db, migrate, mail, cache, toolbar, images, login_manager, redis  # , session
+    db, migrate, mail, toolbar, images, login_manager, redis, plugin_manager
+    # , cache , session
 )
 
 
@@ -116,24 +117,45 @@ def configure_blueprints(app, blueprints):
 
 
 def configure_extensions(app):
+
     # flask-sqlalchemy
     db.init_app(app)
+
     # flask-sqlalchemy
     migrate.init_app(app, db)
+
     # flask-mail
     mail.init_app(app)
     # flask-cache
     # cache.init_app(app)
+
     # initialize debug toolbar
     toolbar.init_app(app)
+
     # initialize Images utils
     images.init_app(app)
+
     # initialize FlaskRedis
     redis.init_app(app)
+
     # initialize SocketIO
     # socketio.init_app(app)
+
     # initialize Session
     # session.init_app(app)
+
+    # initialize pluginManager
+    # plugin_manager.init_app(
+    #     app,
+    #     base_app_folder='app',
+    #     plugin_folder="app/plugins"
+    # )
+    plugin_manager.init_app(
+        app,
+        plugin_folder="app/plugins",
+        plugin_import_path='app.plugins',
+    )
+
     # flask-login
     login_manager.login_view = 'carboard.login'
     login_manager.refresh_view = 'carboard.reauth'

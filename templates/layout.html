@@ -95,14 +95,14 @@
     <!-- Vendor scripts -->
     <script src="/static/js/vendor{{ minified }}.js"></script>
     <script>
-        var source = new EventSource('/carboard/import/stream');
-        source.onmessage = function (event) {
-			console.log(event.data);
-            if(event.data !== 'undefined' && event.data.length > 1){
-				console.log('Event :: ' + event.data);
-                window.toastr.info(event.data);
-            }
-        };
+   //      var source = new EventSource('/carboard/import/stream');
+   //      source.onmessage = function (event) {
+			// console.log(event.data);
+   //          if(event.data !== 'undefined' && event.data.length > 1){
+			// 	console.log('Event :: ' + event.data);
+   //              window.toastr.info(event.data);
+   //          }
+   //      };
         /* turning flask flash messages into js popup notifications */
         window.popupMessages = {{ get_flashed_messages(with_categories = True) | tojson | safe }};
     </script>

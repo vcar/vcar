@@ -48,7 +48,7 @@ redis = FlaskRedis()
 
 # ------------------------- Inisialize PluginManager object ----------------- #
 
-redis = FlaskRedis()
+plugin_manager = PluginManager()
 
 # ------------------------- Inisialize Session object ----------------------- #
 """
