@@ -38,7 +38,7 @@ class DefaultConfig(object):
     CACHE_DEFAULT_TIMEOUT = 1
     TEMPLATES_AUTO_RELOAD = True
     # ToolbarExtention Configuration
-    DEBUG_TB_ENABLED = False
+    DEBUG_TB_ENABLED = True
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     DEBUG_TB_TEMPLATE_EDITOR_ENABLED = True
     DEBUG_TB_PROFILER_ENABLED = True

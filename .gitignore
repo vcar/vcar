@@ -16,7 +16,10 @@ _mailinglist
 migrations/
 
 # Ignore uploaded files
-static/uploads/
+static/uploads/datasets
+static/uploads/files
+static/uploads/records
+static/uploads/traces
 
 # Node packages
 node_modules/

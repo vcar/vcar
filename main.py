@@ -79,6 +79,7 @@ def static_file_status(app, debug=None):
         debug = app.config['DEBUG']
     minified = ".min" if debug is False else ""
     app.jinja_env.globals.update(minified=minified)
+    app.jinja_env.add_extension('jinja2.ext.do')
 
 # ----------------------------- App configuration --------------------------- #
 
@@ -121,7 +122,7 @@ def configure_extensions(app):
     # flask-sqlalchemy
     db.init_app(app)
 
-    # flask-sqlalchemy
+    # flask-migrate
     migrate.init_app(app, db)
 
     # flask-mail

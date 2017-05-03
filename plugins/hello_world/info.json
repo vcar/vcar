@@ -1,8 +1,0 @@
-{
-    "identifier": "hello_world",
-    "name": "Hello World",
-    "author": "boubouhkarim",
-    "license": "BSD",
-    "description": "A Hello World Plugin.",
-    "version": "1.0.0"
-}

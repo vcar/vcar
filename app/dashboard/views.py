@@ -1,4 +1,4 @@
-import sys
+import os
 from os.path import basename
 import json
 from werkzeug import secure_filename
@@ -173,10 +173,15 @@ def openxc_graph():
 # ---------------------------- /kill : kill Server ------------------------- #
 
 
-@dashboard.route('/kill')
-def killo():
-    func = request.environ.get('werkzeug.server.shutdown')
-    if func is None:
-        raise RuntimeError('Not running with the Werkzeug Server')
-    func()
-    return "Flask Development Server killed successfully!"
+# @dashboard.route('/kill')
+# def killo():
+#     func = request.environ.get('werkzeug.server.shutdown')
+#     if func is None:
+#         raise RuntimeError('Not running with the Werkzeug Server')
+#     func()
+#     return "Flask Development Server killed successfully!"
+
+
+@dashboard.route('/restart')
+def restart_server():
+    os.kill(os.getpid(), signal.SIGHUP)

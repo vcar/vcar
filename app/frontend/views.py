@@ -1,3 +1,5 @@
+import os
+import signal
 from flask import Blueprint, request, render_template
 
 frontend = Blueprint('frontend', __name__, url_prefix='/')
@@ -33,3 +35,9 @@ def killo():
         raise RuntimeError('Not running with the Werkzeug Server')
     func()
     return "Flask Development Server killed successfully!"
+
+
+@frontend.route('restart')
+def restart_server():
+    os.kill(os.getpid(), signal.SIGHUP)
+    return "Flask Development Server restarted successfully!"

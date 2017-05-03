@@ -1,0 +1,8 @@
+{
+    "identifier": "driver_graph",
+    "name": "Driver Graph",
+    "author": "boubouhkarim",
+    "license": "BSD",
+    "description": "Generate driver behavoir graph.",
+    "version": "1.0.0"
+}

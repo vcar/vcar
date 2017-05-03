@@ -1,6 +1,6 @@
 from flask_wtf import Form
 from wtforms import FormField, FieldList, StringField, SelectField
-from flask_wtf.html5 import URLField
+from wtforms.fields.html5 import URLField
 from flask_wtf.file import FileAllowed, FileField
 from wtforms.validators import ValidationError, Optional, DataRequired, Regexp, Length, url
 from ..models.dataset import Dataset
@@ -97,7 +97,6 @@ class FeedDatasetForm(Form):
         validators=[Optional()],
         # default='http://example.com/file.json'
     )
-
 
     """
         ---------------------------------------------------

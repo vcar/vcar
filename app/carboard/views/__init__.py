@@ -24,6 +24,7 @@ from signalsource import *
 from status import *
 from user import *
 from vehicle import *
+from plugin import *
 # --------------------- /carboard/index : User home page -------------------- #
 
 

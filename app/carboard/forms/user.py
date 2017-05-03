@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, HiddenField, SelectField
 from wtforms.validators import (
     DataRequired, Regexp, ValidationError, Email, Length, EqualTo
@@ -22,7 +22,7 @@ def email_exist(form, field):
 
 # ---------------------------- User form classes ---------------------------- #
 
-class UserForm(Form):
+class UserForm(FlaskForm):
     """ User add/edit Form """
     fullname = StringField(
         'Full name',
@@ -83,7 +83,7 @@ class UserForm(Form):
     )
 
 
-class RegisterForm(Form):
+class RegisterForm(FlaskForm):
     """ RegisterForm Form """
     username = StringField(
         'Username',
@@ -126,7 +126,7 @@ class RegisterForm(Form):
     )
 
 
-class LoginForm(Form):
+class LoginForm(FlaskForm):
     """Login Form"""
     # next = HiddenField()
     login = StringField(
@@ -145,7 +145,7 @@ class LoginForm(Form):
     # submit = SubmitField('Sign in')
 
 
-class RecoverPasswordForm(Form):
+class RecoverPasswordForm(FlaskForm):
     email = StringField(
         'Email',
         validators=[
@@ -155,7 +155,7 @@ class RecoverPasswordForm(Form):
     )
 
 
-class ChangePasswordForm(Form):
+class ChangePasswordForm(FlaskForm):
     activation_key = HiddenField()
     password = PasswordField(
         'Password',
@@ -173,7 +173,7 @@ class ChangePasswordForm(Form):
     )
 
 
-class ReauthForm(Form):
+class ReauthForm(FlaskForm):
     password = PasswordField(
         'Password',
         validators=[
@@ -184,7 +184,7 @@ class ReauthForm(Form):
     )
 
 
-class ProfileForm(Form):
+class ProfileForm(FlaskForm):
     fullname = StringField(
         'Full name',
         validators=[

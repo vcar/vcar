@@ -1,0 +1,31 @@
+
+            <html><head>
+                <script src="js/vis.js"></script>
+                <link href="css/vis.css" rel="stylesheet" type="text/css"/>
+            </head><body>
+            <div id="driver"></div>
+            <div id="driver"></div>
+            <script type="text/javascript">
+                var nodes = new vis.DataSet([{"color": "#FB7E81", "title": "<pre>engine_speed: 0\nfuel_level: 0\ntorque_at_transmission: 0\ntransmission_gear_position: 0\nvehicle_speed: 0\n</pre>", "id": 0, "label": 0}, {"color": "#8BC34A", "title": "<pre>engine_speed: 0\nfuel_level: 0\ntorque_at_transmission: 0\ntransmission_gear_position: 0\nvehicle_speed: '1'\n</pre>", "id": 1, "label": 1}, {"color": "#FF5722", "title": "<pre>engine_speed: '2'\nfuel_level: 0\ntorque_at_transmission: 0\ntransmission_gear_position: 0\nvehicle_speed: '1'\n</pre>", "id": 2, "label": 2}, {"color": "#8BC34A", "title": "<pre>engine_speed: '2'\nfuel_level: '5'\ntorque_at_transmission: 0\ntransmission_gear_position: 0\nvehicle_speed: '1'\n</pre>", "id": 3, "label": 3}, {"color": "#8BC34A", "title": "<pre>engine_speed: '2'\nfuel_level: '5'\ntorque_at_transmission: '3'\ntransmission_gear_position: 0\nvehicle_speed: '1'\n</pre>", "id": 4, "label": 4}, {"color": "#6E6EFD", "title": "<pre>engine_speed: '2'\nfuel_level: '5'\ntorque_at_transmission: '3'\ntransmission_gear_position: '0'\nvehicle_speed: '1'\n</pre>", "id": 5, "label": 5}, {"color": "#6E6EFD", "title": "<pre>engine_speed: '2'\nfuel_level: '5'\ntorque_at_transmission: '3'\ntransmission_gear_position: '1'\nvehicle_speed: '1'\n</pre>", "id": 6, "label": 6}, {"color": "#FF5722", "title": "<pre>engine_speed: '3'\nfuel_level: '5'\ntorque_at_transmission: '3'\ntransmission_gear_position: '1'\nvehicle_speed: '1'\n</pre>", "id": 7, "label": 7}, {"color": "#7BE141", "title": "<pre>engine_speed: '3'\nfuel_level: '5'\ntorque_at_transmission: '4'\ntransmission_gear_position: '1'\nvehicle_speed: '1'\n</pre>", "id": 8, "label": 8}]);
+                var edges = new vis.DataSet([{"color": "#FF5722", "to": 1, "from": 0, "label": 1}, {"color": "#FF5722", "to": 2, "from": 1, "label": 1}, {"color": "#FFFF00", "to": 3, "from": 2, "label": 1}, {"color": "#FB7E81", "to": 4, "from": 3, "label": 1}, {"color": "#FF5722", "to": 4, "from": 4, "label": 1244}, {"color": "#FF5722", "to": 5, "from": 4, "label": 1}, {"color": "#8BC34A", "to": 5, "from": 5, "label": 17}, {"color": "#6E6EFD", "to": 6, "from": 5, "label": 1}, {"color": "#FB7E81", "to": 6, "from": 6, "label": 1510}, {"color": "#FFA807", "to": 7, "from": 6, "label": 2}, {"color": "#00BCD4", "to": 8, "from": 7, "label": 2}, {"color": "#6E6EFD", "to": 6, "from": 7, "label": 1}, {"color": "#7BE141", "to": 7, "from": 7, "label": 744}, {"color": "#607D8B", "to": 8, "from": 8, "label": 23}, {"color": "#607D8B", "to": 7, "from": 8, "label": 2}]);
+                var container = document.getElementById("driver");
+                var data = {nodes: nodes, edges: edges};
+                var options = {
+                    nodes: { size: 25, font: {size: 14} },
+                    edges: {
+                        font: {size: 10, align: 'middle'},
+                        color: 'gray',
+                        arrows: { to: {enabled: true, scaleFactor: 0.5} },
+                        smooth: {enabled: true}
+                    },
+                    layout:{
+                        hierarchical: false
+                    },
+                    physics: {
+                        enabled: true,
+                        stabilization: true
+                    }
+                };
+                var network = new vis.Network(container, data, options);
+            </script></body></html>
+        

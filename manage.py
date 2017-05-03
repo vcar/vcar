@@ -37,7 +37,8 @@ def run():
     # app.run(processes=4, extra_files=extra_files)
     # app.run(threaded=True, extra_files=extra_files)
     # app.run(threaded=True, extra_files=extra_files)
-    app.run(processes=4)
+    # app.run(extra_files=extra_files)
+    app.run()
 
 
 @manager.command
