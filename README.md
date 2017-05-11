@@ -10,9 +10,9 @@ Python, FLASK, MYSQL, REDIS, ELASTIC, JS, VISJS, NODEJS, BOOTSTRAP, CSS, JINJA2,
 
 ## Platform Insights:
 
-Car data storages
-Data visualization
-Driving Behavior
+ * Car data storages
+ * Data visualization
+ * Driving Behavior
 
 ## Team members:
 
