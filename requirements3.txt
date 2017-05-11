@@ -1,0 +1,17 @@
+elasticsearch
+Flask
+Flask-Bcrypt
+Flask-Cache
+Flask-DebugToolbar
+Flask-Login
+Flask-Mail
+Flask-Migrate
+Flask-Redis
+Flask-Script
+Flask-SQLAlchemy
+Flask-WTF
+marshmallow
+networkx
+PyYAML
+https://github.com/mikeboers/Flask-Images/archive/py3.zip
+https://github.com/vcar/flask-plugins/archive/master.zip
