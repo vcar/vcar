@@ -13,9 +13,10 @@ DATA = {
 WEIGHT = 1
 
 # For key in range d
-    # if d[key][0] <= value <= d[key][1]:
-    # if d[key][0] <= value < d[key][1]:
+# if d[key][0] <= value <= d[key][1]:
+# if d[key][0] <= value < d[key][1]:
 # End For
+
 
 class DefaultSettings(object):
     # 1 - fuel_level [ 0 => 120] (%)
@@ -48,7 +49,7 @@ class DefaultSettings(object):
         5: [40, 50],
         6: [50, 60],
         7: [60, 655],
-		8: [655, 800]
+        8: [655, 800]
     }
     # 4 - engine speed [ 0 => 20000] (RPM)
     ENGINE_SPEED = {
@@ -60,7 +61,7 @@ class DefaultSettings(object):
         6: [2500, 3000],
         7: [3000, 4000],
         8: [4000, 16382],
-		9: [16382, 20000]
+        9: [16382, 20000]
     }
     # 5 - torque at transmission [ -500 => 2000] (Nm)
     TORQUE = {
@@ -72,7 +73,7 @@ class DefaultSettings(object):
         6: [150, 200],
         7: [200, 500],
         8: [500, 1500],
-		9: [1500, 2000]
+        9: [1500, 2000]
     }
     # 6 - accelerator pedal position [ 0 => 100] (%)
     ACCEL_PEDAL = {

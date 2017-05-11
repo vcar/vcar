@@ -321,8 +321,8 @@ th {
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("../../../../../../static/fonts/glyphicons/glyphicons-halflings-regular.eot");
-  src: url("../../../../../../static/fonts/glyphicons/glyphicons-halflings-regular.eot?#iefix") format('embedded-opentype'), url("../../../../../../static/fonts/glyphicons/glyphicons-halflings-regular.woff2") format('woff2'), url("../../../../../../static/fonts/glyphicons/glyphicons-halflings-regular.woff") format('woff'), url("../../../../../../static/fonts/glyphicons/glyphicons-halflings-regular.ttf") format('truetype'), url("../../../../../../static/fonts/glyphicons/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format('svg');
+  src: url("/static/fonts/glyphicons/glyphicons-halflings-regular.eot");
+  src: url("/static/fonts/glyphicons/glyphicons-halflings-regular.eot?#iefix") format('embedded-opentype'), url("/static/fonts/glyphicons/glyphicons-halflings-regular.woff2") format('woff2'), url("/static/fonts/glyphicons/glyphicons-halflings-regular.woff") format('woff'), url("/static/fonts/glyphicons/glyphicons-halflings-regular.ttf") format('truetype'), url("/static/fonts/glyphicons/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format('svg');
 }
 
 .glyphicon {
@@ -8296,8 +8296,8 @@ button.close {
 
 @font-face {
   font-family: 'FontAwesome';
-  src: url("../../../../../../static/fonts/font-awesome/fontawesome-webfont.eot?v=4.7.0");
-  src: url("../../../../../../static/fonts/font-awesome/fontawesome-webfont.eot?#iefix&v=4.7.0") format('embedded-opentype'), url("../../../../../../static/fonts/font-awesome/fontawesome-webfont.woff2?v=4.7.0") format('woff2'), url("../../../../../../static/fonts/font-awesome/fontawesome-webfont.woff?v=4.7.0") format('woff'), url("../../../../../../static/fonts/font-awesome/fontawesome-webfont.ttf?v=4.7.0") format('truetype'), url("../../../../../../static/fonts/font-awesome/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format('svg');
+  src: url("/static/fonts/font-awesome/fontawesome-webfont.eot?v=4.7.0");
+  src: url("/static/fonts/font-awesome/fontawesome-webfont.eot?#iefix&v=4.7.0") format('embedded-opentype'), url("/static/fonts/font-awesome/fontawesome-webfont.woff2?v=4.7.0") format('woff2'), url("/static/fonts/font-awesome/fontawesome-webfont.woff?v=4.7.0") format('woff'), url("/static/fonts/font-awesome/fontawesome-webfont.ttf?v=4.7.0") format('truetype'), url("/static/fonts/font-awesome/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -11358,8 +11358,8 @@ button.close {
 
 @font-face {
   font-family: "Ionicons";
-  src: url("../../../../../../static/fonts/ionicons/ionicons.eot?v=2.0.0");
-  src: url("../../../../../../static/fonts/ionicons/ionicons.eot?v=2.0.0#iefix") format("embedded-opentype"), url("../../../../../../static/fonts/ionicons/ionicons.ttf?v=2.0.0") format("truetype"), url("../../../../../../static/fonts/ionicons/ionicons.woff?v=2.0.0") format("woff"), url("../../../../../../static/fonts/ionicons/ionicons.svg?v=2.0.0#Ionicons") format("svg");
+  src: url("/static/fonts/ionicons/ionicons.eot?v=2.0.0");
+  src: url("/static/fonts/ionicons/ionicons.eot?v=2.0.0#iefix") format("embedded-opentype"), url("/static/fonts/ionicons/ionicons.ttf?v=2.0.0") format("truetype"), url("/static/fonts/ionicons/ionicons.woff?v=2.0.0") format("woff"), url("/static/fonts/ionicons/ionicons.svg?v=2.0.0#Ionicons") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -18715,7 +18715,7 @@ textarea.form-control {
 
 .home-overlay {
   background-color: rgba(44, 62, 80, 0.3);
-  background-image: url("../../../../../../static/img/frontend/pattern.png");
+  background-image: url("/static/img/frontend/pattern.png");
   background-repeat: repeat;
   height: 100%;
   left: 0;
@@ -19103,7 +19103,7 @@ s
 }
 
 #status {
-  background-image: url("../../../../../../static/img/frontend/preloader.gif");
+  background-image: url("/static/img/frontend/preloader.gif");
   background-position: center;
   background-repeat: no-repeat;
   height: 200px;

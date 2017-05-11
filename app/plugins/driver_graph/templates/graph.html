@@ -2,6 +2,13 @@
 
 {% block content %}
 
-{{ html |safe }}
+	<div id="driver" style="height:500px;"></div>
+
+{% endblock %}
+
+{% block scripts %}
+	{{ super() }}
+	
+	{{ graph_js |safe }}
 
 {% endblock %}

@@ -1,3 +1,7 @@
+.noor {
+  text-shadow: 0 0 20px #64b5f6;
+}
+
 .control-sidebar {
   height: 100%;
 }
@@ -386,7 +390,7 @@ hr.divider {
 }
 
 .bad-extension {
-  background-image: url("../../../../../../static/img/dashboard/bad-extension.png");
+  background-image: url("/static/img/dashboard/bad-extension.png");
   height: 64px;
   width: 64px;
   margin: -7px 0 0 10px;
@@ -1176,7 +1180,7 @@ hr.divider {
 #upload ul li span {
   width: 15px;
   height: 12px;
-  background: url("../../../../../../static/img/dashboard/uploader_icons.png") no-repeat;
+  background: url("/static/img/dashboard/uploader_icons.png") no-repeat;
   position: absolute;
   top: 34px;
   right: 33px;

@@ -35,11 +35,11 @@ class DriverGraph:
 
     @property
     def settings(self):
-        return self.settings
+        return self._settings
 
     @settings.setter
     def settings(self, settings):
-        self.settings = settings
+        self._settings = settings
     # ====================================================================== #
 
     def __str__(self):
@@ -316,11 +316,6 @@ class DriverGraph:
     def _build_vis_network(self, nodes, edges, physics=False):
         # "barnesHut": {{"centralGravity": 1}},
         html = """
-            <html><head>
-                <script src="/static/vis/js/vis.js"></script>
-                <link href="/static/vis/css/vis.css" rel="stylesheet" type="text/css"/>
-            </head><body>
-            <div id="driver" style="height:500px;"></div>
             <script type="text/javascript">
                 var nodes = new vis.DataSet({nodes});
                 var edges = new vis.DataSet({edges});
@@ -344,7 +339,7 @@ class DriverGraph:
                     }}
                 }};
                 var network = new vis.Network(container, data, options);
-            </script></body></html>
+            </script>
         """
         html = html.format(
             nodes=json.dumps(nodes),

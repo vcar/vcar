@@ -9,15 +9,11 @@ var cleanCSS = require('gulp-clean-css');
 
 // Static files =============================================================== 
 
+// Global Directories
 var css_dist = 'static/css/';
 var js_dist = 'static/js/';
 
-var app_css_files = [
-    'static/css/styles/global.css',
-    'static/css/skins/skin-vcar_blue.css',
-    'static/css/styles/uploader.css',
-];
-
+// Vendor files
 var vendor_css_files = [
     'static/vendor/bootstrap/bootstrap.css',
     'static/vendor/adminlte/adminlte.css',
@@ -25,11 +21,7 @@ var vendor_css_files = [
     'static/vendor/toastr/toastr.css',
     'static/vendor/pace/pace.css',
     'static/vendor/icheck/icheck.css',
-];
-
-var app_js_files = [
-    'static/js/scripts/app.js',
-    'static/js/scripts/uploader.js',
+    'static/vendor/vis/vis.min.css',
 ];
 
 var vendor_js_files = [
@@ -41,11 +33,34 @@ var vendor_js_files = [
     'static/vendor/slimscroll/*.js',
     'static/vendor/fastclick/*.js',
     'static/vendor/icheck/*.js',
+    'static/vendor/vis/vis.min.js',
     'static/vendor/fileupload/fileupload.js',
     'static/vendor/fileupload/fileupload-process.js',
     'static/vendor/fileupload/fileupload-validate.js',
+    'static/vendor/conditionize/conditionize.jquery.js',
     'static/vendor/knob/*.js',
     'static/vendor/adminlte/*.js'
+];
+
+// Application files
+var app_css_files = [
+    'static/css/styles/global.css',
+    'static/css/skins/skin-vcar_blue.css',
+    'static/css/styles/uploader.css',
+];
+
+var app_js_files = [
+    'static/js/scripts/app.js',
+    'static/js/scripts/uploader.js',
+];
+
+// FrontEnd files
+var front_css_files = [
+    'static/vendor/bootstrap/bootstrap.css',
+    'static/vendor/font-awesome/font-awesome.css',
+    'static/vendor/ionicons/ionicons.css',
+    'static/vendor/animate/animate.css',
+    'static/css/styles/frontend.css',
 ];
 
 var front_js_files = [
@@ -57,13 +72,6 @@ var front_js_files = [
     'static/vendor/smoothscroll/smoothscroll.js',
     'static/vendor/backstretch/backstretch.js',
     'static/js/scripts/frontend.js',
-];
-var front_css_files = [
-    'static/vendor/bootstrap/bootstrap.css',
-    'static/vendor/font-awesome/font-awesome.css',
-    'static/vendor/ionicons/ionicons.css',
-    'static/vendor/animate/animate.css',
-    'static/css/styles/frontend.css',
 ];
 
 // End static files ===========================================================
