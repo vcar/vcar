@@ -81,9 +81,9 @@ def feedDataset(id):
             # Dataset slug a.k.a module name
             slug = dataset.slug
             # Import the module
-            mod = import_module(".elastic", 'app.importboard.datasets.' + slug)
+            mod = import_module(".elastic", 'app.importer.datasets.' + slug)
             # Indexing function
-            index_function = 'index_bulk' # 'index'
+            index_function = 'index_bulk'  # 'index'
             # get a reference to the init function
             init = getattr(mod, index_function)
             # create a threaded job to index uploaded data according to it's dataset
@@ -93,7 +93,7 @@ def feedDataset(id):
             # thread.join(1)
             # print(active_count())
             flash('Files added to Dataset "{}" are being indexed in background.'.format(dataset.name), 'success')
-        except ImportError :
+        except ImportError:
             flash('No dataset indexer is provided!', 'error')
         except Exception as err:
             flash('Something went wrong while trying to indexed dataset files!', 'error')
@@ -136,6 +136,7 @@ def getFileDataset(id):
         return json.dumps(trace)
 
 # -------------------- /carboard/dataset/id/edit : Edit dataset ------------- #
+
 
 @carboard.route('/dataset/<int:id>/edit', methods=['GET', 'POST'])
 @login_required

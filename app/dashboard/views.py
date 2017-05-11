@@ -10,11 +10,11 @@ from flask_login import (
     login_user, logout_user, login_required, current_user
 )
 
-from ..extensions import db
 from .models import Trace
-from drivergraph import DriverGraph
+from .drivergraph import DriverGraph
 from .helpers import upload_trace, debug
 from .tasks import task_info, openxc_task
+from ..extensions import db
 
 from elasticsearch import Elasticsearch, helpers
 

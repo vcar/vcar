@@ -1,6 +1,5 @@
 import json
 from os.path import basename
-import platforms.openxc.views
 from importlib import import_module
 from threading import Thread
 from flask import (
@@ -10,6 +9,7 @@ from flask_login import (
     login_user, logout_user, login_required, current_user
 )
 
+# import .platforms.openxc.views
 from ..extensions import db
 from ..carboard.models.platform import Platform
 from ..carboard.models.vehicle import Vehicle

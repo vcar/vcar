@@ -131,7 +131,7 @@ def configure_extensions(app):
     # cache.init_app(app)
 
     # initialize debug toolbar
-    toolbar.init_app(app)
+    # toolbar.init_app(app)
 
     # initialize Images utils
     images.init_app(app)

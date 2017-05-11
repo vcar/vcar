@@ -1,4 +1,4 @@
-from config import DefaultConfig
+from .config import DefaultConfig
 
 # -------------------------- Sqlalchemy Configuration ----------------------- #
 

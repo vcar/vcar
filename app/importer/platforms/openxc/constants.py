@@ -27,3 +27,32 @@ TRANSFORM = {
     7: "seventh"
 }
 
+MAPPING = {
+    "platform": {
+        "properties": {
+            "user": {
+                "type": "integer"
+            },
+            "vehicle": {
+                "type": "integer"
+            },
+            "driver": {
+                "type": "integer"
+            },
+            "class": {
+                "type": "string"
+            },
+            "name": {
+                "type": "string",
+                "index": "not_analyzed"
+            },
+            "value": {
+                "type": "string",
+                "index": "not_analyzed"
+            },
+            "timestamp": {
+                "type": "date"
+            }
+        }
+    }
+}

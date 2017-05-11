@@ -1,2 +1,2 @@
 
-from views import dashboard
+from .views import dashboard

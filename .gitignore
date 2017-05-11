@@ -12,6 +12,9 @@ _mailinglist
 .cache/
 .idea/
 
+# Ignore pycache files
+__pycache__
+
 # Ignore migration files
 migrations/
 

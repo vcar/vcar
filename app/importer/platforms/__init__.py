@@ -1,1 +1,1 @@
-from openxc.views import help 
+from .openxc.views import help

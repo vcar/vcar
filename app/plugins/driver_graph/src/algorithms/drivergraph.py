@@ -6,14 +6,13 @@ import copy
 import json
 import yaml
 from random import choice
-from urllib import pathname2url
 import networkx as nx
 from networkx.drawing.nx_pydot import write_dot, read_dot
 from networkx.readwrite import json_graph
 import networkx.algorithms.isomorphism as iso
 
-from settings import DefaultSettings
-from settings import DATA, WEIGHT, COLORS
+from .settings import DefaultSettings
+from .settings import DATA, WEIGHT, COLORS
 
 # ___________________________ Start : DriverGraph ___________________________ #
 
@@ -30,8 +29,8 @@ class DriverGraph:
         self.settings = kwargs.get('settings', DefaultSettings)
         self.max_nodes = kwargs.get('max_nodes', None)
         self.node_id = kwargs.get('init_node', 0)
-        self.G = kwargs.get('graph', None) # Networkx graph
-        self.last_id = 0 # internal param
+        self.G = kwargs.get('graph', None)  # Networkx graph
+        self.last_id = 0  # internal param
     # ====================================================================== #
 
     @property
@@ -380,7 +379,7 @@ class DriverGraph:
             except:
                 tmp['label'] = self.G[id1][id2][0]['weight']
             edges.append(tmp)
-        return  self._build_vis_network(nodes, edges, physics)
+        return self._build_vis_network(nodes, edges, physics)
         # os.system("cd helpers/vis && python2 -m SimpleHTTPServer 8001")
     # ====================================================================== #
 
@@ -564,11 +563,9 @@ if __name__ == "__main__":
     #
     # return ret
 
-
     # driver.create_digraph("traces/downtown-crosstown.json")
     # except Exception as e:
     #     print('>> {}'.format(e))
-
 
     #
     # data_write_file = sys.argv[2]

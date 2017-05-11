@@ -5,7 +5,6 @@ import copy
 import json
 import yaml
 from random import choice
-from urllib import pathname2url
 import networkx as nx
 from networkx.drawing.nx_pydot import write_dot, read_dot
 from networkx.readwrite import json_graph
