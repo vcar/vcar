@@ -85,14 +85,8 @@
 	</div>
 {% endblock %}
 
-{%- block styles %}
-	{{ super() }}
-	<link href="/static/css/uploader{{ minified }}.css" rel="stylesheet" type="text/css" />
-{%- endblock styles %}
-
 {% block scripts %}
 	{{ super() }}
-	<script src="/static/js/uploader{{ minified }}.js"></script>
 	<script type="text/javascript">
 	$(function() {
 		$('.conditional').conditionize();

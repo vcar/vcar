@@ -2,7 +2,7 @@ $(function() {
 
     var ul = $('#upload ul');
     var acceptFileTypes = /^(application\/json|text\/plain|text\/csv)$/i;
-    var extensions = ['json', 'txt', 'csv'];
+    var extensions = ['json', 'txt', 'csv', 'xml', 'mat', 'zip'];
 
     $('#drop a').click(function() {
         $(this).parent().find('input').click();
@@ -16,15 +16,12 @@ $(function() {
         add: function(e, data) {
             var uploadError = true;
             var re = /(?:\.([^.]+))?$/;
-            var ext = re.exec(data.originalFiles[0]['name'])[1];
+            var ext = re.exec(data.files[0]['name'])[1];
             // Check whether a file is accepted or not.
-            if (data.originalFiles[0]['type'].length && acceptFileTypes.test(data.originalFiles[0]['type'])) {
-                uploadError = false;
-            } else if (data.originalFiles[0]['type'].length == 0 && ext != undefined && ext.length) {
-                if (extensions.indexOf(ext) >= 0)
-                    uploadError = false;
-            }
 
+            if (ext != undefined && ext.length && (extensions.indexOf(ext) >= 0)) {
+                uploadError = false;
+            }
             if (!uploadError) {
                 // if File Accepted :
                 var tpl = $('<li class="working"><input type="text" value="0" data-width="48" data-height="48" data-fgColor="#0788a5" data-readOnly="1" data-bgColor="#3e4043" /><p></p><span></span></li>');

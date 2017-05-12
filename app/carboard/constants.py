@@ -70,7 +70,7 @@ DRIVE_FILES_DIR = 'static/uploads/records/'
 #
 # ------------------------------ Trace upload  constants -------------------- #
 UPLOAD_DATASET_DIR = os.path.join(DefaultConfig.UPLOAD_DIR, 'datasets')
-ALLOWED_DATASET_EXTENSIONS = set(['txt', 'json', 'csv'])
+ALLOWED_DATASET_EXTENSIONS = set(['txt', 'json', 'csv', 'xml', 'mat', 'zip'])
 # ------------------------------ File/Elastic constants --------------------- #
 # file processed by elasicsearch
 NOT_PROCESSED = 0

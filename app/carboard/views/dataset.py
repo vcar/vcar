@@ -1,5 +1,4 @@
 import json
-import csv
 from os.path import basename
 from importlib import import_module
 from threading import Thread
@@ -81,7 +80,8 @@ def feedDataset(id):
             # Dataset slug a.k.a module name
             slug = dataset.slug
             # Import the module
-            mod = import_module(".elastic", 'app.importer.datasets.' + slug)
+            # mod = import_module(".  elastic", 'app.importer.datasets.' + slug)
+            mod = import_module('app.importer.datasets.' + slug + '.elastic')
             # Indexing function
             index_function = 'index_bulk'  # 'index'
             # get a reference to the init function
@@ -95,9 +95,11 @@ def feedDataset(id):
             flash('Files added to Dataset "{}" are being indexed in background.'.format(dataset.name), 'success')
         except ImportError:
             flash('No dataset indexer is provided!', 'error')
-        except Exception as err:
+        except Exception:
             flash('Something went wrong while trying to indexed dataset files!', 'error')
+            print('\n\n\n')
             traceback.print_exc()
+            print('\n\n\n')
             # raise
         # raise
         return redirect(url_for('carboard.indexDataset'))
