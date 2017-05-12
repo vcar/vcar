@@ -128,13 +128,14 @@ def getFileDataset(id):
     dataset = Dataset.query.get_or_404(id)
     if request.method == 'POST':
         trace = upload_dsfile('file', dataset.slug)
-        file = File(
-            user_id=current_user.id,
-            filename=basename(trace['message']),
-            path=trace['message']
-        )
-        db.session.add(file)
-        db.session.commit()
+        if trace['status'] is True:
+            file = File(
+                user_id=current_user.id,
+                filename=basename(trace['message']),
+                path=trace['message']
+            )
+            db.session.add(file)
+            db.session.commit()
         return json.dumps(trace)
 
 # -------------------- /carboard/dataset/id/edit : Edit dataset ------------- #

@@ -59,18 +59,8 @@
 </div>
 {%- endblock content %}
 
-{%- block styles %}
-    {{ super() }}
-    <link href="/static/css/dashboard/uploader{{ minified }}.css" rel="stylesheet" type="text/css" />
-{%- endblock styles %}
-
 {% block scripts %}
     {{ super() }}
-    <script src="/static/js/plugins/Fileupload/jquery.fileupload{{ minified }}.js"></script>
-    <script src="/static/js/plugins/Fileupload/jquery.fileupload-process{{ minified }}.js"></script>
-    <script src="/static/js/plugins/Fileupload/jquery.fileupload-validate{{ minified }}.js"></script>
-    <script src="/static/js/plugins/jQuery-Knob/jquery.knob{{ minified }}.js"></script>
-    <script src="/static/js/dashboard/uploader{{ minified }}.js"></script>
     <script type="text/javascript">
         $(function() {
            $('#next').click(function(e) {
