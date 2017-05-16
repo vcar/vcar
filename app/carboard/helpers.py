@@ -51,6 +51,7 @@ def paginate(query, max_per_page=25):
     # return a dictionary as a response
     return {'items': p.items, 'pages': pages}
 
+
 def upload_file(file_data, upload_dir, oldFile=None):
     """ Upload Files """
     if file_data:
@@ -63,6 +64,7 @@ def upload_file(file_data, upload_dir, oldFile=None):
             pass
         return "/".join([strftime("%Y/%m"), file])
     return None
+
 
 def upload_dsfile(input='file', dataset='_default'):
     """Upload a dataset file"""
@@ -84,6 +86,7 @@ def upload_dsfile(input='file', dataset='_default'):
     file.save(file_path)
     return {'status': True, 'message': file_path}
 
+
 def slugify(text, delim=u'-'):
     """Generates an slightly worse ASCII-only slug."""
     result = []
@@ -92,7 +95,12 @@ def slugify(text, delim=u'-'):
         word = normalize('NFKD', word).encode('ascii', 'ignore')
         if word:
             result.append(word)
-    return unicode(delim.join(result))
+    try:
+        return unicode(delim.join(result))
+    except:
+        d = d = bytes(delim, 'utf-8')
+        return str(d.join(result).decode("utf-8"))
+
 
 def choices(Model, placeholder=None, cond=1, orderField='name'):
     if cond:
@@ -105,6 +113,7 @@ def choices(Model, placeholder=None, cond=1, orderField='name'):
         c.insert(0, ('0', 'Select an option ...'))
     return c
 
+
 def make_dir(dir_path):
     """ Make recursive directories """
     try:
@@ -113,12 +122,15 @@ def make_dir(dir_path):
     except Exception as e:
         raise e
 
+
 def redirect_back():
     """ Redirect back to last url """
     return request.args.get('next') or request.referrer or url_for('index')
 
+
 def get_current_time():
     return datetime.utcnow()
+
 
 def pretty_date(dt, default=None):
     """ Returns string representing "time since" e.g. 5 hours ago etc."""
@@ -144,6 +156,7 @@ def pretty_date(dt, default=None):
         else:
             return u'%d %s ago' % (period, plural)
     return default
+
 
 def allowed_extensions(filename):
     """ check if the file extension is allowed """

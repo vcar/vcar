@@ -22,9 +22,9 @@ class Dataset(db.Model):
     status = db.Column(db.SmallInteger, default=1)
     created = db.Column(db.DateTime(), default=datetime.utcnow())
 
-    def __init__(self, name, description, author=None, lab=None, website=None):
+    def __init__(self, name, description, slug=None, author=None, lab=None, website=None):
         self.name = name
-        self.slug = slugify(name, '_')
+        self.slug = slug if slug != '' else slugify(name, '_')
         self.description = description
         self.author = author
         self.lab = lab

@@ -29,6 +29,17 @@ class DatasetForm(Form):
             ),
         ]
     )
+    slug = StringField(
+        'Slug',
+        validators=[
+            Optional(),
+            Length(min=3, max=50),
+            Regexp(
+                r'^[a-z_]+$',
+                message=("Dataset slug is not correct !")
+            ),
+        ]
+    )
     description = StringField(
         'Description',
         validators=[

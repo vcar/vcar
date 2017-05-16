@@ -50,6 +50,7 @@ def newDataset():
     if form.validate_on_submit():
         dataset = Dataset(
             name=form.name.data,
+            slug=form.slug.data,
             description=form.description.data,
             author=form.author.data,
             lab=form.lab.data,
