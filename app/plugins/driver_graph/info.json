@@ -4,5 +4,31 @@
     "author": "boubouhkarim",
     "license": "BSD",
     "description": "Generate driver behavoir graph.",
-    "version": "1.0.0"
+    "version": "1.3.6",
+	"options": {
+		"favorite": true,
+		"treeview": true,
+		"menu": [
+			{
+				"name": "Overview",
+				"action": "driverGraph.index",
+				"iclass": "fa fa-flask"
+			},
+			{
+				"name": "Demonstration",
+				"action": "driverGraph.index",
+				"iclass": "fa fa-tachometer"
+			},
+			{
+				"name": "Run tests",
+				"action": "driverGraph.index",
+				"iclass": "fa fa-check-circle"
+			},
+			{
+				"name": "Documentation",
+				"action": "driverGraph.docs",
+				"iclass": "fa fa-book"
+			}
+		]
+	}
 }

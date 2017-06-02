@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template
 from flask_login import login_required, current_user
+from flask import g
 
 from ..models.record import Record
 from ..models.vehicle import Vehicle
@@ -41,3 +42,10 @@ def index():
         vehicles=vehicles,
         drivers=drivers,
     )
+
+
+@carboard.route('/configuration')
+@login_required
+def configuration():
+    # may be some logic !
+    return render_template('elements/configuration.html')

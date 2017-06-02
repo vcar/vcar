@@ -1,3 +1,4 @@
+
 var gulp = require('gulp');
 var concatJs = require('gulp-concat');
 var concatCss = require('gulp-concat-css');
@@ -10,6 +11,7 @@ var cleanCSS = require('gulp-clean-css');
 // Static files =============================================================== 
 
 // Global Directories
+
 var css_dist = 'static/css/';
 var js_dist = 'static/js/';
 
@@ -28,6 +30,7 @@ var vendor_js_files = [
     'static/vendor/jquery/*.js',
     'static/vendor/jqueryui/*.js',
     'static/vendor/bootstrap/*.js',
+    'static/vendor/confirmation/*.js',
     'static/vendor/toastr/*.js',
     'static/vendor/pace/*.js',
     'static/vendor/slimscroll/*.js',

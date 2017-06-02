@@ -58,4 +58,9 @@ $(function() {
 	// 	iradio.closest('.btn-vcar').addClass('active');
 	// }
 
+	//Confirmation
+	$('[data-toggle=confirmation]').confirmation({
+		rootSelector: '[data-confirm=confirmation]',
+	});
+
 });

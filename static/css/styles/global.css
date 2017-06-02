@@ -416,7 +416,7 @@ hr.divider {
     color: #1a2226;
 }
 .user-panel > .info{
-    top: 22px;
+    top: 15px;
 }
 .user-panel:hover .info {
     letter-spacing:1px;
@@ -424,15 +424,12 @@ hr.divider {
 .import-icon {
     height: auto;
     width: 100%;
-    max-width: 50px;
-    background-color: #FF9800;
+    max-width: 38px;
     border-radius: 50%;
-    line-height: 50px;
-    /* 30px / 15px */
+    line-height: 38px;
     text-align: center;
     color: #fff;
     font-size: 25px;
-    box-shadow: 0 0 5px #F57F17;
 }
 
 .user-panel:hover .import-icon {
@@ -476,4 +473,144 @@ hr.divider {
 }
 .info-link:hover {
     text-decoration: underline;
+}
+.sidebar-menu {
+    margin-bottom: 22px;
+}
+.sidebar-menu.buttom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 0;
+}
+.big-icon {
+    padding: 5px 0 !important;
+}
+.big-icon a {
+     padding: 10px 20px; 
+    border-right: 1px solid #333;
+    font-size: 16px;
+}
+.big-icon a:hover{
+    color: #fff;
+}
+.big-icon .power-off{
+    color: red;
+}
+.big-icon .power-off:hover{
+    color: yellow;
+}
+.header .see-all {
+    color:#7289da;
+    font-weight:bold;
+    float:right;
+    margin-right:-15px;
+}
+.card {
+    background: #ecf0f1;
+    position: relative;
+    transition: all 0.5s ease;
+    color: #333;
+}
+.card .row, .card [class*="col-"]{
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
+.card .card-selected {
+    position: relative;
+    overflow: hidden;
+    min-height: 150px;
+    background: #3D6AA2;
+}
+.card article {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+.card .info .name {
+    font-size: 22px;
+    font-weight: 200;
+    position: relative;
+    flex: 0 1 auto;
+    align-self: auto;
+}
+.card .info .author {
+    position: absolute;
+    bottom: -20px;
+    color: #fff;
+}
+.card .info .version {
+    position: absolute;
+    bottom: -20px;
+    right: 20px;
+    color: #fff;
+}
+.card .icon {
+    width: 84px;
+    height: 84px;
+    order: 0;
+    flex: 0 0 auto;
+    align-self: center;
+    overflow: visible;
+    text-align: center;
+    padding: 0;
+    line-height: 84px;
+}
+.card .icon i {
+    font-size: 42px;
+}
+.card .fa-toggle-on {
+    color: green;
+}
+.card .fa-heart {
+    color: red;
+}
+.card .card-selected:hover figure {
+    opacity: 0.4;
+}
+.card figure {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.1;
+    z-index: 1;
+    transition: all 0.5s ease;
+}
+.card .actions .row [class*="col-"]:nth-child(2) .action  {
+    border-width: 0 1px 0 1px;
+    border-style: solid;
+    border-color: #dee;
+}
+.card .actions .row [class*="col-"] {
+    transition: all 0.5s ease;  
+}
+.card .actions .row [class*="col-"]:hover{
+    background: #fff;
+}
+.card .actions .action {
+    padding: 10px 0px;
+    text-align: center;
+    display: block;
+    color: #333;
+}
+.card .actions .action h1 {
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+.card .actions .action i {
+    font-size: 16px;
 }

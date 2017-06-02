@@ -1,8 +1,17 @@
 {
-    "identifier": "hello_world",
-    "name": "Hello World",
-    "author": "boubouhkarim",
-    "license": "BSD",
-    "description": "A Hello World Plugin.",
-    "version": "1.0.0"
+	"identifier": "hello_world",
+	"name": "Hello World",
+	"author": "boubouhkarim",
+	"license": "BSD",
+	"description": "A Hello World Plugin.",
+	"version": "1.0.0",
+	"options": {
+		"favorite": true,
+		"treeview": false,
+		"menu": {
+			"name": "DEMO",
+			"action": "hello.index",
+			"iclass": "fa fa-h-square"
+		}
+	}
 }

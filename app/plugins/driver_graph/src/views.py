@@ -29,3 +29,9 @@ def index():
     graph_js = driver.vis_network(physics=True)
 
     return render_template("graph.html", graph_js=graph_js)
+
+
+@driverGraph.route("/docs")
+def docs():
+
+    return render_template("graph.html")

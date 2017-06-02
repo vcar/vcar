@@ -35,8 +35,8 @@ def run():
             * threaded = Bool : allow or not multiple threads.
     """
     # app.run(processes=4, extra_files=extra_files)
+    # app.run(threaded=True, host='0.0.0.0', extra_files=extra_files)
     app.run(threaded=True, extra_files=extra_files)
-    # app.run(threaded=True, extra_files=extra_files)
     # app.run(extra_files=extra_files)
     # app.run()
 

@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, g
+import flask_plugins
 
 from config.config import DefaultConfig
 from config.database import DatabaseConfig
@@ -65,6 +66,8 @@ def create_app(config=None, app_name=None, blueprints=None):
     configure_extensions(app)
     # Template filters
     configure_template_filters(app)
+    # Register plugins menu in g
+    register_plugins_menu(app)
     # Error handling
     configure_error_handlers(app)
 
@@ -178,6 +181,35 @@ def configure_template_filters(app):
     @app.template_filter()
     def format_date(value, format='%Y-%m-%d'):
         return value.strftime(format)
+
+# ------------------------------ Plugins menus ----------------------------- #
+
+
+def convert_keys_to_string(dictionary):
+    """Recursively converts dictionary keys to strings."""
+    if not isinstance(dictionary, dict):
+        return dictionary
+    return dict((str(k), str(convert_keys_to_string(v)))
+                for k, v in dictionary.items())
+
+
+def register_plugins_menu(app):
+
+    @app.context_processor
+    def configure_plugins_menu():
+        plugins = flask_plugins.get_all_plugins()
+
+        plugins_menu = []
+        for plugin in plugins:
+            if plugin.options['favorite']:
+                plugins_menu.append({
+                    'id': str(plugin.identifier),
+                    'name': str(plugin.name),
+                    'favorite': plugin.options['favorite'],
+                    'treeview': plugin.options['treeview'],
+                    'menu': plugin.options['menu']
+                })
+        return {'plugins_menu': plugins_menu}
 
 # ------------------------------- Error handling --------------------------- #
 

@@ -46,4 +46,4 @@ def index():
     # y.enable() ==> enable the plugin by removing DESABLED
     #
 
-    return render_template("graph.html")
+    return render_template("hello.html")

@@ -1,3 +1,5 @@
+{% from "elements/macros.html" import is_active %}
+
 <a class="user-panel" href="{{ url_for('importer.index') }}">
     <div class="pull-left image import-icon">
         <i class="fa fa-bandcamp" aria-hidden="true"></i>
@@ -8,95 +10,81 @@
 </a>
 
 <ul class="sidebar-menu">
-    <LI CLASS="header">V<strong>C</strong>AR DASHBOARD</LI>
-    <li class="active">
+
+    <li CLASS="header">V<strong>C</strong>AR DASHBOARD</li>
+    <li class="{ is_active('explorer.index') }}">
         <a href="{{ url_for('explorer.index') }}">
             <i class="fa fa-dashboard noor"></i> <span>Explorer</span>
         </a>
     </li>
-    <li class="">
+    <li class="{{ is_active('dashboard.openxc_map') }}">
         <a href="{{ url_for('dashboard.openxc_map') }}">
             <i class="fa fa-map-o"></i> <span>Google Map</span>
         </a>
     </li>
-    <li class="">
-        <a href="{{ url_for('dashboard.openxc_graph') }}">
-            <i class="fa fa-share-alt"></i> <span>Driver Graph</span>
-        </a>
+
+    {# Plugin links shows here #}
+    <li CLASS="header">
+        V<strong>C</strong>AR Extensions
+        <span><a class="see-all" href="{{ url_for('carboard.indexPlugin') }}">view all</a></span>
     </li>
 
-    <li class="header">
-        CONFIGURATION</li>
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-car"></i> <span>Vehicles</span> <i class="fa fa-chevron-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="{{ url_for('carboard.indexBrand') }}"><i class="fa fa-square"></i> Brands</a></li>
-            <li><a href="{{ url_for('carboard.indexModel') }}"><i class="fa fa-cubes"></i> Models</a></li>
-            <li><a href="{{ url_for('carboard.indexVehicle') }}"><i class="fa fa-bus"></i> Users vehicles</a></li>
-        </ul>
+    {% if plugins_menu is not none %}
+        {% for plugin in plugins_menu %}
+            {% if plugin.treeview %}
+                {% set status = {'treeview': '', 'menu': ''} %}
+                {% for item in plugin.menu %}
+                    {% if request.path == url_for(item.action) %}
+                        {% if status.update({'treeview': 'active', 'menu': 'menu-open'}) %} {% endif %}
+                    {% endif %}
+                {% endfor %}
+                <li class="treeview {{ status.treeview }}">
+                    <a href="#">
+                        <i class="fa fa-puzzle-piece"></i> <span>{{ plugin.name }}</span> <i class="fa fa-chevron-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu {{ status.menu }}">
+                        {% for item in plugin.menu %}
+                            <li class="{{ is_active(item.action) }}">
+                                <a href="{{ url_for(item.action) }}">
+                                    <i class="{{ item.iclass | default('fa fa-puzzle-piece')}}"></i>
+                                    {{ item.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% else %}
+                <li class="{{ is_active(plugin.menu.action) }}">
+                    <a href="{{ url_for(plugin.menu.action | string) }}">
+                        <i class="{{ plugin.menu.iclass | default('fa fa-puzzle-piece') }}"></i> <span>{{ plugin.name }}</span>
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {# Data storage #}
+    <li class="header">Data storage</li>
+    {# <li><a href="{{ url_for('importer.index') }}"><i class="fa fa-bandcamp"></i> Import Manger</a></li> #}
+
+    <li class="{{ is_active('carboard.indexPlatform') }}">
+        <a href="{{ url_for('carboard.indexPlatform') }}"><i class="fa fa-leaf"></i> <span>Platforms</span></a>
     </li>
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-user"></i> <span>Members</span> <i class="fa fa-chevron-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="{{ url_for('carboard.indexUser') }}"><i class="fa fa-neuter"></i> Users</a></li>
-            <li><a href="{{ url_for('carboard.indexDriver') }}"><i class="fa fa-cubes"></i> Drivers</a></li>
-        </ul>
+    <li class="{{ is_active('carboard.indexDataset') }}">
+        <a href="{{ url_for('carboard.indexDataset') }}"><i class="fa fa-cube"></i> <span>Datasets</span></a>
     </li>
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-road"></i> <span>Driving Records</span> <i class="fa fa-chevron-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="{{ url_for('carboard.indexRecord') }}"><i class="fa fa-rocket"></i> Records</a></li>
-            <li><a href="{{ url_for('carboard.indexDriveType') }}"><i class="fa fa-sort"></i> Drive types</a></li>
-        </ul>
+
+    <li class="{{ is_active('carboard.configuration') }}">
+        <a href="{{ url_for('carboard.configuration') }}"><i class="fa fa-cogs"></i> <span>Configuration</span></a>
     </li>
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-database"></i> <span>Data storage</span> <i class="fa fa-chevron-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="{{ url_for('importer.index') }}"><i class="fa fa-bandcamp"></i> Import Manger</a></li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-cube"></i> Platforms<i class="fa fa-chevron-down pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{ url_for('carboard.indexPlatform') }}"><i class="fa fa-leaf"></i> Platforms</a></li>
-                    <li><a href="{{ url_for('carboard.indexSignal') }}"><i class="fa fa-star"></i>Main signals</a></li>
-                    <li><a href="{{ url_for('carboard.indexExtrasignal') }}"><i class="fa fa-star-half-o"></i> Extra signals</a></li>
-                    <li><a href="{{ url_for('carboard.indexSignalclass') }}"><i class="fa fa-tags"></i>Signal classes</a></li>
-                    <li><a href="{{ url_for('carboard.indexSignalsource') }}"><i class="fa fa-usb"></i>Signal sources</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-cube"></i> Datasets<i class="fa fa-chevron-down pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{ url_for('carboard.indexDataset') }}"><i class="fa fa-leaf"></i> Datasets</a></li>
-                    <li><a href="{{ url_for('carboard.indexArticle') }}"><i class="fa fa-book"></i>Related articles</a></li>
-                </ul>
-            </li>
-        </ul>
+</ul>
+
+
+<ul class="sidebar-menu buttom">
+    <li class="header big-icon">
+        <span><a href="#" data-toggle="tooltip" title="vCar License Policy"><i class="fa fa-copyright"></i></a></span>
+        <span><a href="#" data-toggle="tooltip" title="About vCar"><i class="fa fa-info-circle"></i></a></span>
+        <span><a href="#" data-toggle="tooltip" title="vCar Documentation"><i class="fa fa-book"></i></a></span>
+        <span><a class="power-off" href="/kill" data-toggle="confirmation" data-container="body" title="" data-original-title="Shutdonw server?"><i class="fa fa-power-off"></i></a></span>
     </li>
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-cogs"></i> <span>Configuration</span> <i class="fa fa-chevron-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="{{ url_for('carboard.indexPlugin') }}"><i class="fa fa-globe"></i> Plugins</a></li>
-            <li><a href="{{ url_for('carboard.indexCountry') }}"><i class="fa fa-globe"></i> Countries</a></li>
-            <li><a href="{{ url_for('carboard.indexStatus') }}"><i class="fa fa-toggle-off"></i> Status</a></li>
-        </ul>
-    </li>
-    <br>
-    <small style="color: gray"></i>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a style="color: red" href="/kill">KILL</a> SERVER?
-    </small>
 </ul>

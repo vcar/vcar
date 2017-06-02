@@ -1,0 +1,8 @@
+<!-- Set current menu as active -->
+{% macro is_active(action) %}
+    {% if request.path == url_for(action) %}
+        active
+    {% endif %}
+{% endmacro %}
+
+ 

@@ -15,7 +15,7 @@
 
 
 {% block bodyclass %}
-    hold-transition skin-light sidebar-mini
+    hold-transition skin-light sidebar-mini fixed
 {% endblock %}
 
 {% block body %}
@@ -24,7 +24,7 @@
         <header class="main-header">
             {% block brand %}
                 <a href="{{ url_for('carboard.index') }}" class="logo">
-                    <span class="logo-mini"><strong><i class="ion-model-s"></i></strong></span>
+                    <span class="logo-mini"><strong><i class="fa fa-car"></i></strong></span>
                     <span class="logo-lg">vCar | <strong><i class="fa fa-car"></i></strong></span>
                 </a>
             {% endblock %}
