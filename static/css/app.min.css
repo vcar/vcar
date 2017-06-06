@@ -699,6 +699,36 @@ hr.divider {
   font-size: 16px;
 }
 
+pre {
+  color: #ddd;
+  background-color: #363637;
+  border: 1px solid #444;
+}
+
+code {
+  padding: 2px 6px;
+  color: #ddd;
+  background-color: #363637;
+  border: 1px solid #444;
+}
+
+pre code {
+  border: none;
+}
+
+.markdown {
+  padding: 10px 25px;
+  line-height: 2.5em;
+}
+
+.markdown a {
+  color: #7e9bff;
+}
+
+.markdown a:hover {
+  color: #a8bcff;
+}
+
 a {
   color: #0096cf;
 }

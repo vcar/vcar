@@ -7,6 +7,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from flask_images import Images
 from flask_redis import FlaskRedis
 from flask_plugins import PluginManager
+from flask_misaka import Misaka
 # from flask_session import Session
 # from flask_socketio import SocketIO
 
@@ -49,6 +50,10 @@ redis = FlaskRedis()
 # ------------------------- Inisialize PluginManager object ----------------- #
 
 plugin_manager = PluginManager()
+
+# ------------------------- Inisialize Misaka object ----------------- #
+
+misaka = Misaka()
 
 # ------------------------- Inisialize Session object ----------------------- #
 """

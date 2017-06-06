@@ -15,13 +15,18 @@
 				"iclass": "fa fa-flask"
 			},
 			{
-				"name": "Demonstration",
-				"action": "driverGraph.index",
+				"name": "Data Sets",
+				"action": "driverGraph.datasets",
 				"iclass": "fa fa-tachometer"
 			},
 			{
-				"name": "Run tests",
-				"action": "driverGraph.index",
+				"name": "Run",
+				"action": "driverGraph.run",
+				"iclass": "fa fa-check-circle"
+			},
+			{
+				"name": "Custom",
+				"action": "driverGraph.custom",
 				"iclass": "fa fa-check-circle"
 			},
 			{

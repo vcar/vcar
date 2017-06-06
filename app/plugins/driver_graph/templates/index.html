@@ -1,17 +1,17 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Overview | Hello World | {{ super() }}
+    Overview | Driver Graph | {{ super() }}
 {% endblock %}
 
 {% block content_header %}
     <section class="content-header">
         <h1>
-        	Overview
+        	Overview of the Driver Graph Plugin
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url_for('carboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
-            <li><a href="{{ url_for('hello.index')}}">Hello World</a></li>
+            <li><a href="{{ url_for('driverGraph.index') }}">Driver Graph</a></li>
             <li class="active">Overview</li>
         </ol>
     </section>
@@ -27,7 +27,9 @@
                 </div>
 
                 <div class="box-body markdown">
+
                     {{ html }}
+
                 </div>
             </div>
         </div>

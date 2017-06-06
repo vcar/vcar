@@ -15,8 +15,8 @@ from app.filters import filters
 
 from app.carboard.models.user import User
 from app.extensions import (
-    db, migrate, mail, toolbar, images, login_manager, redis, plugin_manager
-    # , cache , session
+    db, migrate, mail, toolbar, images, login_manager, redis,
+    plugin_manager, misaka  # , cache , session
 )
 
 
@@ -141,6 +141,9 @@ def configure_extensions(app):
 
     # initialize FlaskRedis
     redis.init_app(app)
+
+    # initialize FlaskRedis
+    misaka.init_app(app)
 
     # initialize SocketIO
     # socketio.init_app(app)

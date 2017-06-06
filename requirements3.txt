@@ -10,6 +10,7 @@ Flask-Redis
 Flask-Script
 Flask-SQLAlchemy
 Flask-WTF
+Flask-Misaka
 marshmallow
 networkx
 PyYAML

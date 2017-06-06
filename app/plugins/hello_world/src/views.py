@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, current_app
+from flask import Blueprint, render_template
+from app.plugins.helpers import render_md
 
-import flask_plugins
+from .. import __path__
 
 hello = Blueprint(
     "hello",
@@ -9,41 +10,14 @@ hello = Blueprint(
     template_folder="../templates"
 )
 
-"""
-TODO :
-    - Check app context
-        with app.app_context():
-            cur = db.connection.cursor()
-            cur.execute(...)
-"""
+# --------------------- /hello/ : Overview --------------------------- #
 
 
 @hello.route("/")
 def index():
-    # a = current_app
-    # b = flask_plugins.get_enabled_plugins()
-    # c = flask_plugins.get_all_plugins()
-    # d = flask_plugins.get_plugin_from_all('driver_graph')
-    # try:
-    #     x = flask_plugins.get_plugin('driver_graph')
-    # except KeyError, e:
-    #     x = None
 
-    # x = flask_plugins.get_plugin_from_all('hello_world')
-    # y = flask_plugins.get_plugin_from_all('driver_graph')
-    # raise
+    # Hello world is a one page plugin
 
-    # 'Yeaah' if y.enabled is True else 'Noooo' ==> 'Noooo'
-    # y.path ==>'/home/karim/OpenXC/Dashboard/Flask/vcar/app/plugins/driver_graph'
-    # y.name ==> 'Driver Graph'
-    # y.identifier ==> 'driver_graph'
-    # y.description ==> 'Generate driver behavoir graph.'
-    # y.description_lc ==> {'en': u'Generate driver behavoir graph.'}
-    # y.author ==> 'boubouhkarim'
-    # y.license ==> 'BSD'
-    # y.version ==> '1.0.0'
+    html = render_md(__path__, "README.md")
 
-    # y.enable() ==> enable the plugin by removing DESABLED
-    #
-
-    return render_template("hello.html")
+    return render_template("hello.html", html=html)

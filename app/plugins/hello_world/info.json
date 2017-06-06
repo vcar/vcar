@@ -9,7 +9,7 @@
 		"favorite": true,
 		"treeview": false,
 		"menu": {
-			"name": "DEMO",
+			"name": "Overview",
 			"action": "hello.index",
 			"iclass": "fa fa-h-square"
 		}

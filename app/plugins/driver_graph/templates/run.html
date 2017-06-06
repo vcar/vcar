@@ -1,18 +1,18 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Overview | Hello World | {{ super() }}
+    Run algorithm | Driver Graph | {{ super() }}
 {% endblock %}
 
 {% block content_header %}
     <section class="content-header">
         <h1>
-        	Overview
+            Generate a Driver Graph
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url_for('carboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
-            <li><a href="{{ url_for('hello.index')}}">Hello World</a></li>
-            <li class="active">Overview</li>
+            <li><a href="{{ url_for('driverGraph.index') }}">Driver Graph</a></li>
+            <li class="active">Driver Graph</li>
         </ol>
     </section>
 {% endblock content_header %}
@@ -23,13 +23,22 @@
             <div class="box">
 
                 <div class="box-header with-border">
-                    <h3 class="box-title">Overview</h3>
+                    <h3 class="box-title">Driver Graph</h3>
                 </div>
 
                 <div class="box-body markdown">
-                    {{ html }}
+
+                    <div id="driver" style="height:500px;"></div>
+
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+	{{ super() }}
+	
+	{{ graph_js |safe }}
+
 {% endblock %}
