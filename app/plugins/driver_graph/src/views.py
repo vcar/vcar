@@ -58,4 +58,6 @@ def custom():
 @driverGraph.route("/docs")
 def docs():
     # documentation in markdown
-    return render_template("docs.html")
+    html = render_md(__path__, "DOC.md")
+
+    return render_template("docs.html", html=html)

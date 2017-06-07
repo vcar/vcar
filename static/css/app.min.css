@@ -729,6 +729,17 @@ pre code {
   color: #a8bcff;
 }
 
+.markdown td,
+.markdown th {
+  padding: 5px 10px;
+  border: 1px solid #444;
+}
+
+.callout .highlight,
+.callout code {
+  background-color: #363637;
+}
+
 a {
   color: #0096cf;
 }

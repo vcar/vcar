@@ -53,7 +53,7 @@ plugin_manager = PluginManager()
 
 # ------------------------- Inisialize Misaka object ----------------- #
 
-misaka = Misaka()
+misaka = Misaka(tables=True, highlight=True)
 
 # ------------------------- Inisialize Session object ----------------------- #
 """

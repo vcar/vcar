@@ -639,3 +639,10 @@ pre code {
 .markdown a:hover{
     color: #a8bcff;
 }
+.markdown td, .markdown th {
+       padding: 5px 10px;
+        border: 1px solid #444;
+}
+.callout code, .callout .highlight {
+    background-color: rgb(54, 54, 55);
+}
