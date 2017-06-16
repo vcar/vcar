@@ -208,9 +208,10 @@ def register_plugins_menu(app):
                 plugins_menu.append({
                     'id': str(plugin.identifier),
                     'name': str(plugin.name),
-                    'favorite': plugin.options['favorite'],
-                    'treeview': plugin.options['treeview'],
-                    'menu': plugin.options['menu']
+                    'iclass': plugin.options.get('iclass', 'fa fa-puzzle-piece'),
+                    'favorite': plugin.options.get('favorite', False),
+                    'treeview': plugin.options.get('treeview', False),
+                    'menu': plugin.options.get('menu', None),
                 })
         return {'plugins_menu': plugins_menu}
 

@@ -40,7 +40,9 @@
                 {% endfor %}
                 <li class="treeview {{ status.treeview }}">
                     <a href="#">
-                        <i class="fa fa-puzzle-piece"></i> <span>{{ plugin.name }}</span> <i class="fa fa-chevron-left pull-right"></i>
+                        <i class="{{ plugin.iclass | default('fa fa-puzzle-piece')}}"></i>
+                        <span>{{ plugin.name }}</span>
+                        <i class="fa fa-chevron-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu {{ status.menu }}">
                         {% for item in plugin.menu %}
