@@ -29,17 +29,23 @@
                         <a href="{{ url_for('carboard.newExtrasignal') }}" class="btn btn-primary">
                             Add new extra signal
                         </a>
+                          <a href="{{ url_for('carboard.bulkAddExtraSignal') }}" id="bulk" class="btn btn-success">
+                            Bulk add from file
+                        </a>
                     </div>
                     <div class="box-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                        <form action="{{ url_for('carboard.searchExtraSignal') }}" method="get">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control pull-right"
+                                       placeholder="Search">
 
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fa fa-search"></i>
-                                </button>
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="box-body no-padding">
@@ -49,18 +55,18 @@
                             <th>Name</th>
                             <th>Main signal</th>
                             <th>Class</th>
-                            <th>Platform</th>
+                            <th>Data Storage</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
 
                     {% for extrasignal in extrasignals.items %}
                         <tr>
-                            <td><a href="{{ url_for('carboard.showExtrasignal', id=extrasignal.id) }}">{{ extrasignal.id }}</a></td>
+                            <td><a href="{{ url_for('carboard.showExtrasignal', id=extrasignal.id) }}">{{ loop.index }}</a></td>
                             <td>{{ extrasignal.name }}</td>
                             <td><b>{{ extrasignal.signal }}</b></td>
                             <td><b>{{ extrasignal.signal.signalclass }}</b></td>
-                            <td>{{ extrasignal.platform }}</td>
+                            <td>{{ extrasignal.storage }}</td>
                             <td>
                                 {% if extrasignal.status == 1 %}
                                     <span class="label bg-green">Activated</span>

@@ -29,17 +29,23 @@
                         <a href="{{ url_for('carboard.newSignalsource') }}" class="btn btn-primary">
                             Add new signal source
                         </a>
+                        <a href="{{ url_for('carboard.bulkAddSource') }}" id="bulk" class="btn btn-success">
+                            Bulk add new signal sources
+                        </a>
                     </div>
                     <div class="box-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                        <form action="{{ url_for('carboard.searchSignalSource') }}" method="get">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control pull-right"
+                                       placeholder="Search">
 
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fa fa-search"></i>
-                                </button>
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="box-body no-padding">
@@ -53,7 +59,7 @@
 
                     {% for signalsource in signalsources.items %}
                         <tr>
-                            <td><a href="{{ url_for('carboard.showSignalsource', id=signalsource.id) }}">{{ signalsource.id }}</a></td>
+                            <td><a href="{{ url_for('carboard.showSignalsource', id=signalsource.id) }}">{{ loop.index }}</a></td>
                             <td>{{ signalsource.name }}</td>
                             <td>
                                 {% if signalsource.status == 1 %}

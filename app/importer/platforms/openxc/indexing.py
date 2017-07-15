@@ -17,7 +17,7 @@ red = redis.StrictRedis(
 
 def my_handler(message):
     # print('MY HANDLER: {}'.format(message['data']))
-    yield 'data: {}\n\n'.format(msg['data'])
+    yield 'data: {}\n\n'.format(message['data'])
 
 
 def task_info(name='info'):

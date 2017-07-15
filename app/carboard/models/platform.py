@@ -1,12 +1,26 @@
+import re
 from datetime import datetime
+from unicodedata import normalize
+
 from marshmallow import Schema, fields
 from .extrasignal import ExtrasignalSchema
 from ..constants import DEFAULT_PHOTO
-from ..helpers import slugify
 from ...extensions import db
 
 # -------------------------------- Brand Model ------------------------------- #
-
+def slugify(text, delim=u'-'):
+    """Generates an slightly worse ASCII-only slug."""
+    result = []
+    _punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
+    for word in _punct_re.split(text.lower()):
+        word = normalize('NFKD', word).encode('ascii', 'ignore')
+        if word:
+            result.append(word)
+    try:
+        return unicode(delim.join(result))
+    except:
+        d = d = bytes(delim, 'utf-8')
+        return str(d.join(result).decode("utf-8"))
 
 class Platform(db.Model):
     """ Platform Model """
@@ -20,7 +34,7 @@ class Platform(db.Model):
     description = db.Column(db.String(255))
     website = db.Column(db.String(255), nullable=True)
 
-    signals = db.relationship("Extrasignal")
+    #signals = db.relationship("Extrasignal")
 
     status = db.Column(db.SmallInteger, default=1)
     created = db.Column(db.DateTime(), default=datetime.utcnow())

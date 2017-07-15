@@ -7,16 +7,16 @@
 {% endblock %}
 
 {% block content_header %}
-	<section class="content-header">
-		<h1>
-		Signal source details
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="{{ url_for('carboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
-			<li><a href="{{ url_for('carboard.indexSignalsource') }}">Signalsource</a></li>
-			<li class="active">Signal source details</li>
-		</ol>
-	</section>
+    <section class="content-header">
+        <h1>
+            Signal source details
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('carboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li><a href="{{ url_for('carboard.indexSignalsource') }}">Signalsource</a></li>
+            <li class="active">Signal source details</li>
+        </ol>
+    </section>
 {% endblock content_header %}
 
 
@@ -45,6 +45,10 @@
                         <strong class="line-title">Signals</strong>
                         <p class="line-body">{{ signalsource.signals }}</p>
                     </div>
+                    <div class="line">
+                        <strong class="line-title">Description </strong>
+                        <p class="line-body">{{ signalsource.description or 'No description provided' }}</p>
+                    </div>
 
                     <div class="line">
                         <strong class="line-title">Status</strong>
@@ -59,15 +63,16 @@
 
                     <div class="line">
                         <strong class="line-title">Creation</strong>
-                        <p class="line-body">{{ signalsource.created.strftime('%d-%m-%Y')}}</p>
+                        <p class="line-body">{{ signalsource.created.strftime('%d-%m-%Y') }}</p>
                     </div>
 
                 </div>
 
                 <div class="box-footer form-footer">
-                    <a href="{{ url_for('carboard.editSignalsource', id=signalsource.id) }}" class="btn btn-success" >Edit</a>
-                    <a href="{{ url_for('carboard.deleteSignalsource', id=signalsource.id) }}" class="btn btn-danger" >Delete</a>
-                    <a href="{{ url_for('carboard.indexSignalsource') }}" class="btn btn-default pull-right">Back to list</a>
+                    <a href="{{ url_for('carboard.editSignalsource', id=signalsource.id) }}" class="btn btn-success">Edit</a>
+                    <a href="{{ url_for('carboard.deleteSignalsource', id=signalsource.id) }}" class="btn btn-danger">Delete</a>
+                    <a href="{{ url_for('carboard.indexSignalsource') }}" class="btn btn-default pull-right">Back to
+                        list</a>
                 </div>
             </div>
         </div>

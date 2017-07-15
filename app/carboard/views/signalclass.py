@@ -1,14 +1,20 @@
+import os
+
 from flask import (
     render_template, request, flash, redirect, url_for
 )
-from flask_login import login_required
 
+from flask_login import login_required
+from sqlalchemy import or_
+
+from ..forms.filesignal import FileSignalForm
 from . import carboard
 from ..models.signalclass import Signalclass
 from ..forms.signalclass import SignalclassForm
-from ..helpers import paginate
-from ..constants import PER_PAGE
+from ..helpers import paginate, CSVLoader, find_id
+from ..constants import PER_PAGE, CSV_TEMP
 from ...extensions import db
+from ..helpers import upload_csv, remove_csv
 
 # --------------------- /carboard/signalclass/ : List of signalclasses ----- #
 
@@ -32,6 +38,30 @@ def showSignalclass(id):
     return render_template('carboard/signalclass/show.html', signalclass=signalclass)
 
 # ---------------------- /carboard/signalclass/new : Add signalclass -------------------- #
+
+@carboard.route('/signalclass/bulk-add', methods=['GET', 'POST'])
+@login_required
+def bulkAddClass():
+    form = FileSignalForm()
+    errors = None
+    if form.validate_on_submit():
+        f = upload_csv(form.file.data, CSV_TEMP)
+        loader = CSVLoader(os.path.join(CSV_TEMP, form.file.data.filename))
+        res = loader.load()
+        try:
+            for row in res:
+                signal_class = Signalclass(
+                    name = row['Signal Class'],
+                    description= row['Description']
+                )
+                db.session.add(signal_class)
+                db.session.commit()
+            remove_csv(form.file.data.filename, CSV_TEMP)
+        except KeyError:
+            errors = ['Your file is Not well Formated, please review your file structure .']
+        if not errors:
+            flash('Signal classes added Succesfully', 'success')
+    return render_template('carboard/signalclass/bulk.html', form=form, errors = errors)
 
 
 @carboard.route('/signalclass/new', methods=['GET', 'POST'])
@@ -92,3 +122,15 @@ def deleteSignalclass(id):
     db.session.commit()
     flash('Signal class {}, deleted successfully.'.format(signalclass.name), 'success')
     return redirect(url_for('carboard.indexSignalclass'))
+
+
+@carboard.route('/signalclass/search', methods=['GET'])
+@login_required
+def searchSignalClass():
+    param = request.args.get('table_search')
+    signalclasses = Signalclass.query.filter(
+        or_(Signalclass.name.like('%' + param + '%'), Signalclass.description.like('%' + param + '%'))).paginate(
+        page=request.args.get('page', 1, type=int),
+        per_page=request.args.get('per_page', PER_PAGE, type=int),
+    )
+    return render_template('carboard/signalclass/search.html', signalclasses=signalclasses)

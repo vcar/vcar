@@ -31,10 +31,9 @@ class ExtrasignalForm(Form):
             DataRequired(),
         ]
     )
-    platform_id = SelectField(
-        'Platform (Optionel)',
-        coerce=int,
-        validators=[
+    storage = SelectField(
+        'Data Storage (Optionel)',
+        validators = [
             DataRequired(),
         ]
     )
