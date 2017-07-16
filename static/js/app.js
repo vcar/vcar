@@ -91,6 +91,7 @@ $(function () {
             }
             if (!uploadError) {
                 // if File Accepted :
+                console.log('file accepted ');
                 var tpl = $('<li class="working"><input type="text" value="0" data-width="48" data-height="48" data-fgColor="#0788a5" data-readOnly="1" data-bgColor="#3e4043" /><p></p><span></span></li>');
                 tpl.find('p').text(data.files[0].name).append('<i>' + formatFileSize(data.files[0].size) + '</i>');
                 data.context = tpl.appendTo(ul);
@@ -109,6 +110,7 @@ $(function () {
                 var jqXHR = data.submit();
             } else {
                 // if Error
+                console.log('not working')
                 var tpl = $('<li class="error working"><div class="bad-extension"></div><p></p><span></span></li>');
                 tpl.find('p').text(data.files[0].name).append('<i>Extension not supported</i>');
                 data.context = tpl.appendTo(ul);
@@ -352,4 +354,52 @@ if (type) {
             })
         }
     }
+}
+
+
+/*--------------------------- Signals File Upload -------------------------------*/
+
+let dropZone = document.querySelector('.drop-file');
+let fileInput = document.querySelector('input[type*=file]');
+let fileInfo = document.querySelector('#file-info');
+
+if (dropZone) {
+
+    dropZone.addEventListener('click', function (e) {
+        fileInput.click();
+    })
+
+    fileInput.onchange = function () {
+        if (fileInput.files[0].name.endsWith(".csv")) {
+            fileInfo.textContent = "1 File Chosen " + fileInput.files[0].name;
+            fileInfo.className = '';
+        } else {
+            fileInfo.textContent = "Please make sure that the File is a csv file";
+        }
+    }
+
+    dropZone.ondragover = function () {
+        this.className = 'drop-file drop-on';
+        return false;
+    }
+
+    dropZone.ondragleave = function () {
+        this.className = 'drop-file';
+        return false;
+    }
+
+    dropZone.ondrop = function (e) {
+        e.preventDefault();
+        this.className = 'drop-file';
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            if (e.dataTransfer.files[0].name.endsWith(".csv")) {
+                fileInput.files = e.dataTransfer.files;
+                fileInfo.textContent = "1 File Chosen " + e.dataTransfer.files[0].name;
+                fileInfo.className = '';
+            } else {
+                fileInfo.textContent = "Please make sure that the File is a csv file";
+            }
+        }
+    }
+
 }

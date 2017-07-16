@@ -1,7 +1,7 @@
 {% macro render_field(field, label=false) %}
     <div class="form-group {% if field.errors %} has-error {% endif %}">
         {% if field.type == "FileField" %}
-            {{ field.label(class="label-avatar") }}
+            {# {{ field.label(class="label-avatar") }} #}
             {{ field(class = "avatar-file") }}
         {% elif field.type == "BooleanField" %}
             <div class="checkbox icheck">

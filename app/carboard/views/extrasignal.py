@@ -47,7 +47,7 @@ def newExtrasignal():
     form = ExtrasignalForm()
     form.signal_id.choices = choices(Signal, 'Select main signal', 1)
     form.storage.choices = platform_choices('Select a Data Storage', 'name')
-    print(form.platform_id.choices)
+
     if form.validate_on_submit():
         extrasignal = Extrasignal(
             name=form.name.data,

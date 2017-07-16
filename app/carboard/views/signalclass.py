@@ -16,6 +16,7 @@ from ..constants import PER_PAGE, CSV_TEMP
 from ...extensions import db
 from ..helpers import upload_csv, remove_csv
 
+
 # --------------------- /carboard/signalclass/ : List of signalclasses ----- #
 
 
@@ -28,6 +29,7 @@ def indexSignalclass():
     )
     return render_template('carboard/signalclass/index.html', signalclasses=signalclasses)
 
+
 # ----------------------- /carboard/signalclass/id : Show signalclass ----- #
 
 
@@ -36,6 +38,7 @@ def indexSignalclass():
 def showSignalclass(id):
     signalclass = Signalclass.query.get_or_404(id)
     return render_template('carboard/signalclass/show.html', signalclass=signalclass)
+
 
 # ---------------------- /carboard/signalclass/new : Add signalclass -------------------- #
 
@@ -48,20 +51,27 @@ def bulkAddClass():
         f = upload_csv(form.file.data, CSV_TEMP)
         loader = CSVLoader(os.path.join(CSV_TEMP, form.file.data.filename))
         res = loader.load()
+        already_there = False
         try:
             for row in res:
+                ret = Signalclass.query.filter_by(name=row['Signal Class'])
+                if ret:
+                    already_there = True
+                    continue
                 signal_class = Signalclass(
-                    name = row['Signal Class'],
-                    description= row['Description']
+                    name=row['Signal Class'],
+                    description=row['Description']
                 )
                 db.session.add(signal_class)
                 db.session.commit()
             remove_csv(form.file.data.filename, CSV_TEMP)
         except KeyError:
             errors = ['Your file is Not well Formated, please review your file structure .']
-        if not errors:
+        if not errors and not already_there:
             flash('Signal classes added Succesfully', 'success')
-    return render_template('carboard/signalclass/bulk.html', form=form, errors = errors)
+        if already_there:
+            flash('Some Signals are not added because they are already in the database', 'warning')
+    return render_template('carboard/signalclass/bulk.html', form=form, errors=errors)
 
 
 @carboard.route('/signalclass/new', methods=['GET', 'POST'])
@@ -80,6 +90,7 @@ def newSignalclass():
 
     return render_template('carboard/signalclass/new.html', form=form)
 
+
 # -------------------- /carboard/signalclass/id/edit : Edit signalclass ----------------- #
 
 
@@ -97,6 +108,7 @@ def editSignalclass(id):
 
     return render_template('carboard/signalclass/edit.html', form=form, id=id)
 
+
 # ------------------ /carboard/signalclass/id/delete : Delete signalclass --------------- #
 
 
@@ -110,6 +122,7 @@ def toggleSignalclass(id):
     msg = 'activated' if signalclass.status is 1 else 'deactivated'
     flash('Signal class {}, {} successfully.'.format(signalclass.name, msg), 'success')
     return redirect(url_for('carboard.indexSignalclass'))
+
 
 # ------------------ /carboard/signalclass/id/delete : Delete signalclass --------------- #
 

@@ -5,6 +5,15 @@
 {% block title %}
     Add Signal from File | {{ super() }}
 {% endblock %}
+{% block styles %}
+    {{ super() }}
+    <style>
+        .box-footer {
+            background-color: #2A2A2A;
+            border-color: #2A2A2A;
+        }
+    </style>
+{% endblock %}
 
 {% block content_header %}
     <section class="content-header">
@@ -13,8 +22,8 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
-            <li><a href="#">Signal</a></li>
-            <li class="active">Add Signal from file</li>
+            <li><a href="{{ url_for('carboard.indexSignalclass') }}">Signal Classes</a></li>
+            <li class="active">Bulk Add Signal Classes</li>
         </ol>
     </section>
 {% endblock content_header %}
@@ -38,25 +47,35 @@
         <div class="col-md-12">
             <div class="box box-solid vcar-box">
 
-                {{ box_header('Add from a CSV File') }}
-                <form action="{{ url_for('carboard.bulkAddClass') }}" method="POST" enctype="multipart/form-data">
-                    <div class="box-body">
-                        {{ form.hidden_tag() }}
-                        {% for field in form %}
-                            {{ render_field(field) }}
-                        {% endfor %}
-                    </div>
-                    <div class="box-footer form-footer">
-                        <button type="submit" class="btn btn-primary">Create</button>
-                        <button type="reset" class="btn btn-success">Reset</button>
-                        <a href="{{ url_for('carboard.indexSignal') }}" class="btn btn-default pull-right">Back to
-                            list
-                        </a>
-                    </div>
-                </form>
+                {{ box_header('Bulk Add Signal Classes') }}
 
+                <div class="box-body fill">
+                    <form action="{{ url_for('carboard.bulkAddClass') }}" method="POST" enctype="multipart/form-data">
+                        <div class="drop-file">
+                            <span id="file-info" class="animated-bounce">Drop Your file Here</span>
+                            {% for field in form %}
+                                {{ render_field(field) }}
+                            {% endfor %}
+                        </div>
+                    </form>
+                </div>
             </div>
-
+            <div class="box-footer form-footer">
+                <button type="submit" id="submit" class="btn btn-success">Submit File</button>
+                <a href="{{ url_for('carboard.indexSignalclass') }}" class="btn btn-default pull-right">Back to
+                    list
+                </a>
+            </div>
         </div>
     </div>
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+        $('#submit').click(function (e) {
+            if (fileInput.value) {
+                $('form').submit();
+            }
+        })
+    </script>
 {% endblock %}

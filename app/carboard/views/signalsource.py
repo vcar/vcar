@@ -71,7 +71,12 @@ def bulkAddSource():
             f = upload_csv(form.file.data, CSV_TEMP)
             loader = CSVLoader(os.path.join(CSV_TEMP, form.file.data.filename))
             res = loader.load()
+            already_there = False
             for row in res:
+                ret = Signalsource.query.filter_by(name=row['Signal Source'])
+                if ret:
+                    already_there = True
+                    continue
                 signal_source = Signalsource(
                     name=row['Signal Source'],
                     description=row['Description']
@@ -81,8 +86,10 @@ def bulkAddSource():
             remove_csv(form.file.data.filename, CSV_TEMP)
         except KeyError:
             errors = ['Your file is Not well Formated, please review your file structure .']
-        if not errors:
+        if not errors and not already_there:
             flash('Signal sources added Succesfully', 'success')
+        if already_there:
+            flash('Some Signal sources are not added because they are already in the database', 'warning')
     return render_template('carboard/signalsource/bulk.html', form=form, errors=errors)
 
 

@@ -69,6 +69,7 @@ def newSignal():
 def bulkAdd():
     form = FileSignalForm()
     errors = None
+    print(request.form.getlist('files'))
     if form.validate_on_submit():
         f = upload_csv(form.file.data, CSV_TEMP)
         loader = CSVLoader(os.path.join(CSV_TEMP, form.file.data.filename))
