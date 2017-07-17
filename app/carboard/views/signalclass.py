@@ -136,6 +136,7 @@ def deleteSignalclass(id):
     flash('Signal class {}, deleted successfully.'.format(signalclass.name), 'success')
     return redirect(url_for('carboard.indexSignalclass'))
 
+# ------------------ /carboard/signalclass/search?table_seach=?: Search for given signal class --------------- #
 
 @carboard.route('/signalclass/search', methods=['GET'])
 @login_required

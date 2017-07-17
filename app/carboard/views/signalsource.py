@@ -144,6 +144,8 @@ def deleteSignalsource(id):
     return redirect(url_for('carboard.indexSignalsource'))
 
 
+# ------------------ /carboard/signalsource/search?table_seach=? : Search for signal source --------------- #
+
 @carboard.route('/signalsource/search')
 @login_required
 def searchSignalSource():
