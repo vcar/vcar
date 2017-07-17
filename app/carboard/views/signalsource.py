@@ -46,7 +46,12 @@ def showSignalsource(id):
 def newSignalsource():
     """ Add new signalsource """
     form = SignalsourceForm()
+
     if form.validate_on_submit():
+        ret = Signalsource.query.filter_by(name=form.name.data)
+        if ret:
+            flash('Signal source {}, already exists in the database.'.format(form.name.data), 'error')
+            return redirect(url_for('carboard.indexSignalsource'))
         signalsource = Signalsource(
             name=form.name.data,
             description=form.description.data
@@ -75,7 +80,7 @@ def bulkAddSource():
             for row in res:
                 ret = Signalsource.query.filter_by(name=row['Signal Source'])
                 if ret:
-                    already_there = True
+                    already_there = True  # check to not add already added signal sources
                     continue
                 signal_source = Signalsource(
                     name=row['Signal Source'],
