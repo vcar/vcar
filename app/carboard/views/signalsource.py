@@ -48,7 +48,7 @@ def newSignalsource():
     form = SignalsourceForm()
 
     if form.validate_on_submit():
-        ret = Signalsource.query.filter_by(name=form.name.data)
+        ret = Signalsource.query.filter_by(name=form.name.data).first()
         if ret:
             flash('Signal source {}, already exists in the database.'.format(form.name.data), 'error')
             return redirect(url_for('carboard.indexSignalsource'))

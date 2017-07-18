@@ -12,6 +12,14 @@
             background-color: #2A2A2A;
             border-color: #2A2A2A;
         }
+     .box-body {
+            padding: 40px 50px;
+        }
+
+        .drop-file {
+            width: 100%;
+            height: 200px;
+        }
     </style>
 {% endblock %}
 
@@ -21,7 +29,7 @@
             Bulk add Signals
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li><a href="{{ url_for('carboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
             <li><a href="{{ url_for('carboard.indexSignalclass') }}">Signal Classes</a></li>
             <li class="active">Bulk Add Signal Classes</li>
         </ol>
@@ -49,7 +57,7 @@
 
                 {{ box_header('Bulk Add Signal Classes') }}
 
-                <div class="box-body fill">
+                <div class="box-body">
                     <form action="{{ url_for('carboard.bulkAddClass') }}" method="POST" enctype="multipart/form-data">
                         <div class="drop-file">
                             <span id="file-info" class="animated-bounce">Drop Your file Here</span>

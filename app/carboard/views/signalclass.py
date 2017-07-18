@@ -80,8 +80,13 @@ def newSignalclass():
     """ Add new signalclass """
     form = SignalclassForm()
     if form.validate_on_submit():
+        ret = Signalclass.query.filter_by(name=form.name.data).first()
+        if ret:
+            flash('Signal class {}, already exists in the database.'.format(form.name.data), 'error')
+            return redirect(url_for('carboard.indexSignalclass'))
         signalclass = Signalclass(
             name=form.name.data,
+            description=form.description.data
         )
         db.session.add(signalclass)
         db.session.commit()
