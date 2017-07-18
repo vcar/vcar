@@ -12,9 +12,9 @@
             Add new signal source
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
-            <li><a href="#">Signalsource</a></li>
-            <li class="active">Add new signal source</li>
+            <li><a href="{{ url_for('carboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+			<li><a href="{{ url_for('carboard.indexSignalsource') }}">Signal Sources</a></li>
+			<li class="active">Add new Signal Source</li>
         </ol>
     </section>
 {% endblock content_header %}
