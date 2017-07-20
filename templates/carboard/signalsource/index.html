@@ -56,10 +56,11 @@
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
-
+                    {% set count = [start] %}
                     {% for signalsource in signalsources.items %}
                         <tr>
-                            <td><a href="{{ url_for('carboard.showSignalsource', id=signalsource.id) }}">{{ loop.index }}</a></td>
+                            <td><a href="{{ url_for('carboard.showSignalsource', id=signalsource.id) }}">{{ count[0] }}</a></td>
+                            {% if count.append(count.pop() + 1) %}{% endif %}
                             <td>{{ signalsource.name }}</td>
                             <td>
                                 {% if signalsource.status == 1 %}

@@ -28,7 +28,8 @@ def indexSignal():
         page=request.args.get('page', 1, type=int),
         per_page=request.args.get('per_page', PER_PAGE, type=int),
     )
-    return render_template('carboard/signal/index.html', signals=signals)
+    start = (request.args.get('page', 1, type=int) - 1) * PER_PAGE + 1 # get the pagination start number to render in the template
+    return render_template('carboard/signal/index.html', signals=signals, start=start)
 
 
 # ----------------------- /carboard/signal/id : Show signal ----- #

@@ -59,10 +59,12 @@
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
-
+                    {% set count = [start] %}
                     {% for extrasignal in extrasignals.items %}
                         <tr>
-                            <td><a href="{{ url_for('carboard.showExtrasignal', id=extrasignal.id) }}">{{ loop.index }}</a></td>
+                            <td><a href="{{ url_for('carboard.showExtrasignal', id=extrasignal.id) }}">{{ count[0] }}</a></td>
+                            {% if count.append(count.pop() + 1) %}
+                            {% endif %}
                             <td>{{ extrasignal.name }}</td>
                             <td><b>{{ extrasignal.signal }}</b></td>
                             <td><b>{{ extrasignal.signal.signalclass }}</b></td>

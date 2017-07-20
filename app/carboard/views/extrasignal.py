@@ -25,7 +25,8 @@ def indexExtrasignal():
         page=request.args.get('page', 1, type=int),
         per_page=request.args.get('per_page', PER_PAGE, type=int),
     )
-    return render_template('carboard/extrasignal/index.html', extrasignals=extrasignals)
+    start = (request.args.get('page', 1, type=int) - 1) * PER_PAGE + 1
+    return render_template('carboard/extrasignal/index.html', extrasignals=extrasignals,start=start)
 
 # ----------------------- /carboard/extrasignal/id : Show extrasignal ------------------- #
 

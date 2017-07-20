@@ -27,7 +27,8 @@ def indexSignalclass():
         page=request.args.get('page', 1, type=int),
         per_page=request.args.get('per_page', PER_PAGE, type=int),
     )
-    return render_template('carboard/signalclass/index.html', signalclasses=signalclasses)
+    start = (request.args.get('page', 1, type=int) - 1) * PER_PAGE + 1 # get the pagination number to render in the template
+    return render_template('carboard/signalclass/index.html', signalclasses=signalclasses, start=start)
 
 
 # ----------------------- /carboard/signalclass/id : Show signalclass ----- #

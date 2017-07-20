@@ -26,7 +26,8 @@ def indexSignalsource():
         page=request.args.get('page', 1, type=int),
         per_page=request.args.get('per_page', PER_PAGE, type=int),
     )
-    return render_template('carboard/signalsource/index.html', signalsources=signalsources)
+    start = (request.args.get('page', 1, type=int) - 1) * PER_PAGE + 1
+    return render_template('carboard/signalsource/index.html', signalsources=signalsources, start=start)
 
 
 # ----------------------- /carboard/signalsource/id : Show signalsource ----- #
