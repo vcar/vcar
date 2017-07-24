@@ -1,29 +1,56 @@
 {% macro render_field(field, label=false) %}
-	<div class="form-group {% if field.errors %} has-error {% endif %}">
-		{% if field.type == "FileField" %}
-            {{ field.label(class="label-avatar") }}
-            {{ field(class = "avatar") }}
-		{% elif field.type == "BooleanField" %}
+    <div class="form-group {% if field.errors %} has-error {% endif %}">
+        {% if field.type == "FileField" %}
+            {# {{ field.label(class="label-avatar") }} #}
+            {{ field(class = "avatar-file") }}
+        {% elif field.type == "BooleanField" %}
             <div class="checkbox icheck">
-              <label>
-                {{ field(class = "avatar") }} {{ field.label.text}}
-              </label>
+                <label>
+                    {{ field(class = "avatar") }} {{ field.label.text }}
+                </label>
             </div>
-		{% else %}
+        {% else %}
             {% if label and field.label.text != 'Csrf Token' %}
                 {{ field.label(class="control-label") }}
             {% endif %}
             {{ field(placeholder = field.label.text, class = "form-control") }}
-		{% endif %}
+        {% endif %}
 
-		{% if field.errors %}
-			{% for error in field.errors %}
-				<span class="help-block">{{ error }}</span>
-			{% endfor %}
-		{% endif %}
-	</div>
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <span class="help-block">{{ error }}</span>
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endmacro %}
 
+{% macro render_dynamic(field, label = false) %}
+    <div class="form-group {% if field.errors %} has-error {% endif %}">
+        {% if not field.label.text.startswith('no') %}
+            {% if field.type == "FileField" %}
+                {{ field.label(class="label-avatar") }}
+                {{ field(class = "avatar-file") }}
+            {% elif field.type == "BooleanField" %}
+                <div class="checkbox icheck">
+                    <label>
+                        {{ field(class = "avatar") }} {{ field.label.text }}
+                    </label>
+                </div>
+            {% else %}
+                {% if label and field.label.text != 'Csrf Token' %}
+                    {{ field.label(class="control-label") }}
+                {% endif %}
+                {{ field(placeholder = field.label.text, class = "form-control") }}
+            {% endif %}
+
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    </div>
+{% endmacro %}
 
 {% macro small_box(title, body, footer="More info", link="#", icon="stats-bars", bg="bg-aqua") %}
     <div class="small-box {{ bg }}">
@@ -34,7 +61,7 @@
         <div class="icon">
             <i class="ion ion-{{ icon }}"></i>
         </div>
-        <a href="{{ link }}" class="small-box-footer">{{ footer }}</i></a>
+        <a href="{{ link }}" class="small-box-footer"><i>{{ footer }}</i></a>
     </div>
 {% endmacro %}
 
@@ -44,27 +71,27 @@
     additionally passing on all keyword_arguments (may overwrite existing ones)
     #}
     {%- with kargs = base.copy(),  _ = kargs.update(kwargs) -%}
-        {{url_for(endpoint, **kargs)}}
+        {{ url_for(endpoint, **kargs) }}
     {%- endwith %}
 {%- endmacro %}
 
 {% macro render_pagination(pagination) %}
-  <div class=pagination>
-  {% for page in pagination.iter_pages() %}
-    {% if page %}
-      {% if page != pagination.page %}
-        <a href="{{ url_for_other_page(page) }}">{{ page }}</a>
-      {% else %}
-        <strong>{{ page }}</strong>
-      {% endif %}
-    {% else %}
-      <span class=ellipsis>…</span>
-    {% endif %}
-  {%- endfor %}
-  {% if pagination.has_next %}
-    <a href="{{ url_for_other_page(pagination.page + 1)}}">Next &raquo;</a>
-  {% endif %}
-  </div>
+    <div class=pagination>
+        {% for page in pagination.iter_pages() %}
+            {% if page %}
+                {% if page != pagination.page %}
+                    <a href="{{ url_for_other_page(page) }}">{{ page }}</a>
+                {% else %}
+                    <strong>{{ page }}</strong>
+                {% endif %}
+            {% else %}
+                <span class=ellipsis>…</span>
+            {% endif %}
+        {%- endfor %}
+        {% if pagination.has_next %}
+            <a href="{{ url_for_other_page(pagination.page + 1) }}">Next &raquo;</a>
+        {% endif %}
+    </div>
 {% endmacro %}
 
 {% macro render_pagination__(
@@ -76,42 +103,47 @@
         extra='no-margin pull-right',
         ellipses='…',
         args={}
-    )
--%}
+    )-%}
 
     {% with url_args = {},
         _ = url_args.update(request.view_args if not endpoint else {}),
         __ = url_args.update(request.args if not endpoint else {}),
         ___ = url_args.update(args) %}
         {% with endpoint = endpoint or request.endpoint %}
-        {% if pagination.pages > 1 %}
-            <br>
-            <div class="pull-left">
-                Displaying  <b> {{ pagination.page }}  -  {{ pagination.pages }} </b> in total of <b>{{ pagination.total }}</b>
-            </div>
-            <ul class="pagination{% if size %} pagination-{{size}}{% endif %} {{ extra }}"{{kwargs|xmlattr}}>
-                {# prev and next are only show if a symbol has been passed. #}
-                {% if prev != None -%}
-                    <li{% if not pagination.has_prev %} class="disabled"{% endif %}><a href="{{_arg_url_for(endpoint, url_args, page=pagination.prev_num) if pagination.has_prev else '#'}}">{{prev}}</a></li>
-                {%- endif -%}
+            {% if pagination.pages > 1 %}
+                <br>
+                <div class="pull-left">
+                    Displaying <b> {{ pagination.page }} - {{ pagination.pages }} </b> in total of
+                    <b>{{ pagination.total }}</b>
+                </div>
+                <ul class="pagination{% if size %} pagination-{{ size }}{% endif %} {{ extra }}"{{ kwargs|xmlattr }}>
+                    {# prev and next are only show if a symbol has been passed. #}
+                    {% if prev != None -%}
+                        <li{% if not pagination.has_prev %} class="disabled"{% endif %}><a
+                                href="{{ _arg_url_for(endpoint, url_args, page=pagination.prev_num) if pagination.has_prev else '#' }}">{{ prev }}</a>
+                        </li>
+                    {%- endif -%}
 
-                {%- for page in pagination.iter_pages() %}
-                    {% if page %}
-                        {% if page != pagination.page %}
-                            <li><a href="{{_arg_url_for(endpoint, url_args, page=page)}}">{{page}}</a></li>
-                        {% else %}
-                            <li class="active"><a href="#">{{page}} <span class="sr-only">(current)</span></a></li>
+                    {%- for page in pagination.iter_pages() %}
+                        {% if page %}
+                            {% if page != pagination.page %}
+                                <li><a href="{{ _arg_url_for(endpoint, url_args, page=page) }}">{{ page }}</a></li>
+                            {% else %}
+                                <li class="active"><a href="#">{{ page }} <span class="sr-only">(current)</span></a>
+                                </li>
+                            {% endif %}
+                        {% elif ellipses != None %}
+                            <li class="disabled"><a href="#">{{ ellipses }}</a></li>
                         {% endif %}
-                    {% elif ellipses != None %}
-                        <li class="disabled"><a href="#">{{ellipses}}</a></li>
-                    {% endif %}
-                {%- endfor %}
+                    {%- endfor %}
 
-                {% if next != None -%}
-                    <li{% if not pagination.has_next %} class="disabled"{% endif %}><a href="{{_arg_url_for(endpoint, url_args, page=pagination.next_num) if pagination.has_next else '#'}}">{{next}}</a></li>
-                {%- endif -%}
-            </ul>
-        {% endif %}
+                    {% if next != None -%}
+                        <li{% if not pagination.has_next %} class="disabled"{% endif %}><a
+                                href="{{ _arg_url_for(endpoint, url_args, page=pagination.next_num) if pagination.has_next else '#' }}">{{ next }}</a>
+                        </li>
+                    {%- endif -%}
+                </ul>
+            {% endif %}
         {% endwith %}
     {% endwith %}
 {% endmacro %}
@@ -125,9 +157,12 @@
         </h3>
         <div class="box-tools pull-right">
             <span data-toggle="tooltip" title="{{ label_title }}" class="badge bg-light-blue">{{ label }}</span>
-            <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-            <button class="btn btn-box-tool full" data-widget="fullscreen" data-toggle="tooltip" title="Full screen"><i class="fa fa-expand"></i></button>
-            <button class="btn btn-box-tool" data-widget="remove"  data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+            <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i
+                    class="fa fa-minus"></i></button>
+            <button class="btn btn-box-tool full" data-widget="fullscreen" data-toggle="tooltip" title="Full screen"><i
+                    class="fa fa-expand"></i></button>
+            <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i
+                    class="fa fa-times"></i></button>
         </div>
     </div>
 {% endmacro %}
@@ -167,13 +202,13 @@
 
 
 {% macro _arg_url_for(endpoint, base) %}
-{# calls url_for() with a given endpoint and **base as the parameters,
+    {# calls url_for() with a given endpoint and **base as the parameters,
    additionally passing on all keyword_arguments (may overwrite existing ones)
  #}
-{%- with kargs = base.copy() -%}
-{%- do kargs.update(kwargs) -%}
-{{url_for(endpoint, **kargs)}}
-{%- endwith %}
+    {%- with kargs = base.copy() -%}
+        {%- do kargs.update(kwargs) -%}
+        {{ url_for(endpoint, **kargs) }}
+    {%- endwith %}
 {%- endmacro %}
 
 {% macro render_pagination(pagination,
@@ -183,37 +218,41 @@
                            size=None,
                            ellipses='…',
                            args={}
-                           )
--%}
-{% with url_args = {} %}
-{%- do url_args.update(request.view_args if not endpoint else {}),
+                           )-%}
+    {% with url_args = {} %}
+        {%- do url_args.update(request.view_args if not endpoint else {}),
        url_args.update(request.args if not endpoint else {}),
        url_args.update(args) -%}
-{% with endpoint = endpoint or request.endpoint %}
-<nav class="pull-right">
-  <ul class="pagination{% if size %} pagination-{{size}}{% endif %}"{{kwargs|xmlattr}}>
-  {# prev and next are only show if a symbol has been passed. #}
-  {% if prev != None -%}
-    <li{% if not pagination.has_prev %} class="disabled"{% endif %}><a href="{{_arg_url_for(endpoint, url_args, page=pagination.prev_num) if pagination.has_prev else '#'}}">{{prev}}</a></li>
-  {%- endif -%}
+        {% with endpoint = endpoint or request.endpoint %}
+            <nav class="pull-right">
+                <ul class="pagination{% if size %} pagination-{{ size }}{% endif %}"{{ kwargs|xmlattr }}>
+                    {# prev and next are only show if a symbol has been passed. #}
+                    {% if prev != None -%}
+                        <li{% if not pagination.has_prev %} class="disabled"{% endif %}><a
+                                href="{{ _arg_url_for(endpoint, url_args, page=pagination.prev_num) if pagination.has_prev else '#' }}">{{ prev }}</a>
+                        </li>
+                    {%- endif -%}
 
-  {%- for page in pagination.iter_pages() %}
-    {% if page %}
-      {% if page != pagination.page %}
-        <li><a href="{{_arg_url_for(endpoint, url_args, page=page)}}">{{page}}</a></li>
-      {% else %}
-        <li class="active"><a href="#">{{page}} <span class="sr-only">(current)</span></a></li>
-      {% endif %}
-    {% elif ellipses != None %}
-      <li class="disabled"><a href="#">{{ellipses}}</a></li>
-    {% endif %}
-  {%- endfor %}
+                    {%- for page in pagination.iter_pages() %}
+                        {% if page %}
+                            {% if page != pagination.page %}
+                                <li><a href="{{ _arg_url_for(endpoint, url_args, page=page) }}">{{ page }}</a></li>
+                            {% else %}
+                                <li class="active"><a href="#">{{ page }} <span class="sr-only">(current)</span></a>
+                                </li>
+                            {% endif %}
+                        {% elif ellipses != None %}
+                            <li class="disabled"><a href="#">{{ ellipses }}</a></li>
+                        {% endif %}
+                    {%- endfor %}
 
-  {% if next != None -%}
-    <li{% if not pagination.has_next %} class="disabled"{% endif %}><a href="{{_arg_url_for(endpoint, url_args, page=pagination.next_num) if pagination.has_next else '#'}}">{{next}}</a></li>
-  {%- endif -%}
-  </ul>
-</nav>
-{% endwith %}
-{% endwith %}
+                    {% if next != None -%}
+                        <li{% if not pagination.has_next %} class="disabled"{% endif %}><a
+                                href="{{ _arg_url_for(endpoint, url_args, page=pagination.next_num) if pagination.has_next else '#' }}">{{ next }}</a>
+                        </li>
+                    {%- endif -%}
+                </ul>
+            </nav>
+        {% endwith %}
+    {% endwith %}
 {% endmacro %}

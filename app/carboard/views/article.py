@@ -9,6 +9,7 @@ from ..forms.article import ArticleForm
 from ..constants import PER_PAGE
 from ...extensions import db
 
+
 # -------------------- /carboard/article/ : List of articles ---------------- #
 
 
@@ -21,6 +22,7 @@ def indexArticle():
     )
     return render_template('carboard/article/index.html', articles=articles)
 
+
 # -------------------- /carboard/article/id : Show article ------------------ #
 
 
@@ -29,6 +31,7 @@ def indexArticle():
 def showArticle(id):
     article = Article.query.get_or_404(id)
     return render_template('carboard/article/show.html', article=article)
+
 
 # -------------------- /carboard/article/new : Add article ------------------ #
 
@@ -59,6 +62,7 @@ def newArticle(dataset_id=None):
 
     return render_template('carboard/article/new.html', form=form, dataset_id=dataset_id)
 
+
 # -------------------- /carboard/article/id/edit : Edit article ------------- #
 
 
@@ -76,6 +80,7 @@ def editArticle(id):
         return redirect(url_for('carboard.showArticle', id=id))
 
     return render_template('carboard/article/edit.html', form=form, id=id)
+
 
 # -------------------- /carboard/article/id/delete : Delete article --------- #
 

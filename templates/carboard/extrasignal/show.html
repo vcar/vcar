@@ -13,7 +13,7 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="{{ url_for('carboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
-			<li><a href="{{ url_for('carboard.indexExtrasignal') }}">Extrasignal</a></li>
+			<li><a href="{{ url_for('carboard.indexExtrasignal') }}">Extra Signals</a></li>
 			<li class="active">Extra signal details</li>
 		</ol>
 	</section>
@@ -52,8 +52,8 @@
                     </div>
 
                     <div class="line">
-                        <strong class="line-title">Platform</strong>
-                        <p class="line-body">{{ extrasignal.platform }}</p>
+                        <strong class="line-title">Data Storage</strong>
+                        <p class="line-body">{{ extrasignal.storage }}</p>
                     </div>
 
                     <div class="line">
