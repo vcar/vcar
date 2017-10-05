@@ -13589,3 +13589,5 @@ if (ischrome) {
 	});
 
 })(jQuery);
+
+//# sourceMappingURL=frontend.js.map

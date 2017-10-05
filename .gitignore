@@ -11,6 +11,7 @@ _mailinglist
 .tox
 .cache/
 .idea/
+.vscode/
 
 # Ignore pycache files
 __pycache__
@@ -20,6 +21,10 @@ migrations/
 
 # Ignore uploaded files
 static/uploads/
+
+# Ignore compiled static files
+static/css/*.css*
+static/js/*.js*
 
 # Node packages
 node_modules/

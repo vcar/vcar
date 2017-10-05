@@ -646,3 +646,6 @@ pre code {
 .callout code, .callout .highlight {
     background-color: rgb(54, 54, 55);
 }
+.sidebar-menu, .main-sidebar .user-panel, .sidebar-menu > li.header {
+	white-space: normal !important;
+}
