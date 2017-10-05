@@ -9,8 +9,8 @@ the drivers capability to adjust his driving based on driving conditions.
 * Production :
 `gulp build --prod`
 * Development :
-    * `dulp build [--dev]` to generate static files.
-    * `dulp watch` to watch static files.
+    * `gulp build [--dev]` to generate static files.
+    * `gulp watch` to watch static files.
 
 
 
