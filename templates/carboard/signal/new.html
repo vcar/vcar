@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% from "carboard/macros.html" import render_field, box_header %}
+{% from "carboard/macros.html" import render_field, box_header , render_dynamic %}
 
 {% block title %}
     Add new signal | {{ super() }}
@@ -12,8 +12,8 @@
 		Add new signal
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
-			<li><a href="#">Signal</a></li>
+			<li><a href="{{ url_for('carboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li><a href="{{ url_for('carboard.indexSignal') }}">Signals</a></li>
 			<li class="active">Add new signal</li>
 		</ol>
 	</section>
@@ -30,7 +30,8 @@
                     <div class="box-body">
             			{{ form.hidden_tag() }}
             			{% for field in form %}
-            				{{ render_field(field) }}
+            				{{ render_dynamic
+            				(field) }}
             			{% endfor %}
                     </div>
 

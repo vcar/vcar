@@ -1,5 +1,6 @@
 import os
 import re
+import csv
 from unicodedata import normalize
 from uuid import uuid4
 from time import strftime
@@ -8,8 +9,12 @@ from datetime import datetime
 from flask import request, url_for
 from werkzeug import secure_filename
 
+from app.carboard.models.dataset import Dataset
+from app.carboard.models.platform import Platform
+from app.carboard.models.signal import Signal
 from config.config import DefaultConfig
 from .constants import UPLOAD_DATASET_DIR, ALLOWED_DATASET_EXTENSIONS
+
 
 # ------------------------------ View Helpers ------------------------------- #
 
@@ -50,6 +55,21 @@ def paginate(query, max_per_page=25):
         request.endpoint, page=p.pages, per_page=per_page)
     # return a dictionary as a response
     return {'items': p.items, 'pages': pages}
+
+
+def upload_csv(file_data, upload_dir):
+    """  upload csv file (keeping the name cause it will be removed after processing """
+    if file_data:
+        path = os.path.join(upload_dir)
+        file_data.save("/".join([path, file_data.filename]))
+        return file_data.filename
+
+
+def remove_csv(filename, upload_dir):
+    """ delet the plugins csv file """
+    path = os.path.join(upload_dir)
+    os.remove("/".join([path, filename]))
+    return True
 
 
 def upload_file(file_data, upload_dir, oldFile=None):
@@ -114,6 +134,50 @@ def choices(Model, placeholder=None, cond=1, orderField='name'):
     return c
 
 
+def platform_choices(placeholder=None, orderField='name'):
+    platforms = [(b.name, b) for b in Platform.query.filter_by(status=1).order_by(orderField).all()]
+    datasets = [(b.name, b) for b in Dataset.query.filter_by(status=1).order_by(orderField).all()]
+    ret = platforms + datasets
+    if placeholder:
+        ret.insert(0, ('0', placeholder))
+    else:
+        ret.insert(0, ('0', 'Select A Data Storatge'))
+    return ret
+
+
+def types():
+    return [
+        ('type', 'Select a Type ...'),
+        ('Numerical', 'Numerical'),
+        ('String', 'String'),
+        ('States', 'States'),
+        ('Path', 'Path')
+    ]
+
+
+def get_signal_from_form(form):
+    """ get a signal object from the given form """
+    signal = Signal(
+        name=form.name.data,
+        signalclass_id=form.signalclass_id.data,
+        signalsource_id=form.signalsource_id.data,
+        unit=form.unit.data,
+        description=form.unit.description,
+        frequency=form.frequency.data,
+        type=form.type.data
+    )
+    if form.type.data == "States" or form.type.data == "Numerical":
+        if form.type.data == "States":
+            number = form.number.data
+            values = form.values.data
+            signal.range = values
+        else:
+            signal.range = " - ".join([form.min_value.data, form.max_value.data])
+        return signal
+    else:
+        return signal
+
+
 def make_dir(dir_path):
     """ Make recursive directories """
     try:
@@ -162,4 +226,37 @@ def allowed_extensions(filename):
     """ check if the file extension is allowed """
     return '.' in filename and filename.rsplit('.', 1)[1] in DefaultConfig.ALLOWED_AVATAR_EXTENSIONS
 
+
 # ------------------------------- Form Helpers ------------------------------ #
+
+
+def find_id(model, field_name):
+    """ find the the given model by name, if not found return -1 """
+    res = model.query.filter_by(name=field_name).first()
+    if res:
+        return res.id
+    return -1
+
+
+# ------------------------------- CSV File Helper --------------------------- #
+
+class CSVLoader:
+    ## initialize with the wanted file path
+    def __init__(self, path):
+        self.path = path
+
+    ## give value in case of Non or empty
+    def sanitize(self, val):
+        if not val:
+            return "UNDEFINED"
+        return val
+
+    ## load the contents of the file an generate a resulting Hash
+    def load(self):
+        list = []
+        with open(self.path, 'rU') as f:
+            r = csv.DictReader(f)
+            for a in r:
+                list.append(a)
+        # final result
+        return list

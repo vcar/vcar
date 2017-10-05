@@ -67,6 +67,7 @@ DRIVER_LOGO_DIR = 'static/uploads/drivers/'
 VEHICLE_LOGO_DIR = 'static/uploads/vehicles/'
 DRIVE_FILES_DIR = 'static/uploads/records/'
 
+
 #
 # ------------------------------ Trace upload  constants -------------------- #
 UPLOAD_DATASET_DIR = os.path.join(DefaultConfig.UPLOAD_DIR, 'datasets')
@@ -75,3 +76,6 @@ ALLOWED_DATASET_EXTENSIONS = set(['txt', 'json', 'csv', 'xml', 'mat', 'zip'])
 # file processed by elasicsearch
 NOT_PROCESSED = 0
 PROCESSED = 1
+
+# ----------------------------- Temp CSV file ------------------------- #
+CSV_TEMP = 'static/uploads'

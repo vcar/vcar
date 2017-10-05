@@ -13,7 +13,7 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="{{ url_for('carboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
-			<li><a href="{{ url_for('carboard.indexSignalclass') }}">Signalclass</a></li>
+			<li><a href="{{ url_for('carboard.indexSignalclass') }}">Signal Classes</a></li>
 			<li class="active">List of signal classes</li>
 		</ol>
 	</section>
@@ -29,17 +29,23 @@
                         <a href="{{ url_for('carboard.newSignalclass') }}" class="btn btn-primary">
                             Add new signal class
                         </a>
+                        <a href="{{ url_for('carboard.bulkAddClass') }}" id="bulk" class="btn btn-success">
+                            Bulk add signal classes
+                        </a>
                     </div>
                     <div class="box-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                       <form action="{{ url_for('carboard.searchSignalClass') }}" method="get">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control pull-right"
+                                       placeholder="Search">
 
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fa fa-search"></i>
-                                </button>
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="box-body no-padding">
@@ -50,10 +56,11 @@
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
-
+                    {% set count = [start] %}
                     {% for signalclass in signalclasses.items %}
                         <tr>
-                            <td><a href="{{ url_for('carboard.showSignalclass', id=signalclass.id) }}">{{ signalclass.id }}</a></td>
+                            <td><a href="{{ url_for('carboard.showSignalclass', id=signalclass.id) }}">{{ count[0] }}</a></td>
+                            {% if count.append(count.pop() + 1) %}{% endif %}
                             <td>{{ signalclass.name }}</td>
                             <td>
                                 {% if signalclass.status == 1 %}

@@ -13,8 +13,8 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="{{ url_for('carboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
-			<li><a href="{{ url_for('carboard.indexSignalclass') }}">Signalclass</a></li>
-			<li class="active">Edit signal class</li>
+			<li><a href="{{ url_for('carboard.indexSignalclass') }}">Signal Classes</a></li>
+			<li class="active">Edit Signal Class</li>
 		</ol>
 	</section>
 {% endblock content_header %}
@@ -36,7 +36,7 @@
 
                     <div class="box-footer form-footer">
                         <button type="submit" class="btn btn-primary">Submit changes</button>
-                        <a href="{{ url_for('carboard.showSignalclass', id=id) }}" class="btn btn-success">Cansel</a>
+                        <a href="{{ url_for('carboard.showSignalclass', id=id) }}" class="btn btn-success">Cancel</a>
                         <a href="{{ url_for('carboard.indexSignalclass') }}" class="btn btn-default pull-right">Back to list</a>
                     </div>
             	</form>
