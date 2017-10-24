@@ -16,7 +16,7 @@ class DefaultConfig(object):
     # Configuration for the Flask-Bcrypt extension
     BCRYPT_LEVEL = 12
     # Application root directory
-    APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+    APP_ROOT = os.path.dirname(os.path.abspath('.'))
     # Application email
     MAIL_FROM_EMAIL = "misaki.yooko@gmail.com"
     # Upload directory
@@ -25,7 +25,8 @@ class DefaultConfig(object):
     UPLOAD_AVATAR_DIR = os.path.join(UPLOAD_DIR, 'avatars/')
     ALLOWED_AVATAR_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
     # Instance folder path
-    INSTANCE_FOLDER_PATH = os.path.join('/home/karim/OpenXC/Dashboard/Flask/instance')
+    INSTANCE_FOLDER_PATH = os.path.join(os.path.abspath('.'), 'instance')
+    # INSTANCE_FOLDER_PATH = os.path.join('/home/karim/OpenXC/Dashboard/Flask/instance')
     # INSTANCE_FOLDER_PATH = os.path.join('I:/home/karim/OpenXC/Dashboard/Flask', 'instance')
     UPLOAD_USER = "/uploads/avatars/"
     UPLOAD_BRAND = "/uploads/brands/"
