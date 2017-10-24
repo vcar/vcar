@@ -12,8 +12,8 @@ class Signal(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
-    description = db.Column(db.String(1000))
-    type = db.Column(db.String(100))
+    description = db.Column(db.Text)
+    type = db.Column(db.String(255))
     range = db.Column(db.String(255))
     frequency = db.Column(db.String(255))
     unit = db.Column(db.String(255))

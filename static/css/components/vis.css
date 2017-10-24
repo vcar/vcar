@@ -1,0 +1,103 @@
+/*
+* vis.js section --------------------------------------------------------------
+*/
+.vcar-vis {
+	background-color: #272B30;
+	margin: -10px;
+}
+
+.vcar-linechart {
+	fill: #C78317;
+}
+
+.blue-chart {
+	fill: #5555DD;
+	fill-opacity: 0;
+	stroke-width: 2px;
+	stroke: #5555DD;
+}
+
+.yellow-chart {
+	fill: #B9BA0A;
+	fill-opacity: 0;
+	stroke-width: 2px;
+	stroke: #B9BA0A;
+}
+
+.green-chart {
+	fill: #66AA00;
+	fill-opacity: 0;
+	stroke-width: 2px;
+	stroke: #66AA00;
+}
+
+.red-chart {
+	fill: #FE3912;
+	fill-opacity: 0;
+	stroke-width: 2px;
+	stroke: #FE3912;
+}
+
+.purple-chart {
+	fill: #DD5555;
+	fill-opacity: 0;
+	stroke-width: 2px;
+	stroke: #DD5555;
+}
+
+.vis-legend {
+	background-color: transparent !important;
+	padding: 5px 0px !important;
+	border: none !important;
+	box-shadow: none !important;
+}
+
+.vis-legend-text {
+	color: #878B90;
+	padding-bottom: 3px;
+	border-bottom: 1px solid #B9B2B4;
+	font-weight: 600;
+}
+
+.vis-time-axis .vis-text {
+	color: #6c6c6c !important;
+}
+
+.vis-timeline .vis-outline {
+	fill: #2a2a2a !important;
+	stroke: #3a3a3a !important;
+}
+
+.vis-panel.vis-center, .vis-panel.vis-left, .vis-panel.vis-right, .vis-panel.vis-top, .vis-panel.vis-bottom {
+	border: 1px #2B3035 !important;
+}
+
+.vis-timeline {
+	border: 1px solid #2A2A2A !important;
+}
+
+.vis-time-axis .vis-grid.vis-minor {
+	border-color: #2B3035 !important;
+}
+
+.vis-time-axis .vis-grid.vis-major {
+	border-color: #2B3035 !important;
+}
+
+.vis-panel.vis-background.vis-horizontal .vis-grid.vis-minor {
+	border-color: #2B3035 !important;
+}
+
+.vis-panel.vis-background.vis-horizontal .vis-grid.vis-major {
+	border-color: #2B3035 !important;
+}
+
+.vis-active {
+	box-shadow: 0 0 1px 1px #86d5f8 !important;
+}
+
+.vis-network-tooltip, .vis-network-tooltip > pre {
+	color: #03A100 !important;
+	background-color: #1C1E22 !important;
+	border: 1px solid #1C1E22 !important;
+}

@@ -15,37 +15,36 @@
 </a>
 <div class="navbar-custom-menu">
 	<ul class="nav navbar-nav">
-		<li class="dropdown user user-menu">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <!-- User Account: style can be found in dropdown.less -->
+        <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 				<img src="{{resized_img_src(avatar_dir+current_user.avatar, width=160, mode='crop')}}" class="user-image" alt="User Image">
                 <span class="hidden-xs">{{ current_user.fullname | upper}}</span>
 			</a>
-			<ul class="dropdown-menu">
-				<!-- User image -->
-				<li class="user-header bg-light-blue">
-					<img src="{{resized_img_src(avatar_dir+current_user.avatar , width=160, height=160, mode='crop')}}" class="img-circle" alt="User Image" />
-					<p> {{ current_user.fullname }} </p>
-				</li>
-				<!-- Menu Body -->
-				<li class="user-body">
-					<!-- <div class="col-xs-6 text-center">
-						<a href="#">Followers</a>
-					</div>
-					<div class="col-xs-6 text-center">
-						<a href="#">Friends</a>
-					</div> -->
-				</li>
-				<!-- Menu Footer-->
-				<li class="user-footer">
-					<div class="pull-left">
-						<a href="{{ url_for('carboard.profile') }}" class="btn btn-default btn-flat">Profile</a>
-					</div>
-					<div class="pull-right">
-						<a href="{{ url_for('carboard.logout') }}" class="btn btn-default btn-flat">Sign out</a>
-					</div>
-				</li>
-			</ul>
-		</li>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ url_for('carboard.profile') }}"><i class="fa fa-user-o"></i> Profil</a></li>
+                <li class="divider"></li>
+                <li><a href="{{ url_for('carboard.configuration') }}"><i class="fa fa-cog"></i> Configuration</a></li>
+                <li class="divider"></li>
+                <li><a href="{{ url_for('carboard.logout') }}"><i class="fa fa-sign-out"></i> Se déconncter</a></li>
+                <li class="divider"></li>
+                <li><a id="switch-sidebar" href="">
+                    {% if request.cookies.get('sidebar-collapse') %}
+                        <i class="fa fa-plus-square-o"></i> Expand sidebar
+                    {% else %}
+                        <i class="fa fa-minus-square-o"></i> Collapse sidebar
+                    {% endif %}
+                </a></li>
+                <li><a id="switch-mode" href="">
+                    {% if request.cookies.get('dark-theme') %}
+                        <i class="fa fa-sun-o"></i> Light mode
+                    {% else %}
+                        <i class="fa fa-moon-o"></i> Dark mode
+                    {% endif %}                
+                </a></li>
+            </ul>
+        </li>
+        <!-- control-sidebar -->
         <li>
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-sliders"></i></a>
         </li>

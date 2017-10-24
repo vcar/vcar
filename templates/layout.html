@@ -15,7 +15,11 @@
 
 
 {% block bodyclass %}
-    hold-transition skin-light sidebar-mini fixed
+    hold-transition
+    {% if request.cookies.get('dark-theme') %} dark {% else %} light {% endif %}
+    sidebar-mini
+    {% if request.cookies.get('sidebar-collapse') %} sidebar-collapse {% endif %}
+    fixed
 {% endblock %}
 
 {% block body %}

@@ -5,14 +5,9 @@
 	Log In | {{ super() }}
 {% endblock %}
 
-{%- block styles %}
-	{{ super() }}
-    <!-- User style  -->
-    <link href="/static/css/user{{ minified }}.css" rel="stylesheet" type="text/css" />
-{%- endblock styles %}
-
 {% block bodyclass %}
-    login-page
+	login-page
+	{% if request.cookies.get('dark-theme') %} dark {% else %} light {% endif %}
 {% endblock %}
 
 {% block body %}

@@ -36,6 +36,7 @@ var vendor_js_files = [
     'static/vendor/fastclick/*.js',
     'static/vendor/icheck/*.js',
     'static/vendor/vis/vis.min.js',
+    'static/vendor/cookie/jquery.cookie.js',
     'static/vendor/fileupload/fileupload.js',
     'static/vendor/fileupload/fileupload-process.js',
     'static/vendor/fileupload/fileupload-validate.js',
@@ -46,9 +47,10 @@ var vendor_js_files = [
 
 // Application files
 var app_css_files = [
-    'static/css/styles/global.css',
-    'static/css/skins/skin-vcar_blue.css',
-    'static/css/styles/uploader.css',
+    'static/css/styles/application.css',
+    'static/css/skins/dark-theme.css',
+    'static/css/skins/light-theme.css',
+    'static/css/components/**/*.css',
 ];
 var app_js_files = [
     'static/js/scripts/main.js',
@@ -102,8 +104,8 @@ gulp.task('css_vendor', function() {
 gulp.task('js_app', function() {
     return gulp.src(app_js_files)
         .pipe(sourcemaps.init())
-        .pipe(mode.dev(concat('app.js')))   
-        .pipe(mode.prod(concat('app.min.js')))   
+        .pipe(mode.dev(concat('app.js')))
+        .pipe(mode.prod(concat('app.min.js')))
         .pipe(mode.prod(uglify()))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(js_dist));

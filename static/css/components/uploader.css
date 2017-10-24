@@ -1,0 +1,170 @@
+/*
+* ----------------------------------------------------------------------------
+ * Component : Uploader
+ * ----------------------------------------------------------------------------
+ */
+
+#drop {
+    border-radius: 3px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    padding: 40px 50px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#drop input {
+    display: none
+}
+
+#drop a {
+    border-radius: 2px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1;
+    margin-top:12px;
+    padding: 12px 26px;
+}
+
+#drop a:hover {
+}
+
+#upload {
+    padding: 30px;
+}
+
+#upload ul {
+    list-style: none;
+    margin: 0 -30px;
+    padding: 0;
+}
+
+#upload ul li {
+    height: 84px;
+    padding: 15px;
+    position: relative
+}
+
+#upload ul li.working span {
+    background-position: 0 -12px;
+    height:16px;
+}
+
+#upload ul li canvas {
+    left: 32px;
+    position: absolute;
+    top:15px;
+}
+
+#upload ul li span {
+    background: url('/static/img/dashboard/uploader_icons.png') no-repeat;
+    cursor: pointer;
+    position: absolute;
+    right: 33px;
+    top: 34px;
+    width: 15px;
+    height: 12px;
+}
+
+#upload ul li i {
+    display: block;
+    font-style:normal;
+    font-weight: normal;
+}
+
+#upload ul li p {
+    left: 100px;
+    overflow:hidden;
+    position: absolute;
+    top: 20px;
+    white-space: nowrap;
+    width: 75%;
+}
+
+#upload ul li input {
+    display: none
+}
+
+
+/*
+* ----------------------------------------------------------------------------
+ * Component : Uploader - Dark theme
+ * ----------------------------------------------------------------------------
+ */
+
+ .dark #drop {
+     background-color: #2E3134;
+     border: 3px dashed #444;
+     color: #7f858a;
+ }
+.dark #drop a {
+     background-color: #007a96;
+     color: #fff;
+ }
+.dark #drop a:hover {
+     background-color: #0986a3
+ }
+.dark #upload {
+     background-color: #373a3d;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+ }
+.dark #upload ul {
+     border-bottom: 1px solid #3d4043;
+     border-top:1px solid #2b2e31;
+ }
+.dark #upload ul li {
+     background-color: #333639;
+     border-bottom: 1px solid #2b2e31;
+     border-top: 1px solid #3d4043;
+ }
+.dark #upload ul li.error p {
+     color: red
+ }
+.dark #upload ul li i {
+     color: #7f7f7f;
+ }
+.dark #upload ul li p {
+     color: #EEE;
+ }
+
+ /*
+ * ----------------------------------------------------------------------------
+  * Component : Uploader - Light theme
+  * ----------------------------------------------------------------------------
+  */
+
+.light #drop {
+    background-color: #fff;
+    border: 3px dashed #ccc;
+    color: #7f858a;
+}
+.light #drop a {
+    background-color: #007a96;
+    color: #fff;
+}
+.light #drop a:hover {
+    background-color: #0986a3
+}
+.light #upload {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.light #upload ul {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+}
+.light #upload ul li {
+    background-color: #eee;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+}
+.light #upload ul li.error p {
+    color: red
+}
+.light #upload ul li i {
+    color: #7f7f7f;
+}
+.light #upload ul li p {
+    color: #333;
+}

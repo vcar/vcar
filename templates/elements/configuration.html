@@ -21,7 +21,7 @@
 <div class="row">
     <!-- Signals -->
     <div class="col-md-3">
-        <div class="box box-solid box-conf">
+        <div class="box box-conf">
             <div class="box-header"><i class="fa fa-microchip"></i><h3 class="box-title">Signals</h3></div>
             <div class="box-body">
                 <a href="{{ url_for('carboard.indexSignal') }}"><i class="fa fa-star"></i>Main signals</a>
@@ -84,37 +84,4 @@
         </div>
     </div>
 </div>
-<style type="text/css">
-.box-conf {
-    /*min-height: 5 blocks including the title*/
-    min-height: calc(49px * 5);
-}
-.box-conf .box-header {
-    background: #1a2226;
-    padding: 15px;
-}
-.box-conf .box-header > .fa {
-    color: rgba(255, 152, 0, 0.75);
-}
-.box-conf .box-body {
-    padding: 0;
-}
-.box-conf .box-body a {
-    display: block;
-    padding: 15px 0 15px 20px;
-    border-bottom: 1px solid #333;
-    color: #b8c7ce;
-}
-.box-conf .box-body a:hover {
-    color: #7289da;
-    background: #2e2e2e;
-}
-.box-conf .box-body a i {
-    margin-right: 10px;
-}
-.box-conf .box-body a:hover i {
-    color: yellow;
-}
-
-</style>
 {% endblock %}

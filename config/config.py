@@ -25,7 +25,7 @@ class DefaultConfig(object):
     UPLOAD_AVATAR_DIR = os.path.join(UPLOAD_DIR, 'avatars/')
     ALLOWED_AVATAR_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
     # Instance folder path
-    INSTANCE_FOLDER_PATH = os.path.join('/Users/mac/Projects/vcar')
+    INSTANCE_FOLDER_PATH = os.path.join('/home/karim/OpenXC/Dashboard/Flask/instance')
     # INSTANCE_FOLDER_PATH = os.path.join('I:/home/karim/OpenXC/Dashboard/Flask', 'instance')
     UPLOAD_USER = "/uploads/avatars/"
     UPLOAD_BRAND = "/uploads/brands/"

@@ -1,0 +1,716 @@
+/*
+* ----------------------------------------------------------------------------
+ * vCar application styles
+ * ----------------------------------------------------------------------------
+ */
+.info-link:hover, .right-checkbox {
+    text-decoration: underline;
+}
+
+.selector ul, .vcar-task ul {
+    list-style: none;
+}
+
+.control-sidebar {
+    height: 100%;
+}
+
+.line-right {
+    line-height: 164px;
+    float: right !important;
+    width: 160px;
+    height: 160px;
+    margin: -11px -10px 0 0;
+    padding: 0 !important;
+    text-align: center;
+}
+
+.line-right img {
+    overflow: hidden;
+    max-width: 138px;
+    max-height: 138px;
+}
+
+.line {
+    padding: 5px;
+}
+
+.line .line-title {
+    display: inline-block;
+    min-width: 20%;
+    margin: 10px 0 !important;
+    vertical-align: top;
+}
+
+.line .line-body {
+    display: inline-block;
+    max-width: 75%;
+    margin: 0 !important;
+    padding-left: 10px;
+    vertical-align: sub;
+    vertical-align: -webkit-baseline-middle;
+}
+
+.line-sm, .vcar-box #upload {
+    margin: -10px;
+}
+
+.line-sm {
+    padding: 12px 5px;
+    text-align: left;
+}
+
+.vcar-box .box-tools {
+    top: 25%;
+}
+
+.vcar-box .box-footer {
+    padding: 10px;
+    border: none;
+    border-radius: 0;
+}
+
+.vcar-box-sm {
+    text-align: left;
+    border: none;
+}
+
+.btn-sm, .intro, .selector li .item {
+    text-align: center;
+}
+
+.line-sm .line-body {
+    display: inline-block;
+    margin: 0 !important;
+    padding-left: 10px;
+}
+
+.line-sm .line-icon {
+    display: inline-block;
+    margin: 0 5px 0 -10px;
+    padding: 4px 6px;
+    cursor: pointer;
+    border-radius: 100%;
+}
+
+.form-row {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.form-row hr {
+    margin: 25px 0;
+}
+
+.table-avatar {
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-top: -2px;
+    margin-right: 0;
+    border-radius: 50%;
+}
+
+iframe {
+    border: none;
+}
+
+#graph, #map {
+    height: 480px;
+}
+
+.fullscreen .vcar-task, .fullscreen .vcar-vis {
+    height: 100% !important;
+}
+
+.vcar {
+    margin-top: 20px;
+}
+
+.callout-icon {
+    float: right;
+    padding: 15px 0 15px 20px;
+    border-left: 1px solid;
+}
+
+.btn-vcar-action {
+    position: relative;
+    overflow: hidden;
+    padding: 10px 45px 10px 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.btn-vcar-action >:first-child {
+    font-size: 1.7em;
+    line-height: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    width: 40px;
+    text-align: center;
+}
+
+.tooltip-inner {
+    min-width: 150px !important;
+}
+
+hr.divider {
+    width: 50%;
+    margin: 30px auto 40px;
+}
+
+.selector {
+    position: relative;
+    display: inline-block;
+    width: 140px;
+    height: 140px;
+    margin: 10px 0;
+}
+
+.selector, .selector button {
+    font-weight: 300;
+}
+
+.selector button {
+    font-family: Lobster, cursive;
+    font-size: 40px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    cursor: pointer;
+    transition: all .1s;
+    border: 0;
+    border-radius: 50%;
+}
+
+.selector button:focus {
+    outline: 0;
+}
+
+.selector ul {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    bottom: -20px;
+    left: -20px;
+    margin: 0;
+    padding: 0;
+}
+
+.selector li {
+    position: absolute;
+    width: 0;
+    height: 100%;
+    margin: 0 50%;
+    transition: all .8s ease-in-out;
+    -webkit-transform: rotate(-360deg);
+}
+
+.selector li .item {
+    font-size: 30px;
+    line-height: 80px;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    overflow: hidden;
+    width: 80px;
+    height: 80px;
+    margin-left: -40px;
+    cursor: pointer;
+    transition: all .8s ease-in-out, color .1s, background .1s;
+    border-radius: 50%;
+}
+
+.btn-sm {
+    line-height: 32px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+}
+
+.callout-vcar-border > p, .info-box {
+    text-align: left;
+}
+
+.table td {
+    vertical-align: middle !important;
+}
+
+.fullscreen {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.fullscreen .car-box, .fullscreen .vcar-vis {
+    height: 100% !important;
+}
+
+.callout-vcar-border {
+    padding: 0 0 0 15px;
+    border-radius: 0;
+}
+
+.info-box-img {
+    width: 70px;
+    height: 70px;
+    margin-top: -10px;
+    margin-right: 0;
+    border-radius: 50%;
+}
+
+.box-body .btn-group, .box-body .btn-group-vertical {
+    display: block !important;
+}
+
+.or-cercle {
+    font-size: 20px;
+    font-weight: 700;
+    display: inline-block;
+    margin-top: 105px;
+    padding: 30px;
+    border-width: 5px;
+    border-style: solid;
+    border-radius: 50%;
+}
+
+.overflow-y-500 {
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.right-checkbox {
+    display: inline-block;
+    padding: 0 40px;
+}
+
+.btn-vcar .iradio_square-orange {
+    float: right;
+    margin: 10px;
+}
+
+.empty-radio-label {
+    margin-right: -3px;
+    padding-right: 3px;
+}
+
+.box-header .box-title .title {
+    display: inline-block;
+    min-height: 40px;
+    padding-top: 10px;
+}
+
+.bad-extension {
+    width: 64px;
+    height: 64px;
+    margin: -7px 0 0 10px;
+    padding: 0;
+    opacity: .8;
+    background-image: url(/static/img/dashboard/bad-extension.png);
+}
+
+.info-box {
+    display: block;
+    width: 100%;
+    min-height: 90px;
+    margin-bottom: 15px;
+    padding: 0;
+    border-radius: 2px;
+}
+
+.info-box-text, .progress-description {
+    font-family: cursive;
+    font-size: 14px;
+    display: block;
+    overflow: hidden;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.info-box-number {
+    font-size: 14px;
+    font-weight: 400;
+    font-style: italic;
+    display: block;
+    white-space: pre-line;
+}
+
+.info-box-small {
+    font-size: 12px;
+    font-weight: 300;
+    font-style: italic;
+    display: block;
+    white-space: normal;
+}
+
+.vcar-circle {
+	font-size: 20px;
+	font-weight: 600;
+	display: block;
+	width: 300px;
+	margin: 25px auto auto;
+	min-width: 250px;
+	padding-bottom: 20px;
+	border-radius: 2px;
+}
+
+.vcar-circle i {
+	font-size: 50px;
+	position: relative;
+	top: 15px;
+	padding-left: 45px;
+	color: #ff8400;
+}
+
+.user-panel {
+    display: block;
+    transition: .4s all;
+}
+
+.card, .card .actions .row [class*=col-], .card figure {
+    transition: all .5s ease;
+}
+
+.user-panel > .info {
+    top: 15px;
+}
+
+.user-panel:hover .info {
+    letter-spacing: 1px;
+}
+
+.import-icon {
+    font-size: 25px;
+    line-height: 38px;
+    width: 100%;
+    max-width: 38px;
+    height: auto;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.user-panel:hover .import-icon {
+    background-color: #2a2a2a;
+}
+
+#toast-container > div {
+    width: 100%;
+    max-width: 500px;
+    min-height: 50px;
+    opacity: 1;
+}
+
+.y-notice {
+    padding-left: 15px;
+}
+
+.y-notice i {
+    font-size: 110%;
+    padding-right: 5px;
+}
+
+.info-link {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    display: inline-block;
+}
+
+.sidebar-menu {
+    margin-bottom: 22px;
+}
+
+.sidebar-menu.buttom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.card .info .author, .card .info .version {
+    position: absolute;
+    bottom: -20px;
+}
+
+.big-icon {
+    padding: 5px 0 !important;
+}
+
+.big-icon a {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-right: 1px solid #333;
+}
+
+.header .see-all {
+    font-weight: 700;
+    float: right;
+    margin-right: -15px;
+}
+
+.card {
+    position: relative;
+}
+
+.card .row, .card [class*=col-] {
+    margin-right: 0;
+    margin-left: 0;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.card .card-selected {
+    position: relative;
+    overflow: hidden;
+    min-height: 150px;
+}
+
+.card article {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    align-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card .info .name {
+    font-size: 22px;
+    font-weight: 200;
+    position: relative;
+    align-self: auto;
+    flex: 0 1 auto;
+}
+
+.card .info .version {
+    right: 20px;
+}
+
+.card .icon {
+    line-height: 84px;
+    overflow: visible;
+    width: 84px;
+    height: 84px;
+    padding: 0;
+    text-align: center;
+    align-self: center;
+    flex: 0 0 auto;
+    order: 0;
+}
+
+.card .icon i {
+    font-size: 42px;
+}
+
+.card .card-selected:hover figure {
+    opacity: .4;
+}
+
+.card figure {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .1;
+    background-position: center;
+    background-size: cover;
+}
+
+.card .actions .row [class*=col-]:nth-child(2) .action {
+    border-width: 0 1px;
+    border-style: solid;
+}
+
+.card .actions .action {
+    display: block;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.card .actions .action h1 {
+    font-size: 14px;
+    margin-top: 5px;
+    text-transform: uppercase;
+}
+
+.card .actions .action i {
+    font-size: 16px;
+}
+
+code {
+    padding: 2px 6px;
+}
+
+pre code {
+    border: none;
+}
+
+.markdown {
+    line-height: 2.5em;
+    padding: 10px 25px;
+}
+
+.markdown td, .markdown th {
+    padding: 5px 10px;
+}
+
+.main-sidebar .user-panel, .sidebar-menu, .sidebar-menu > li.header {
+    white-space: normal !important;
+}
+
+.vcar-box .box-title .subtitle {
+    font-size: 75%;
+    display: inline-block;
+    margin-left: 10px;
+    padding: 15px;
+}
+
+.vcar-box .half {
+    width: 50% !important;
+}
+
+.vcar-box .box-footer .box-title {
+    font-size: 18px;
+    line-height: 1;
+    display: inline-block;
+    margin: 0;
+}
+
+.vcar-task h2 > i {
+    margin: 10px;
+    vertical-align: middle;
+}
+
+.vcar-task li {
+    margin: 10px;
+}
+
+.vcar-task li > i {
+    margin-right: 15px;
+}
+
+.vcar-task li > hr {
+    width: 75%;
+    height: 5px;
+    border-radius: 4px;
+}
+
+.vcar-chartbox > .box-header {
+    padding: 2px 10px;
+}
+
+.callout h4 {
+    font-weight: 400;
+    margin-top: 0;
+}
+
+.mid-line {
+    width: 40%;
+    margin-bottom: 35px;
+}
+
+.underlined {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.underlined > div {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.content-header {
+    padding-top: 30px;
+    padding-bottom: 15px;
+}
+
+.content-header > .breadcrumb {
+    top: 25px;
+}
+
+.sidebar-menu > li > .treeview-menu {
+    margin: 0 1px;
+}
+
+.sidebar a:hover {
+    text-decoration: none;
+}
+
+.sidebar-form {
+    margin: 10px;
+    border-radius: 3px;
+}
+
+.sidebar-form .btn, .sidebar-form input[type=text] {
+    height: 35px;
+    -webkit-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    border: 1px solid transparent;
+    box-shadow: none;
+}
+
+.sidebar-form input[type=text] {
+    border-radius: 2px 0 0 2px;
+}
+
+.sidebar-form .btn {
+    border-radius: 0 2px 2px 0;
+}
+
+.modal-vcar .modal-dialog {
+    width: 75%;
+}
+
+.vcar-box, .vcar-box .box-body {
+    border-radius: 0;
+}
+
+.btn-vcar {
+    transition: all .4s;
+}
+
+.box-alert {
+    margin-top: 10px;
+}
+.box-conf {
+    min-height: calc(50px * 5 + 10px)
+}
+.box-conf .box-header {
+    border-radius: 3px 3px 0 0;
+    padding: 15px;
+}
+.box-conf .box-body {
+    padding: 0;
+}
+.box-conf .box-body a {
+    display: block;
+    padding: 15px 0 15px 20px;
+}
+.box-conf .box-body a i {
+    margin-right: 10px;
+}
+.dropdown-menu > li > a {
+	padding: 10px 20px;
+}
+.dropdown-menu > li > a {
+	color: #777;
+}
+.navbar-nav > .user-menu > .dropdown-menu {
+	width: auto !important;
+	min-width: 171px;
+}
