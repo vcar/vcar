@@ -9,7 +9,7 @@ from app.frontend import frontend
 from app.carboard import carboard
 from app.importer import importer
 from app.explorer import explorer
-from app.dashboard import dashboard
+# from app.dashboard import dashboard
 from app.api import api
 from app.filters import filters
 
@@ -28,7 +28,7 @@ DEFAULT_BLUEPRINTS = (
     api,
     frontend,
     carboard,
-    dashboard,
+    # dashboard,
     importer,
     explorer,
     filters

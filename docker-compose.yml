@@ -1,0 +1,22 @@
+version: '3'
+services:
+  elastic:
+    image: elasticsearch
+    environment:
+      - ES_JAVA_OPTS="-Xmx1g" /bin/elasticsearch
+  redis:
+    image: redis
+  vcar:
+    build: .
+    working_dir: /vcar
+    command: python manage.py run
+    links:
+      - redis
+      - elastic
+    volumes:
+      - .:/vcar:rw
+    ports:
+      - "5000:5000"
+    depends_on:
+    - redis
+    - elastic
