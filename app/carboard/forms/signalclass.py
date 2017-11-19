@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired, Regexp, Length
 
@@ -12,8 +12,8 @@ def signalclass_exist(form, field):
 # ---------------------------- Driver form classes ---------------------------- #
 
 
-class SignalclassForm(Form):
-    """ Signalclass add/edit Form """
+class SignalclassForm(FlaskForm):
+    """ Signalclass add/edit FlaskForm """
     name = StringField(
         'Name',
         validators=[

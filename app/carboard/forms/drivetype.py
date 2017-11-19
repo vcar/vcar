@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired, Regexp, Length
 
@@ -7,8 +7,8 @@ from ..models.drivetype import DriveType
 # ----------------------------- DriveType form classes ---------------------------
 
 
-class DriveTypeForm(Form):
-    """ Driver type add/edit Form """
+class DriveTypeForm(FlaskForm):
+    """ Driver type add/edit FlaskForm """
     name = StringField(
         'Driver type name',
         validators=[

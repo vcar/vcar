@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, DateField
 from wtforms.validators import ValidationError, DataRequired, Optional, Regexp, Length
 from ..models.article import Article
@@ -13,8 +13,8 @@ def article_exist(form, field):
 # ---------------------------- Article form classes ------------------------- #
 
 
-class ArticleForm(Form):
-    """ Article add/edit Form """
+class ArticleForm(FlaskForm):
+    """ Article add/edit FlaskForm """
     name = StringField(
         'Name',
         validators=[

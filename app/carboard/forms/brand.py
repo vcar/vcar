@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
 from wtforms import StringField
 from wtforms.validators import DataRequired, Regexp, Length
@@ -15,8 +15,8 @@ def brand_exist(form, field):
 # ---------------------------- Brand form classes ---------------------------- #
 
 
-class BrandForm(Form):
-    """ Brand add/edit Form """
+class BrandForm(FlaskForm):
+    """ Brand add/edit FlaskForm """
     name = StringField(
         'Name',
         validators=[

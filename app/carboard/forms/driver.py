@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
 from wtforms import StringField, SelectField
 from wtforms.validators import DataRequired, Regexp, Length
@@ -16,8 +16,8 @@ def driver_exist(form, field):
 # ---------------------------- Driver form classes ---------------------------- #
 
 
-class DriverForm(Form):
-    """ Driver add/edit Form """
+class DriverForm(FlaskForm):
+    """ Driver add/edit FlaskForm """
     gender = SelectField(
         'Gender',
         coerce=int,

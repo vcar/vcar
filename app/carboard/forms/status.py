@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired, Regexp, Length
 
@@ -7,8 +7,8 @@ from ..models.status import Status
 # ----------------------------- Status form classes ---------------------------
 
 
-class StatusForm(Form):
-    """ Status add/edit Form """
+class StatusForm(FlaskForm):
+    """ Status add/edit FlaskForm """
     title = StringField(
         'Status title',
         validators=[

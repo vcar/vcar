@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired, Regexp, Length
 
@@ -14,8 +14,8 @@ def country_exist(form, field):
 # ---------------------------- User form classes ---------------------------- #
 
 
-class CountryForm(Form):
-    """ Country add/edit Form """
+class CountryForm(FlaskForm):
+    """ Country add/edit FlaskForm """
     title = StringField(
         'Name',
         validators=[

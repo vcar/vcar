@@ -10,9 +10,13 @@ the drivers capability to adjust his driving based on driving conditions.
 
 ### build static files
 
+install dependencies :
+`npm install`
+
 * Production :
 
 `gulp build --prod`
+Then you need to set DEBUG=False in config/congig.py
 
 * Development :
   * `gulp build [--dev]` to generate static files.
@@ -26,6 +30,15 @@ the drivers capability to adjust his driving based on driving conditions.
 ### Install Redis
 
 * Download at [Redis](https://redis.io/download)
+
+### Docker integration ()
+to run vcar inside docker please make this changes
+change `REDIS_HOST` and `ELASTICSEARCH_HOST` in `importer/platforms/openxc/constants.py` to : 
+
+`REDIS_HOST = 'redis'`
+`ELASTICSEARCH_HOST = 'elastic'`
+then run :
+`docker-compose up`
 
 ## Technologies
 

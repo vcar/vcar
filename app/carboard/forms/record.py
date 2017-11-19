@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
 from wtforms import StringField, SelectField, DateTimeField
 from wtforms.validators import Optional, DataRequired, Regexp, Length
@@ -14,8 +14,8 @@ def vehicle_exist(form, field):
 
 # ---------------------------- Record form classes ---------------------------- #
 
-class RecordForm(Form):
-    """ Record add/edit Form """
+class RecordForm(FlaskForm):
+    """ Record add/edit FlaskForm """
     trace = FileField(
         'Record trace file', validators=[
             DataRequired(),
@@ -81,8 +81,8 @@ class RecordForm(Form):
         ]
     )
 
-class RecordStatusForm(Form):
-    """ Edit vehicle status Form """
+class RecordStatusForm(FlaskForm):
+    """ Edit vehicle status FlaskForm """
     status_id = SelectField(
         'Status',
         coerce=int,

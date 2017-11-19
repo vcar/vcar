@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import FormField, FieldList, StringField, SelectField
 from wtforms.fields.html5 import URLField
 from flask_wtf.file import FileAllowed, FileField
@@ -16,8 +16,8 @@ def dataset_exist(form, field):
 # ---------------------------- Dataset form classes ------------------------- #
 
 
-class DatasetForm(Form):
-    """ Dataset add/edit Form """
+class DatasetForm(FlaskForm):
+    """ Dataset add/edit FlaskForm """
     name = StringField(
         'Name',
         validators=[
@@ -57,8 +57,8 @@ class DatasetForm(Form):
     )
 
 
-class FeedDatasetForm(Form):
-    """ Dataset add/edit Form """
+class FeedDatasetForm(FlaskForm):
+    """ Dataset add/edit FlaskForm """
 
     where = SelectField(
         'Where is your dataset files?',
@@ -114,7 +114,7 @@ class FeedDatasetForm(Form):
         Dependences :
             from wtforms import FormField, FieldList
         ---------------------------------------------------
-        Nested Form :
+        Nested FlaskForm :
             article = FormField(ArticleForm)
             article = FieldList(FormField(ArticleForm))
         ---------------------------------------------------

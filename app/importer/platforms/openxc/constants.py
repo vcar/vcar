@@ -1,7 +1,7 @@
 
 # -------------------- Redis constants -------------------------------------- #
-# REDIS_HOST = 'localhost'  # default config when runing inside a virtualenv
-REDIS_HOST = 'redis'  # docker links
+REDIS_HOST = 'localhost'  # default config when runing inside a virtualenv
+# REDIS_HOST = 'redis'  # docker links
 REDIS_PORT = 6379
 REDIS_DB = 1
 

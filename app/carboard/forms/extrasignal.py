@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField
 from wtforms.validators import DataRequired, Regexp, Length
 
@@ -14,8 +14,8 @@ def extrasignal_exist(form, field):
 # ---------------------------- User form classes ---------------------------- #
 
 
-class ExtrasignalForm(Form):
-    """ Extrasignal add/edit Form """
+class ExtrasignalForm(FlaskForm):
+    """ Extrasignal add/edit FlaskForm """
     name = StringField(
         'Name',
         validators=[

@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
@@ -17,8 +17,8 @@ def model_exist(form, field):
 # ---------------------------- Model form classes ---------------------------- #
 
 
-class ModelForm(Form):
-    """ Model add/edit Form """
+class ModelForm(FlaskForm):
+    """ Model add/edit FlaskForm """
     name = StringField(
         'Name',
         validators=[

@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
 from wtforms import StringField, SelectField
 from wtforms.validators import DataRequired, Regexp, Length
@@ -16,8 +16,8 @@ def platform_exist(form, field):
 # ---------------------------- Platform form classes ---------------------------- #
 
 
-class PlatformForm(Form):
-    """ Platform add/edit Form """
+class PlatformForm(FlaskForm):
+    """ Platform add/edit FlaskForm """
     name = StringField(
         'Name',
         validators=[
