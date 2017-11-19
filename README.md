@@ -31,11 +31,12 @@ Then you need to set DEBUG=False in config/congig.py
 
 * Download at [Redis](https://redis.io/download)
 
-### Docker integration ()
+### Docker integration :
 to run vcar inside docker please make this changes
 change `REDIS_HOST` and `ELASTICSEARCH_HOST` in `importer/platforms/openxc/constants.py` to : 
 
 `REDIS_HOST = 'redis'`
+
 `ELASTICSEARCH_HOST = 'elastic'`
 then run :
 `docker-compose up`
