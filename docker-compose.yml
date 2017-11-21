@@ -2,8 +2,6 @@ version: '3'
 services:
   elastic:
     image: elasticsearch
-    environment:
-      - ES_JAVA_OPTS="-Xmx1g" /bin/elasticsearch
   redis:
     image: redis
   vcar:
