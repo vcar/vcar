@@ -21,7 +21,7 @@ def index():
 
     html = render_md(__path__, "README.md")
 
-    return render_template("index.html", html=html)
+    return render_template("driver_graph/index.html", html=html)
 
 # --------------------- /driver_graph/datasets : Show available datasets ---- #
 
@@ -29,7 +29,7 @@ def index():
 @driverGraph.route("/datasets")
 def datasets():
     # todo
-    return render_template("datasets.html")
+    return render_template("driver_graph/datasets.html")
 
 # --------------------- /driver_graph/run : Main plugin function ------------ #
 
@@ -41,7 +41,7 @@ def run():
     driver.create_digraph("/home/karim/OpenXC/uptown-west.json")
     graph_js = driver.vis_network(physics=True)
 
-    return render_template("run.html", graph_js=graph_js)
+    return render_template("driver_graph/run.html", graph_js=graph_js)
 
 # --------------------- /driver_graph/custom : custom functions ------------- #
 
@@ -50,7 +50,7 @@ def run():
 def custom():
     # some plugin spesific functions ...
 
-    return render_template("custom.html")
+    return render_template("driver_graph/custom.html")
 
 # --------------------- /driver_graph/docs : Documentation ------------------ #
 
@@ -60,4 +60,4 @@ def docs():
     # documentation in markdown
     html = render_md(__path__, "DOC.md")
 
-    return render_template("docs.html", html=html)
+    return render_template("driver_graph/docs.html", html=html)

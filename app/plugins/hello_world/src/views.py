@@ -20,4 +20,4 @@ def index():
 
     html = render_md(__path__, "README.md")
 
-    return render_template("hello.html", html=html)
+    return render_template("hello_world/index.html", html=html)
