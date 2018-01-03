@@ -16,7 +16,7 @@ from app.filters import filters
 from app.carboard.models.user import User
 from app.extensions import (
     db, migrate, mail, toolbar, images, login_manager, redis,
-    plugin_manager, misaka  # , cache , session
+    plugin_manager, socketio, misaka  # , cache , session
 )
 
 
@@ -146,7 +146,7 @@ def configure_extensions(app):
     misaka.init_app(app)
 
     # initialize SocketIO
-    # socketio.init_app(app)
+    socketio.init_app(app)
 
     # initialize Session
     # session.init_app(app)

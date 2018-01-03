@@ -8,8 +8,8 @@ from flask_images import Images
 from flask_redis import FlaskRedis
 from flask_plugins import PluginManager
 from flask_misaka import Misaka
+from flask_socketio import SocketIO
 # from flask_session import Session
-# from flask_socketio import SocketIO
 
 # ------------------------- Inisialize Database object ---------------------- #
 
@@ -41,7 +41,7 @@ images = Images()
 
 # ------------------------- Inisialize SocketIO object ---------------------- #
 
-# socketio = SocketIO()
+socketio = SocketIO()
 
 # ------------------------- Inisialize Redis object ------------------------- #
 

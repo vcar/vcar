@@ -12,7 +12,11 @@ _mailinglist
 .cache/
 .idea/
 .vscode/
-
+workspaces/
+app/plugins/editor
+static/css/editor
+static/js/editor
+static/img/editor
 # Ignore pycache files
 __pycache__
 

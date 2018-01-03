@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
 from wtforms import StringField, SelectField
 from wtforms.validators import DataRequired, Regexp, Length
@@ -10,8 +10,8 @@ from .constants import DRIVER_GENDER
 
 # ---------------------------- Brand form classes ---------------------------- #
 
-class VehicleForm(Form):
-    """ Vehicle add/edit Form """
+class VehicleForm(FlaskForm):
+    """ Vehicle add/edit FlaskForm """
     brand_id = SelectField(
         'Brand',
         coerce=int,
@@ -29,8 +29,8 @@ class VehicleForm(Form):
         ]
     )
 
-class DriverForm(Form):
-    """ Driver add/edit Form """
+class DriverForm(FlaskForm):
+    """ Driver add/edit FlaskForm """
     gender = SelectField(
         'Gender',
         coerce=int,
