@@ -20,12 +20,13 @@ static/img/editor
 # Ignore pycache files
 __pycache__
 _Notes
+clean_py.sh
 
 # Ignore migration files
 migrations/
 
 # Ignore uploaded files
-static/uploads/
+core/dashboard/static/uploads/
 
 # Ignore compiled static files
 static/css/*.css*
