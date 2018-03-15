@@ -1,0 +1,64 @@
+{% extends "dashboard/layout.html" %}
+
+{% from "dashboard/macros.html" import render_pagination %}
+
+{% block title %}
+    List of plugins | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+	<section class="content-header">
+		<h1>
+		List of plugins
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ url_for('dashboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+			<li><a href="{{ url_for('dashboard.indexPlugin') }}">Plugin</a></li>
+			<li class="active">List of plugins</li>
+		</ol>
+	</section>
+{% endblock content_header %}
+
+{% block content %}
+<div class="row">
+    {% if plugins is not none %}
+		{% for plugin in plugins %}
+			<div class="col-sm-4">
+				<div class="card">
+					<div class="card-selected">
+						<article>
+							<div class="info">
+								<div class="name">{{ plugin.name }}</div>
+								<div class="desc">{{ plugin.description }}</div>
+								<div class="author"><i class="fa fa-user"></i> {{ plugin.author }}</div>
+								<div class="version"><i class="fa fa-code-fork"></i> {{ plugin.version }}</div>
+							</div>
+							<div class="icon"><i class="fa fa-star"></i></div>
+						</article>
+						<figure style="background-image: url(/static/img/dashboard/extension.png)"></figure>
+					</div>
+					<div class="actions">
+						<div class="row">
+							<div class="col-md-4">
+								<a class="action" href="#">
+									<h1>Favorite</h1>
+									<i class="fa fa-heart{{ '-o' if not plugin.options['favorite'] }}"></i></a>
+							</div>
+							<div class="col-md-4">
+								<a class="action" href="{{ url_for('dashboard.enablePlugin', identifier=plugin.identifier) }}">
+									<h1>Status</h1><i class="fa fa-toggle-{{ 'on' if plugin.enabled == true else 'off' }}"></i>
+								</a>
+							</div>
+							<div class="col-md-4">
+								<a class="action" href="{{ url_for('dashboard.showPlugin', identifier=plugin.identifier) }}">
+									<h1>View</h1><i class="fa fa-eye"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

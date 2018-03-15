@@ -1,0 +1,85 @@
+{% extends "dashboard/layout.html" %}
+
+{% from "dashboard/macros.html" import render_pagination %}
+
+{% block title %}
+    Extra signal details | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+	<section class="content-header">
+		<h1>
+		Extra signal details
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ url_for('dashboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+			<li><a href="{{ url_for('dashboard.indexExtrasignal') }}">Extra Signals</a></li>
+			<li class="active">Extra signal details</li>
+		</ol>
+	</section>
+{% endblock content_header %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title">Extra signal : {{ extrasignal.name }}</h3>
+                </div>
+
+                <div class="box-body">
+
+                    <div class="line">
+                        <strong class="line-title">ID</strong>
+                        <p class="line-body">{{ extrasignal.id }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Name</strong>
+                        <p class="line-body">{{ extrasignal.name }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Main signal</strong>
+                        <p class="line-body">{{ extrasignal.signal }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Signal class</strong>
+                        <p class="line-body">{{ extrasignal.signal.signalclass }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Data Storage</strong>
+                        <p class="line-body">{{ extrasignal.storage }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Status</strong>
+                        <p class="line-body">
+                            {% if extrasignal.status == 1 %}
+                                <span class="label bg-green">Activated</span>
+                            {% else %}
+                                <span class="label bg-red">Disabled</span>
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Creation</strong>
+                        <p class="line-body">{{ extrasignal.created.strftime('%d-%m-%Y')}}</p>
+                    </div>
+
+                </div>
+
+                <div class="box-footer form-footer">
+                    <a href="{{ url_for('dashboard.editExtrasignal', id=extrasignal.id) }}" class="btn btn-success" >Edit</a>
+                    <a href="{{ url_for('dashboard.deleteExtrasignal', id=extrasignal.id) }}" class="btn btn-danger" >Delete</a>
+                    <a href="{{ url_for('dashboard.indexExtrasignal') }}" class="btn btn-default pull-right">Back to list</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

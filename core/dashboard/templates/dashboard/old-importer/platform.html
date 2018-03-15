@@ -1,0 +1,136 @@
+{% extends "dashboard/layout.html" %}
+
+{% from "dashboard/importer/macros.html" import info_box, box_header %}
+
+{% block title %}
+    vCar importer manager :: Platform | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+    <section class="content-header">
+        <h1>
+        Import wizard
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('dashboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li><a href="#">Importer</a></li>
+            <li class="active">Import wizard</li>
+        </ol>
+    </section>
+{% endblock content_header %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="callout callout-vcar">
+            <i class="callout-icon">Step 1 of 5</i>
+            <h4>Choose a platform</h4>
+            <p>The import wizard will be your guide to successfully upload and configure your trace files.</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <form action="{{ url_for('dashboard.platformImporter') }}" method="POST" id="platform">
+			<hr class="mid-line">
+            <div class="btn-group" data-toggle="buttons">
+                {% for platform in platforms %}
+                    <label class="info-box btn btn-vcar">
+                        <input type="radio" autocomplete="off" name="platform" value="{{ platform.id }}">
+                        <span class="info-box-icon">
+                            <img class="info-box-img" src="{{ resized_img_src(config.UPLOAD_PLATFORM + platform.logo, width=100) }}">
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">{{ platform.name }}</span>
+                            <span class="info-box-number">{{ platform.description }}</span>
+                            <a href="/" class="pull-right info-link" target="_blank">Read more ...</a>
+                        </div>
+                    </label>
+                {% endfor %}
+            </div>
+            <div class="footer">
+                <div class="pull-left box-alert" style="display:none">
+                    <i class="fa fa-info-circle"></i>
+                    Please select a platform first to proccess the importing wizard.
+                </div>
+                <a class="pull-right btn btn-vcar-action" href="#" id="next">
+                    <i class="fa fa-chevron-right"></i>
+                    Continue
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="info-modal" class="modal fade modal-vcar" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <p>One fine body&hellip;</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%- endblock content %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".info-link").click(function(e) {
+                var id = $(this).parent().parent().find('input').val();
+                $.ajax({
+                    url: "/dashboard/platform/" + id + "/json",
+                    success: function(data) {
+                        var platform = data.platform;
+                        var signals = data.signals;
+                        $('#info-modal .modal-title').html(platform.name + " platform");
+                        var body =
+                            "<b>Description</b> : " + platform.description + "<br><br>" +
+                            "<b>Website</b> : <a href='"+platform.website+"' target='_blank'>"+platform.website+"</a><br><br>" +
+                            "<b>File format</b> : Json" + platform.mimetype + "<br><br>" +
+                            "<b>List of supported signals</b><br><br>"
+                        ;
+                        var table =
+                            "<table class='table table-hover table-bordered'>" +
+                            "    <tr>" +
+                            "        <th>Signal name</th>" +
+                            "        <th>Internal mapping name</th>" +
+                            "        <th>Signal class</th>" +
+                            "        <th>Signal source</th>" +
+                            "    </tr>"
+                        ;
+                        for (var i = 0; i < signals.length; i++) {
+                            table+=
+                                "<tr>" +
+                                    "<td>" + signals[i].name + "</td>" +
+                                    "<td>" + signals[i].signal.name + "</td>" +
+                                    "<td>" + signals[i].signal.signalclass + "</td>" +
+                                    "<td>" + signals[i].signal.signalsource + "</td>" +
+                                "</tr>"
+                            ;
+                        }
+                        table+="</table>";
+                        body+= table + "* <small>Only signals available in this table will be taken into account while parsing platform data.</small>";
+                        $('#info-modal .modal-body').html(body);
+                    }
+                });
+                $('#info-modal').modal('show');
+            });
+            $("#next").click(function (e) {
+                e.preventDefault();
+                if ($("input:radio[name=platform]:checked").length == 0) {
+                    $('.box-alert').show();
+                }else{
+                    e.preventDefault();
+                    $('#platform').submit();
+                }
+            });
+        });
+    </script>
+{% endblock %}

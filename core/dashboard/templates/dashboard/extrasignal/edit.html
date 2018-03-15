@@ -1,0 +1,46 @@
+{% extends "dashboard/layout.html" %}
+
+{% from "dashboard/macros.html" import render_field, box_header %}
+
+{% block title %}
+    Edit extra signal | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+	<section class="content-header">
+		<h1>
+		Edit extra signal
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ url_for('dashboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+			<li><a href="{{ url_for('dashboard.indexExtrasignal') }}">Extra Signals</a></li>
+			<li class="active">Edit extra signal</li>
+		</ol>
+	</section>
+{% endblock content_header %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-solid vcar-box">
+
+                {{ box_header('Edit extra signal') }}
+
+                <form action="{{ url_for('dashboard.editExtrasignal', id=id) }}" method="POST" enctype="multipart/form-data">
+                    <div class="box-body">
+            			{{ form.hidden_tag() }}
+            			{% for field in form %}
+            				{{ render_field(field) }}
+            			{% endfor %}
+                    </div>
+
+                    <div class="box-footer form-footer">
+                        <button type="submit" class="btn btn-primary">Submit changes</button>
+                        <a href="{{ url_for('dashboard.showExtrasignal', id=id) }}" class="btn btn-success">Cancel</a>
+                        <a href="{{ url_for('dashboard.indexExtrasignal') }}" class="btn btn-default pull-right">Back to list</a>
+                    </div>
+            	</form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

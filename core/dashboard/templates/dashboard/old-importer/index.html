@@ -1,0 +1,83 @@
+{% extends "dashboard/layout.html" %}
+
+{% from "dashboard/importer/macros.html" import info_box, box_header %}
+
+{% block title %}
+    vCar importer manager | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+    <section class="content-header">
+        <h1>
+        Import wizard
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('dashboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li><a href="#">Importer</a></li>
+            <li class="active">Import wizard</li>
+        </ol>
+    </section>
+{% endblock content_header %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="callout callout-vcar">
+            <i class="icon fa fa-info-circle callout-icon"></i>
+            <h4>Wellcome to <b>vCar</b> import wizard</h4>
+            <p>The import wizard will be your guide to successfully upload and configure your trace files.</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-linode"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Platform</span>
+                <span class="info-box-number">Choose data recording platform ...</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-car"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Vehicle</span>
+                <span class="info-box-number">Select the vehicle used for recording ...</span>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix visible-sm-block"></div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Driver</span>
+                <span class="info-box-number">Identify the vehicle driver ...</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-cloud-upload"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Records</span>
+                <span class="info-box-number">Strart uploading record files ...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br><br><br><br>
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <a class="vcar-circle" href="{{ url_for('dashboard.platformImporter') }}">
+            Start importing
+            <i class="fa fa-chevron-right"></i>
+        </a>
+    </div>
+</div>
+{%- endblock content %}

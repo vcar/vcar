@@ -1,0 +1,195 @@
+{% extends "dashboard/layout.html" %}
+
+{% block title %}
+  Create a new dataset | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+    <section class="content-header">
+        <h1>
+          Create a new dataset
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('dashboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li><a href="#">Importer</a></li>
+            <li class="active">Create a new dataset</li>
+        </ol>
+    </section>
+{% endblock content_header %}
+
+{% block content %}
+<div class="row">
+	<div class="col-xs-12">
+		<div class="nav-tabs-vcar">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#tab_2" data-toggle="tab" aria-expanded="true">
+          <i class="fa fa-car"></i>vCar templates
+        </a></li>
+				<li><a href="#tab_3" data-toggle="tab" aria-expanded="false">
+          <i class="fa fa-rocket"></i>Community templates
+        </a></li>
+				<li><a href="#tab_4" data-toggle="tab" aria-expanded="false">
+          <i class="fa fa-user"></i>Private templates
+        </a></li>
+				<li class="pull-right"><a href="#tab_4">
+          <i class="fa fa-plus"></i>New template
+        </a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="tab_2">
+
+        <div class="card card--template">
+          <div class="card-selected" style="background-image: url(http://openxcplatform.com/images/logos/openxc-logo-gray.png);">
+            <label>
+              <div class="info">
+                <div class="name">OpenXC</div>
+                <div class="version"><i class="fa fa-code-fork"></i> 1.0.2</div>
+                <div class="input"><input type="radio" autocomplete="off" name="platform" value="55"></div>
+              </div>
+              <div class="icon"><i class="fa fa-info"></i></div>
+            </label>
+            <figure></figure>
+          </div>
+        </div>
+
+        <div class="card card--template">
+          <div class="card-selected" style="background-image: url(http://openxcplatform.com/images/logos/openxc-logo-blackbg.png);">
+            <label>
+              <div class="info">
+                <div class="name">Plugin </div>
+                <div class="version"><i class="fa fa-code-fork"></i> 1.0.2</div>
+                <div class="input"><input type="radio" autocomplete="off" name="platform" value="55"></div>
+              </div>
+              <div class="icon"><i class="fa fa-info"></i></div>
+            </label>
+            <figure></figure>
+          </div>
+        </div>
+
+        <div class="card card--template">
+          <div class="card-selected" style="background-image: url(http://openxcplatform.com/images/logos/openxc-logo-blackonwhite.png);">
+            <label>
+              <div class="info">
+                <div class="name">Plugin </div>
+                <div class="version"><i class="fa fa-code-fork"></i> 1.0.2</div>
+                <div class="input"><input type="radio" autocomplete="off" name="platform" value="55"></div>
+              </div>
+              <div class="icon"><i class="fa fa-info"></i></div>
+            </label>
+            <figure></figure>
+          </div>
+        </div>
+
+        <div class="card card--template">
+          <div class="card-selected">
+            <label>
+              <div class="info">
+                <div class="name">Plugin </div>
+                <div class="version"><i class="fa fa-code-fork"></i> 1.0.2</div>
+                <div class="input"><input type="radio" autocomplete="off" name="platform" value="55"></div>
+              </div>
+              <div class="icon"><i class="fa fa-info"></i></div>
+            </label>
+            <figure></figure>
+          </div>
+        </div>
+
+
+
+
+
+
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+				</div>
+				<div class="tab-pane " id="tab_3">
+					<div class="row">
+						<div class="col-lg-12"><h1>tab3</h1></div>
+					</div>
+				</div>
+				<div class="tab-pane " id="tab_4">
+					<div class="row">
+						<div class="col-lg-12"><h1>tab3</h1></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="callout callout-vcar">
+            <i class="icon fa fa-info-circle callout-icon"></i>
+            <h4>Wellcome to <b>vCar</b> import wizard</h4>
+            <p>The import wizard will be your guide to successfully upload and configure your trace files.</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-linode"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Platform</span>
+                <span class="info-box-number">Choose data recording platform ...</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-car"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Vehicle</span>
+                <span class="info-box-number">Select the vehicle used for recording ...</span>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix visible-sm-block"></div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Driver</span>
+                <span class="info-box-number">Identify the vehicle driver ...</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-cloud-upload"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Records</span>
+                <span class="info-box-number">Strart uploading record files ...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br><br><br><br>
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <a class="vcar-circle" href="{{ url_for('dashboard.platformOldImporter') }}">
+            Start importing
+            <i class="fa fa-chevron-right"></i>
+        </a>
+    </div>
+</div>
+{%- endblock content %}

@@ -1,0 +1,89 @@
+{% extends "dashboard/layout.html" %}
+
+{% from "dashboard/macros.html" import render_pagination %}
+
+{% block title %}
+    Vehicle details | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+	<section class="content-header">
+		<h1>
+		Vehicle details
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="{{ url_for('dashboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+			<li><a href="{{ url_for('dashboard.indexVehicle') }}">Vehicle</a></li>
+			<li class="active">Vehicle details</li>
+		</ol>
+	</section>
+{% endblock content_header %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title">Vehicle : {{ vehicle }}</h3>
+                </div>
+
+                <div class="box-body">
+
+                    <div class="line line-right">
+                        {% if vehicle.image %}
+                            <img class="avatar" src="{{ resized_img_src(config.UPLOAD_VEHICLE + vehicle.image, width=160) }}">
+                        {% else %}
+                            <img class="avatar" src="/static{{ config.UPLOAD_VEHICLE}}/default.png">
+                        {% endif %}
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">ID</strong>
+                        <p class="line-body">{{ vehicle.id }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">User</strong>
+                        <p class="line-body">{{ vehicle.user }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Brand</strong>
+                        <p class="line-body">{{ vehicle.brand }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Model</strong>
+                        <p class="line-body">{{ vehicle.model | default('--') }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Driver</strong>
+                        <p class="line-body">{{ vehicle.driver | default('--') }}</p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Status</strong>
+                        <p class="line-body">
+                            <span class="label bg-{{ vehicle.status.color }}">{{ vehicle.status.title }}</span>
+                        </p>
+                    </div>
+
+                    <div class="line">
+                        <strong class="line-title">Creation</strong>
+                        <p class="line-body">{{ vehicle.created.strftime('%d-%m-%Y')}}</p>
+                    </div>
+
+                </div>
+
+                <div class="box-footer form-footer">
+                    <a href="{{ url_for('dashboard.editVehicle', id=vehicle.id) }}" class="btn btn-success" >Edit</a>
+                    <a href="{{ url_for('dashboard.deleteVehicle', id=vehicle.id) }}" class="btn btn-danger" >Delete</a>
+                    <a href="{{ url_for('dashboard.indexVehicle') }}" class="btn btn-default pull-right">Back to list</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

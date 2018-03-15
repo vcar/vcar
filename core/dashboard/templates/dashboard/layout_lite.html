@@ -1,0 +1,33 @@
+{% extends "dashboard/base.html" %}
+
+
+{% block title %}
+    Dashboard | {{ super() }}
+{% endblock title %}
+
+
+ {%- block styles %}
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='css/vendor' ~ minified ~ '.css') }}"/>
+    <!-- App styles -->
+    <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='css/app' ~ minified ~ '.css') }}"/>
+{%- endblock styles %}
+
+
+{% block bodyclass %}
+    hold-transition skin-vcar sidebar-mini
+{% endblock %}
+
+{% block body %} {% endblock %}
+
+
+ {% block scripts %}
+    <!-- Vendor scripts -->
+    <script src="/static/js/vendor{{ minified }}.js"></script>
+    <script>
+        /* turning flask flash messages into js popup notifications */
+        window.popupMessages = {{ get_flashed_messages(with_categories = True) | tojson | safe }};
+    </script>
+    <!-- App scripts -->
+    <script src="/static/js/app{{ minified }}.js"></script>
+{%- endblock scripts %}

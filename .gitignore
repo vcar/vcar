@@ -19,6 +19,7 @@ static/js/editor
 static/img/editor
 # Ignore pycache files
 __pycache__
+_Notes
 
 # Ignore migration files
 migrations/
@@ -32,3 +33,4 @@ static/js/*.js*
 
 # Node packages
 node_modules/
+core/dashboard/static/node_modules/
