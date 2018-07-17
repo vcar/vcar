@@ -14,12 +14,15 @@ from ..constants.constants import PER_HOME_PAGE
 @dashboard.route('/')
 @login_required
 def index():
+
+    x = dashboard.root_path
     records = Record.query.order_by(Record.created).limit(PER_HOME_PAGE).all()
     vehicles = Vehicle.query.order_by(Vehicle.created).limit(PER_HOME_PAGE).all()
     drivers = Driver.query.order_by(Driver.created).limit(PER_HOME_PAGE).all()
     return render_template(
         'dashboard/index.html',
         user=current_user,
+        x=x,
         records=records,
         vehicles=vehicles,
         drivers=drivers,

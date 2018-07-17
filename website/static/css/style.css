@@ -1,0 +1,9 @@
+html, body{
+  height: 100%;
+}
+.hero{
+  height: 100%;
+}
+.title.is-2 {
+    font-size: 5rem;
+}

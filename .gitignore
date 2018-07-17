@@ -2,6 +2,7 @@
 *.pyc
 *.pyo
 env
+*.env
 env*
 dist
 build
@@ -24,7 +25,7 @@ clean_py.sh
 
 # Ignore migration files
 migrations/
-
+.Notes/
 # Ignore uploaded files
 core/dashboard/static/uploads/
 

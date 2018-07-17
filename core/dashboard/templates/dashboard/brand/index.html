@@ -61,7 +61,7 @@
                             {% if brand.logo %}
                                 <img class="avatar table-avatar" src="{{ resized_img_src(config.UPLOAD_BRAND + brand.logo, width=60) }}" alt="{{ brand.name }}">
                             {% else %}
-                                <img class="avatar table-avatar" src="/static{{ config.UPLOAD_BRAND}}/default.png">
+                                <img class="avatar table-avatar" src="{{ url_for('dashboard.static', filename=config.UPLOAD_BRAND ~ 'default.png') }}">
                             {% endif %}
                             </a></td>
                             <td>{{ brand.name }}</td>

@@ -1,6 +1,7 @@
 import os
 import re
 import csv
+import subprocess
 from unicodedata import normalize
 from uuid import uuid4
 from time import strftime

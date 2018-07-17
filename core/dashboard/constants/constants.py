@@ -60,12 +60,12 @@ DRIVER_GENDER = [
 # ------------------------------ View constants ----------------------------- #
 PER_HOME_PAGE = 10
 PER_PAGE = 20
-USER_LOGO_DIR = 'static/uploads/avatars/'
-BRAND_LOGO_DIR = 'static/uploads/brands/'
-PLATFORM_LOGO_DIR = 'static/uploads/platforms/'
-DRIVER_LOGO_DIR = 'static/uploads/drivers/'
-VEHICLE_LOGO_DIR = 'static/uploads/vehicles/'
-DRIVE_FILES_DIR = 'static/uploads/records/'
+USER_LOGO_DIR = 'core/dashboard/static/uploads/avatars/'
+BRAND_LOGO_DIR = 'core/dashboard/static/uploads/brands/'
+PLATFORM_LOGO_DIR = 'core/dashboard/static/uploads/platforms/'
+DRIVER_LOGO_DIR = 'core/dashboard/static/uploads/drivers/'
+VEHICLE_LOGO_DIR = 'core/dashboard/static/uploads/vehicles/'
+DRIVE_FILES_DIR = 'core/dashboard/static/uploads/records/'
 
 
 #

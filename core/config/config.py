@@ -24,16 +24,19 @@ class DefaultConfig(object):
     # Avater upload directory
     UPLOAD_AVATAR_DIR = os.path.join(UPLOAD_DIR, 'avatars/')
     ALLOWED_AVATAR_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+    # IMAGES_URL = "/dashboard/imgsizer"
+    # IMAGES_PATH = "static/uploads"
+    # IMAGES_CACHE = "/tmp/flask-images"
     # Instance folder path
     INSTANCE_FOLDER_PATH = os.path.join(os.path.abspath('.'), 'instance')
     # INSTANCE_FOLDER_PATH = os.path.join('/home/karim/OpenXC/Dashboard/Flask/instance')
     # INSTANCE_FOLDER_PATH = os.path.join('I:/home/karim/OpenXC/Dashboard/Flask', 'instance')
-    UPLOAD_USER = "/uploads/avatars/"
-    UPLOAD_BRAND = "/uploads/brands/"
-    UPLOAD_DRIVER = "/uploads/drivers/"
-    UPLOAD_VEHICLE = "/uploads/vehicles/"
-    UPLOAD_RECORDS = "/uploads/records/"
-    UPLOAD_PLATFORM = "/uploads/platforms/"
+    UPLOAD_USER = "uploads/avatars/"
+    UPLOAD_BRAND = "uploads/brands/"
+    UPLOAD_DRIVER = "uploads/drivers/"
+    UPLOAD_VEHICLE = "uploads/vehicles/"
+    UPLOAD_RECORDS = "uploads/records/"
+    UPLOAD_PLATFORM = "uploads/platforms/"
     # Cache configuration
     CACHE_TYPE = 'null'
     CACHE_DEFAULT_TIMEOUT = 1

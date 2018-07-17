@@ -9,6 +9,7 @@ Flask-Migrate
 Flask-Redis
 Flask-Script
 Flask-SQLAlchemy
+Flask-Socketio
 Flask-WTF
 Flask-Misaka
 marshmallow

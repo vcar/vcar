@@ -1,0 +1,706 @@
+{% extends "dashboard/layout.html" %}
+
+{% block title %}
+    Overview | Add New Plugin | {{ super() }}
+{% endblock %}
+
+{% block content_header %}
+    <section class="content-header">
+        <h1>
+        	Create a New Plugin :
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('dashboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li><a href="{{ url_for('dashboard.addPlugin') }}">Add Plugin</a></li>
+            <li class="active">Overview</li>
+        </ol>
+    </section>
+ 
+    <script src="{{ url_for('static' , filename='js/jquery.min.js') }}"></script>
+
+{% endblock content_header %}
+
+
+
+{% block content %}
+
+	<div class="container dashboard">
+        <div class="container">
+            <!-- <div class="box" style="background-color:#92a8d1;"> -->
+
+                <!-- <div class="box-header with-border">
+                    <h3 class="box-title">Overview</h3>
+                </div> -->
+
+                {{ state |safe }}<br>
+
+                <div id="displayForm">
+                	<!-- <h2>Create a New Plugin :</h2>
+                	<br> -->
+                	<form name="newplugin" action="/dashboard/plugin/add" onsubmit="return validateBlueprint()" method="POST">
+                		<div class="col-md-5">
+                			<!-- Plugin Name -->
+	                		<div class="form-group">
+	                			<label for="InputPluginName">Plugin Name</label>
+	                			<input type="text" name="name" pattern="[A-Z a-z 0-9]+" autofocus required class="form-control" id="InputPluginName" aria-describedby="pluginNameHelp" placeholder="Plugin Name">
+	                			<small id="pluginNameHelp" class="form-text text-muted" style="color:red"></small>
+
+	                		</div>
+	                		<!-- Plugin Description -->
+	                		<div class="form-group">
+	                			<label for="InputPluginDescription">Plugin Description</label>
+	                			<input type="text" name="desc" class="form-control" id="InputPluginDescription" aria-describedby="descriptionHelp" placeholder="Plugin Description">
+	                			<small id="descriptionHelp" class="form-text text-muted"> Your Description ...</small>
+	                		</div>
+	                		<!-- Author Name -->
+	                		<div class="form-group">
+	                			<label for="InputAuthorName">Author Name</label>
+	                			<input type="text" name="author_name" class="form-control" id="InputAuthorName" placeholder="Enter Name">
+	                		</div>
+	                		<!-- Author Email address -->
+	                		<div class="form-group">
+	                			<label for="InputAuthorEmail">Author Email address</label>
+	                			<input type="email" name="author_mail" class="form-control" id="InputAuthorEmail" placeholder="Enter email">
+	                		</div>
+	                		<!-- Contributor Names -->
+	                		<div class="form-group">
+	                			<label for="InputContributorNames">Contributor Names</label>
+	                			<input type="text" name="contributors_names" class="form-control" id="InputContributorNames" aria-describedby="ContributorNamesHelp" placeholder="Enter Names Separated by Comma">
+	                			<small id="ContributorNamesHelp" class="form-text text-muted"> exp : james, Jui, Sony, ...</small>
+	                		</div>
+	                		<!-- Plugin version -->
+	                		<div class="form-group">
+	                			<label for="InputPluginVersion">Plugin version</label>
+	                			<input type="text" name="plugin_version" class="form-control" id="InputPluginVersion" value="1.0.0" placeholder="Enter Version">
+	                		</div>
+	                		<!-- License type -->
+	                		<div class="form-group">
+	                			<!-- Modal Long for License type -->
+	                			<label for="license-type" class="col-form-label">License type:</label>
+	                			<div class="row">
+		                			<div class="col-md-9">
+		                				<input type="text" class="form-control" name="license_type" id="selected_type" value="Permissive Free Licenses (BSD)" readonly>
+		                			</div>
+		    						<!-- Button trigger modal -->
+				                	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+				                			<span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> Change
+				                	</button>
+			                	</div>
+		                		
+		                		<!-- Modal -->
+		                		<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		                			<div class="modal-dialog" role="document">
+		                				<div class="modal-content">
+		                					<div class="modal-header">
+		                						<h5 class="modal-title" id="exampleModalLongTitle">Licensing agreement</h5>
+		                						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                							<span aria-hidden="true">&times;</span>
+		                						</button>
+		                					</div>
+		                					<div class="modal-body">
+						                		<div class="form-group">
+						                			<label for="select_license_type">License type</label>
+						                			<select id="select_license_type" class="form-control" onchange="show_license_info(this.options[this.selectedIndex].value)">
+						                				<!-- <option value="">Choose...</option> -->
+						                				<optgroup label="Proprietary License">
+						                					<option value="Proprietary">Proprietary License</option>
+						                				</optgroup>
+						                				<optgroup label="Permissive Free Licenses">
+						                					<option value="MIT">MIT Licence</option>
+						                					<option value="BSD" selected>BSD Licence</option>
+						                					<option value="Apache">Apache Licence</option>
+						                				</optgroup>
+						                				<optgroup label="Open-Source Licenses (GNU General Public License)">
+						                					<option value="GPL Freedom 0" title="the freedom to use the work">GPL Freedom 0</option>
+						                					<option value="GPL Freedom 1" title="the freedom to study the work">GPL Freedom 1</option>
+						                					<option value="GPL Freedom 2" title="the freedom to copy and share the work with others">GPL Freedom 2</option>
+						                					<option value="GPL Freedom 3" title="the freedom to modify the work, and the freedom to distribute modified and therefore derivative works">GPL Freedom 3</option>
+						                				</optgroup>
+						                				<optgroup label="End User License Agreement (EULA)">
+						                					<option value="EULA">EULA</option>
+						                				</optgroup>
+						                				<optgroup label="Workstation Licenses">
+						                					<option value="Workstation">Workstation License</option>
+						                				</optgroup>
+						                				<optgroup label="Concurrent Use License">
+						                					<option value="Concurrent Use">Concurrent Use License</option>
+						                				</optgroup>
+						                				<optgroup label="Site licenses">
+						                					<option value="Site">Site License</option>
+						                				</optgroup>
+						                				<optgroup label="Perpetual Licenses">
+						                					<option value="Perpetual">Perpetual License</option>
+						                				</optgroup>
+						                				<optgroup label="Non-perpetual Licenses">
+						                					<option value="Non-Perpetual">Non-Perpetual License</option>
+						                				</optgroup>
+						                				<optgroup label="License with Maintenance">
+						                					<option value="License with Maintenance">License with Maintenance</option>
+						                				</optgroup>
+						                			</select>
+						                		</div>
+						                		<div id="agreement-zone" class="form-group">
+						                			<h3>Permissive Free Licenses</h3><p>A permissive software license, sometimes also called BSD-like or BSD-style license, is a free software software licence with minimal requirements about how the software can be redistributed.</p><ul><li>MIT Licence</li><li>BSD licences</li><li>Apache licence</li><li>...</li></ul>
+						                		</div>
+		                					</div>
+	        								<div class="modal-footer">
+	        									<button type="button" class="btn btn-secondary" data-dismiss="modal">Save changes</button>
+	        								</div>
+	        							</div>
+	        						</div>
+	        					</div>
+	                		</div>
+	                		<!-- Plugin Requirements -->
+	                		<div class="form-group">
+	                			<label for="RequirementsTextarea">Plugin Requirements</label>
+	                			<textarea name="pluging_requirements" class="form-control" id="RequirementsTextarea" aria-describedby="RequirementsHelp" rows="4" onfocus="delete_requirements(this)" onblur="some_requirements(this)" style="color:gray"></textarea>
+	                		</div>
+	                		<!-- Python Version -->
+	                		<div class="form-group">
+	                			<label for="pythonVersion">Python Version</label>
+	                			<select class="form-control" name="pythonVersion" id="pythonVersion">
+	                				<option value="py2" selected>Python 2</option>
+	                				<option value="py3">Python 3</option>
+	                			</select>
+	                		</div>
+	                	</div>
+
+	                	<div class="col-md-6">
+	                		<!-- API Interface -->
+	                		<div class="form-group">
+	                			<label for="api_interface">API Interface :</label>
+	                			
+								<!--  -->
+								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+									<div class="panel panel-default">
+									    <div class="panel-heading" role="tab" id="headingOne">
+									      <h4 class="panel-title">
+									        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+									          Default Interface #1
+									        </a>
+									      </h4>
+									    </div>
+									    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+									        <div class="panel-body">
+									        	<!-- Interface Name -->
+									            <div class="row form-inline">
+											      <label for="interface_name" class="col-sm-2 col-form-label col-form-label-sm">Interface Name</label>
+											      <input type="text" class="col-sm-9 form-control form-control-sm" id="interface_name" placeholder="Interface name" value="salutation" readonly>
+											    </div>
+											    <br>
+				                				<!-- Input Args -->
+				                				<div class="row form-inline">
+				                					<label for="input_interface_arg" class="col-sm-2">Input Args
+				                					</label>
+				                					<div class="col-sm-7 row" id="arg_interface">
+				                						<div>
+					                						<input type="text" class="form-control form-control-sm col-7" id="arg_interface_name_ele11" placeholder="Arg name" value="somebody" readonly>
+															<select class="form-control form-control-sm col-3" id="input_interface_arg_ele11" disabled>
+															    <option value="">Type</option>
+															    <option value="bool">bool</option>
+															    <option value="int">int</option>
+															    <option value="uint">uint</option>
+															    <option value="float">float</option>
+															    <option value="complex">complex</option>
+															    <option value="string" selected>string</option>
+															    <option value="time">time</option>
+															    <option value="enum">enum</option>
+															</select>
+															<!-- <label class="col-1">
+																<i id="add_arg_type_ele1" class="fa fa-plus-square"></i>
+															</label> -->
+														</div>
+													</div>
+				                				</div>
+				                				<br>
+				                				<!-- Output Format -->
+				                				<div class="row form-inline">
+				                					<label for="output_interface_format" class="col-sm-2">Output Format
+				                					</label> 
+				                					<select class="form-control form-control-sm col-sm-3" id="output_interface_format" disabled>
+														    <option value="json" selected>json</option>
+														    <option value="value">value</option>
+														</select>
+				                				</div>
+				                				<br>
+				                				<!-- Draw Format -->
+				                				<div class="row form-inline">
+				                					<label for="draw_interface_format" class="col-sm-2">Draw Format
+				                					</label> 
+				                					<select class="form-control form-control-sm col-sm-3" id="draw_interface_format" disabled>
+													    <option value="Text" selected>Text</option>
+													    <option value="Bar-charts">Bar-charts</option>
+													    <option value="Pie-charts">Pie-charts</option>
+													    <option value="Line/Area-charts">Line/Area-charts</option>
+													    <option value="Other">Other</option>
+													</select>
+				                				</div>
+				                				
+				                			</div>
+									    </div>
+									</div>
+
+
+								</div>
+								<!--  -->
+								<button id="btn-add-inter"><i class="fa fa-plus-square"></i> Add Interface</button>
+							</div>
+
+							<div class="form-group">
+								<p id="result"></p>
+								<textarea name="interface_results" class="form-control form-control-sm" id="interface_results" rows="8" style="color:gray" readonly></textarea>
+							</div>
+
+	                	</div>
+
+	                	<br>
+	                	<div class="col-md-4">
+                		    <button type="submit" class="btn btn-primary" onclick="check_plugin_requireement()">Create</button>
+                	    </div>
+					</form>
+
+					
+				</div>
+			<!-- </div> -->
+		</div>
+	</div>
+	<div id="tempNode" style="display:none"></div>
+
+{% endblock %}
+
+	{% block scripts %}
+		{{ super() }}
+	<script>
+		display_form();
+
+		function validateBlueprint() {
+		    var blueprint = document.forms["newplugin"]["name"].value;
+		    if ({{blueprints_list| safe}}.includes(blueprint)) {
+			    //alert("Plugin name already exist !!");
+			    text = "Sorry, that plugin name's taken. Try another?";
+		        document.getElementById("pluginNameHelp").innerHTML = text;
+		        return false;
+		    }
+		    else{
+		    	document.getElementById("pluginNameHelp").innerHTML = "";
+		    }
+		    //alert("Validate Blueprint")
+		}
+
+		var Requirements_placeholder = 'scikit-learn==0.18.1\nKeras==2.0.1\n.\n.';
+		document.getElementById("RequirementsTextarea").value=Requirements_placeholder;
+
+		function check_plugin_requireement(){
+			if (document.getElementById("RequirementsTextarea").value==='scikit-learn==0.18.1\nKeras==2.0.1\n.\n.') {
+				document.getElementById("RequirementsTextarea").value="";
+			};
+
+		};
+
+		function delete_requirements(elem){
+			if(elem.value === Requirements_placeholder){
+		        elem.value='';
+		        elem.style.color="black";
+		    }
+		};
+
+		function some_requirements(elem){
+			if(elem.value ===''){
+				elem.style.color="gray";
+		        elem.value=Requirements_placeholder;
+		        //alert("some_requirements");
+		        //alert(Requirements_placeholder);
+		    }    
+		};
+
+		function display_none(){
+			document.getElementById("alertState").style.display = "none";
+			document.getElementById("displayForm").style.display = "block";
+		};
+		function display_form(){
+			document.getElementById("displayForm").style.display = {{form_display| safe}};
+		};
+
+		function set_license(){
+			var licenses = document.getElementById("select_license_type");
+			var type = licenses.options[licenses.selectedIndex].value;
+			document.getElementById("license-type").value = type;
+		};
+
+		
+		function Edit_agreement_content() {
+		    document.getElementById("agreement-zone").contentEditable = true;
+		};
+
+		function show_license_info(license_type){
+			if (license_type==="Proprietary") {
+				license_name="Proprietary License";
+				label="<h3>Proprietary License</h3><p>Most software licenses are <b>proprietary</b> licenses, meaning the software publisher grants a license to use one or more copies of software, but that ownership of those copies remains with the software publisher. The user must accept the license before they are permitted to use the software.</p>";
+			}
+			else if (license_type==="MIT"||license_type==="BSD"||license_type==="Apache") {
+				license_name="Permissive Free Licenses";
+				label="<h3>Permissive Free Licenses</h3><p>A permissive software license, sometimes also called BSD-like or BSD-style license, is a free software software licence with minimal requirements about how the software can be redistributed.</p><ul><li>MIT Licence</li><li>BSD licences</li><li>Apache licence</li><li>...</li></ul>";
+				if (license_type==="MIT") {license_name=license_name+" (MIT)";}
+				else if (license_type==="BSD") {license_name=license_name+" (BSD)";}
+				else {license_name=license_name+" (Apache)";}
+
+			}
+			else if (license_type==="GPL Freedom 0"||license_type==="GPL Freedom 1"||license_type==="GPL Freedom 2"||license_type==="GPL Freedom 3") {
+				license_name="GNU General Public License";
+				label="<h3>Open-Source Licenses (GNU General Public License)</h3><p>These are agreements under which much <b>open source</b> software is licensed. End users may do things like change the source code, but any refinements of the software must also be made available under a GNU GPL license.</p><ul><li>Freedom 0 : the freedom to use the work,</li><li>Freedom 1 : the freedom to study the work,</li><li>Freedom 2 : the freedom to copy and share the work with others,</li><li>Freedom 3 : the freedom to modify the work, and the freedom to distribute modified and therefore derivative works.</li></ul>";
+
+				if (license_type==="GPL Freedom 0") {license_name=license_name+" (GPL Freedom 0)";}
+				else if (license_type==="GPL Freedom 1") {license_name=license_name+" (GPL Freedom 1)";}
+				else if (license_type==="GPL Freedom 2") {license_name=license_name+" (GPL Freedom 2)";}
+				else {license_name=license_name+" (GPL Freedom 3)";}
+			}
+			else if (license_type==="EULA") {
+				license_name="End User License Agreement (EULA)";
+				label="<h3>End User License Agreement (EULA)</h3><p>Also called <b>clickwraps</b> or <b>shrinkwraps</b>, EULAS indicate the terms under which the end-user may use the software. Agreements with organizations or companies often take the form of contracts between the organization and the software publisher or vendor, and specify the terms of use for all users from the organization, superseding any EULAs which may come with the software.</p>";
+			}
+			else if (license_type==="Workstation") {
+				license_name="Workstation Licenses";
+				label="<h3>Workstation Licenses</h3><p>These are licenses that permit the installation of an application on a single computer. You may not install the software on more than one machine unless you purchase a license for each additional machine. Most workstation license agreements allow you to make a single backup copy of the software as long as that backup copy is used only to restore the software onto the same machine, or a separate machine if the software is removed from the original computer.</p>";
+			}
+			else if (license_type==="Concurrent Use") {
+				license_name="Concurrent Use License";
+				label="<h3>Concurrent Use License</h3><p>These are licenses that permit you to install the software onto multiple machines as long as the number of computers using the software at the same time does not exceed the number of licenses which you have purchased. Concurrent use licenses are usually used in conjunction with <b>license manager</b> software that prevents the number of licenses from being exceeded.</p>";
+			}
+			else if (license_type==="Site") {
+				license_name="Site licenses";
+				label="<h3>Site licenses</h3><p>A site license permits the use of software on any computer at a specified site. Unlimited site licenses allow the installation of software on any number of computers as long as those computers are located at the specified site. Some site licenses permit the installation on computers owned by a particular entity (such as a university) regardless of the physical location. Some vendors refer to their licenses as site licenses but restrict the number of computers on which the software may be installed.</p>";
+			}
+			else if (license_type==="Perpetual") {
+				license_name="Perpetual Licenses";
+				label="<h3>Perpetual Licenses</h3><p>These are licenses without expiration dates, which permit use of the software indefinitely, without requiring a recurring fee for continued use. Most software that individuals buy for use on their home computers are perpetual licenses.</p>";
+			}
+			else if (license_type==="Non-Perpetual") {
+				license_name="Non-perpetual Licenses";
+				label="<h3>Non-perpetual Licenses</h3><p>These are licenses that <b>lease</b> the software for use for a specified period of time, usually annually or sometimes bi-annually. Users are required to remove the software from their computer if they cease paying the license fee.</p>";
+			}
+			else if (license_type==="License with Maintenance") {
+				license_name="License with Maintenance";
+				label="<h3>License with Maintenance</h3><p>Some license agreements allow the user to purchase 'maintenance' or 'software assurance along with the original license fee, which entitles the user to receive new versions of the software for one to two years until the maintenance agreement expires.</p>";
+			}
+			else {
+				alert(license_type)
+				license_name="Permissive Free Licenses (BSD)";
+				label="<h3>Permissive Free Licenses</h3><p>A permissive software license, sometimes also called BSD-like or BSD-style license, is a free software software licence with minimal requirements about how the software can be redistributed.</p><ul><li>MIT Licence</li><li>BSD licences</li><li>Apache licence</li><li>...</li></ul>";
+			}
+			document.getElementById("agreement-zone").innerHTML = "<hr>"+label;
+			document.getElementById("selected_type").value=license_name;
+
+		};
+
+
+		$(document).ready(function() {
+			var total_result = [];
+  
+			var num_id = 2;
+			var nbr_interface = 2;
+
+			$("#btn-add-inter").click(function(e) {
+				e.preventDefault();
+				var ele_num = num_id;
+
+				var interface_detail = '<!-- Interface Name -->'+
+							            '<div class="row form-inline">'+
+									      '<label for="interface_name_ele'+ele_num+'" class="col-sm-2 col-form-label col-form-label-sm">Interface Name</label>'+
+									      '<input type="text" class="col-sm-9 form-control form-control-sm" id="interface_name_ele'+ele_num+'" placeholder="Interface name" pattern="^[A-Za-z]+[A-Za-z0-9_]*$">'+
+									    '</div>'+
+									    '<br>'+
+		                				'<!-- Input Args -->'+
+		                				'<div class="row form-inline">'+
+		                					'<label for="arg_interface_ele'+ele_num+'" class="col-sm-2">Input Args'+
+		                					'</label>'+
+		                					'<div class="col-sm-7 row" id="arg_interface_ele'+ele_num+'">'+
+		                						'<div>'+
+			                						'<input type="text" class="form-control form-control-sm col-7" id="arg_interface_name_ele'+ele_num+'1" placeholder="Arg name" pattern="^[A-Za-z]+[A-Za-z0-9_]*$">'+
+													'<select class="form-control form-control-sm col-3" id="input_interface_arg_ele'+ele_num+'1">'+
+													    '<option value="" selected>Type</option>'+
+													    '<option value="bool">bool</option>'+
+													    '<option value="int">int</option>'+
+													    '<option value="uint">uint</option>'+
+													    '<option value="float">float</option>'+
+													    '<option value="complex">complex</option>'+
+													    '<option value="string">string</option>'+
+													    '<option value="time">time</option>'+
+													    '<option value="enum">enum</option>'+
+													'</select>'+
+													'<label class="col-1">'+
+														'&nbsp;&nbsp;<i id="add_arg_type_ele'+ele_num+'" class="fa fa-plus-square"></i>'+
+													'</label>'+
+												'</div>'+
+											'</div>'+
+		                				'</div>'+
+		                				'<br>'+
+		                				'<!-- Output Format -->'+
+		                				'<div class="row form-inline">'+
+		                					'<label for="output_interface_format_ele'+ele_num+'" class="col-sm-2">Output Format'+
+		                					'</label>'+ 
+		                					'<select class="form-control form-control-sm col-sm-3" id="output_interface_format_ele'+ele_num+'" disabled>'+
+												    '<option value="json" selected>json</option>'+
+												    '<option value="value">value</option>'+
+												'</select>'+
+		                				'</div>'+
+		                				'<br>'+
+		                				'<!-- Draw Format -->'+
+		                				'<div class="row form-inline">'+
+		                					'<label for="draw_interface_format_ele'+ele_num+'" class="col-sm-2">Draw Format'+
+		                					'</label>'+
+		                					'<select class="form-control form-control-sm col-sm-3" id="draw_interface_format_ele'+ele_num+'">'+
+											    '<option value="Text" selected>Text</option>'+
+											    '<option value="Bar-charts">Bar-charts</option>'+
+											    '<option value="Pie-charts">Pie-charts</option>'+
+											    '<option value="Line/Area-charts">Line/Area-charts</option>'+
+											    '<option value="Other">Other</option>'+
+											'</select>'+
+		                				'</div>';
+				var element='<div class="panel panel-default" id="interface_element['+ele_num+']">'+
+				    '<div class="panel-heading" role="tab" id="heading'+ele_num+'">'+
+				      '<h4 class="panel-title">'+
+				        '<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+ele_num+'" aria-expanded="false" aria-controls="collapse'+ele_num+'">'+
+				            	'Interface #'+ele_num+' '+
+				        '</a> &nbsp; <i id="trash'+ele_num+'" class="fa fa-trash"></i>'+
+				      '</h4>'+
+				    '</div>'+
+				    '<div id="collapse'+ele_num+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading'+ele_num+'">'+
+				      '<div class="panel-body">'+
+				        interface_detail
+				      '</div>'+
+				    '</div>'+
+				'</div>';
+
+
+				$("#accordion").append(element);
+				
+
+				var ele_result = {
+					"InterfaceName":$("#interface_name_ele"+ele_num).val(),
+					"InputArgs":[{"ArgName":$("#arg_interface_name_ele"+ele_num+"1").val(), "ArgType":$("#input_interface_arg_ele"+ele_num+"1").val()}],
+					"OutputFormat":$("#output_interface_format_ele"+ele_num).val(),
+					"DrawFormat":$("#draw_interface_format_ele"+ele_num).val()
+				};
+				
+
+				$("#interface_name_ele"+ele_num).change(function(){
+			        ele_result["InterfaceName"] = $("#interface_name_ele"+ele_num).val();
+			        refresh();
+			    });
+			    $("#arg_interface_name_ele"+ele_num+"1").change(function(){
+			        ele_result["InputArgs"][0]["ArgName"] = $("#arg_interface_name_ele"+ele_num+"1").val();
+			        refresh();
+			    });
+			    $("#input_interface_arg_ele"+ele_num+"1").change(function(){
+			        ele_result["InputArgs"][0]["ArgType"] = $("#input_interface_arg_ele"+ele_num+"1").val();
+			        refresh();
+			    });
+			    $("#output_interface_format_ele"+ele_num).change(function(){
+			        ele_result["OutputFormat"] = $("#output_interface_format_ele"+ele_num).val();
+			        refresh();
+			    });
+			    $("#draw_interface_format_ele"+ele_num).change(function(){
+			        ele_result["DrawFormat"] = $("#draw_interface_format_ele"+ele_num).val();
+			        refresh();
+			    });
+			    addNewArg(ele_num);
+
+			    total_result.push(ele_result);
+				refresh();
+				initRemove(ele_num);
+				num_id = num_id + 1;
+				nbr_interface = nbr_interface + 1;
+				
+				/*alert("ele_num : "+ele_num);*/
+				
+				
+			});
+
+			var addNewArg = function(ele_num){
+				var g_cnt = 2;
+				var plusid = "#add_arg_type_ele"+ele_num;
+				$(plusid).click(function(){
+					var cnt = g_cnt;
+					var new_arg = '<div><br>'+
+						'<input type="text" class="form-control form-control-sm col-7" id="arg_interface_name_ele'+ele_num+''+cnt+'" placeholder="Arg name" pattern="^[A-Za-z]+[A-Za-z0-9_]*$">'+
+						'&nbsp;<select class="form-control form-control-sm col-3" id="input_interface_arg_ele'+ele_num+''+cnt+'">'+
+						    '<option value="" selected>Type</option>'+
+						    '<option value="bool">bool</option>'+
+						    '<option value="int">int</option>'+
+						    '<option value="uint">uint</option>'+
+						    '<option value="float">float</option>'+
+						    '<option value="complex">complex</option>'+
+						    '<option value="string">string</option>'+
+						    '<option value="time">time</option>'+
+						    '<option value="enum">enum</option>'+
+						'</select>'+
+						'&nbsp;&nbsp;<i id="trash_'+ele_num+'_'+cnt+'" class="fa fa-trash"></i>'+
+					'</div>';
+					/*alert("arg"+cnt+" => "+"#arg_interface_ele"+ele_num);*/
+					$(this).parent().parent().append(new_arg);
+					/*alert("push =>"+ele_num+" :: "+total_result[ele_num]["InputArgs"]);*/
+					total_result[ele_num-2]["InputArgs"].push({"ArgName": $("#arg_interface_name_ele"+ele_num+""+cnt).val(), "ArgType": $("#input_interface_arg_ele"+ele_num+""+cnt).val()});
+					$("#arg_interface_name_ele"+ele_num+""+cnt).change(function(){
+				        total_result[ele_num-2]["InputArgs"][cnt-1]["ArgName"] = $("#arg_interface_name_ele"+ele_num+""+(cnt)).val();
+				        refresh();
+				    });
+				    $("#input_interface_arg_ele"+ele_num+""+cnt).change(function(){
+				        total_result[ele_num-2]["InputArgs"][cnt-1]["ArgType"] = $("#input_interface_arg_ele"+ele_num+""+(cnt)).val();
+				        refresh();
+				    });
+				    refresh();
+					var fa_arg_id = "#trash_"+ele_num+"_"+cnt;
+					$(fa_arg_id).click(function() {
+					  $(this).parent().remove();
+					  alert("delete arg index : "+(cnt-1));
+					  delete total_result[ele_num-2]["InputArgs"][cnt-1];
+					  refresh();
+					});
+					g_cnt = g_cnt + 1;
+				});
+			}
+
+			var initRemove = function(ele_num) {
+				var fa_id = "#trash"+ele_num;
+				$(fa_id).click(function() {
+				  $(this).parent().parent().parent().remove();
+				  nbr_interface = nbr_interface - 1;
+				  if(nbr_interface < 1) {
+				    nbr_interface = 1;
+				  }
+				  alert("delete Interface index : "+(ele_num-2));
+				  delete total_result[ele_num-2];
+				  refresh();
+				});
+			}
+
+			/*var ele = 1;
+			addNewArg(ele);*/
+
+			
+			var refresh = function(){
+				var tt = {"ArgName":"", "ArgType":""};
+				var text_result = "[\n";
+				for (var i = 0; i < total_result.length; i++) {
+					dict = total_result[i];
+					if (dict) {
+						text_result = text_result+"{";
+						var c = 0;
+						for(var key in dict) {
+							c = c + 1;
+							var value = dict[key];
+							if (value instanceof Array) {
+								text_result = text_result+"\""+key+"\""+" : [";
+								var filted_values = [];
+								for (var j = 0; j < value.length; j++) {
+									if (value[j] && !isEqual(value[j], tt)) {
+										filted_values.push(value[j]);
+									}
+								}
+								for (var j = 0; j < filted_values.length; j++) {
+									text_result = text_result+"{";
+									var g = 0;
+									for(var k in filted_values[j]) {
+										g = g + 1;
+										var v = filted_values[j][k];
+										text_result = text_result+"\""+k+"\""+" : "+"\""+v+"\"";
+										if (g<Object.keys(filted_values[j]).length) {
+											text_result = text_result+", ";
+										}
+									}
+									text_result = text_result+"}";
+
+									if ((j+1)<filted_values.length) {
+										text_result = text_result+", ";
+									}
+								}
+								text_result = text_result+"]";
+							}
+							else{
+								text_result = text_result+"\""+key+"\""+" : "+"\""+value+"\"";
+							}
+							if (c<Object.keys(dict).length) {
+								text_result = text_result+", ";
+							}
+						}
+						text_result = text_result+"}";
+						if ((i+1)<total_result.length) {
+							text_result = text_result+", \n";
+						}
+					}
+				};
+				text_result = text_result+"\n]";
+				//$("#result").html(text_result);
+				$("#interface_results").text(text_result);					
+			}
+
+			var isEqual = function (value, other) {
+
+				// Get the value type
+				var type = Object.prototype.toString.call(value);
+
+				// If the two objects are not the same type, return false
+				if (type !== Object.prototype.toString.call(other)) return false;
+
+				// If items are not an object or array, return false
+				if (['[object Array]', '[object Object]'].indexOf(type) < 0) return false;
+
+				// Compare the length of the length of the two items
+				var valueLen = type === '[object Array]' ? value.length : Object.keys(value).length;
+				var otherLen = type === '[object Array]' ? other.length : Object.keys(other).length;
+				if (valueLen !== otherLen) return false;
+
+				// Compare two items
+				var compare = function (item1, item2) {
+
+					// Get the object type
+					var itemType = Object.prototype.toString.call(item1);
+
+					// If an object or array, compare recursively
+					if (['[object Array]', '[object Object]'].indexOf(itemType) >= 0) {
+						if (!isEqual(item1, item2)) return false;
+					}
+
+					// Otherwise, do a simple comparison
+					else {
+
+						// If the two items are not the same type, return false
+						if (itemType !== Object.prototype.toString.call(item2)) return false;
+
+						// Else if it's a function, convert to a string and compare
+						// Otherwise, just compare
+						if (itemType === '[object Function]') {
+							if (item1.toString() !== item2.toString()) return false;
+						} else {
+							if (item1 !== item2) return false;
+						}
+
+					}
+				};
+
+				// Compare properties
+				if (type === '[object Array]') {
+					for (var i = 0; i < valueLen; i++) {
+						if (compare(value[i], other[i]) === false) return false;
+					}
+				} else {
+					for (var key in value) {
+						if (value.hasOwnProperty(key)) {
+							if (compare(value[key], other[key]) === false) return false;
+						}
+					}
+				}
+
+				// If nothing failed, return true
+				return true;
+
+			};
+
+			refresh();
+
+		});
+
+		
+	</script>
+{%- endblock scripts %}
+
