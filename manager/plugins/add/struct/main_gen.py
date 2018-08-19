@@ -1,6 +1,5 @@
 def set_main_algo(interfaces):
-	main = """import config_param as conf
-
+	main = """
 class Main_algo():
     \"\"\"docstring for Main_algo\"\"\"
     def __init__(self):

@@ -7,8 +7,8 @@ import flask_plugins
 from flask_login import login_required
 
 from . import dashboard
-from ..utils.plugin.add import CreateNewPlugin
-
+#from ..utils.plugin.add import CreateNewPlugin
+from ... import CreateNewPlugin
 
 # -------------------- /dashboard/plugin/add  : Add new plugin ------------------ #
 
@@ -70,6 +70,7 @@ def addPlugin():
                 '''ERROR !'''
                 pass
                 raise
+                #ERROR = 1+"1"
 
         except Exception as e:
             flash('ERROR! Plugin has not been created! : {}'.format(str(e)))

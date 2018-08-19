@@ -36,3 +36,7 @@ static/js/*.js*
 # Node packages
 node_modules/
 core/dashboard/static/node_modules/
+
+# Add plugins
+manager/plugins/add/struct/views_gen.py
+manager/plugins/add/struct/templates_gen.py

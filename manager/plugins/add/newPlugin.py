@@ -1,108 +1,93 @@
 import os
 import sys
-from struct import templates_gen, views_gen, static_contain, info_gen, main_gen
+from struct import config_gen, services_gen, static_contain, info_gen, main_gen
 import re
-
+from flask_login import login_required, current_user
 
 class CreateNewPlugin:
 	"""docstring for NewPlugin"""
-	base_path = "app/plugins"
+	base_path = "plugins/community"
 	plugin_name = ""
-	plugin_init = ""
+	user_name = "unknown"
+	py_version = "2"
+	install_requirements=True
 
 	default_contents = {}
 
-	def __init__(self, name, desc, author_name, author_mail, python_version, plugin_requirements, contributors_names=[], interfaces=[], license_type="BSD", version="1.0.0"):
-		
+	@login_required
+	def __init__(self, name, desc, author_name, author_mail, python_version,\
+	 plugin_requirements, contributors_names=[], interfaces=[], license_type="BSD",\
+	  version="1.0.0"):
+		#print("\n===========================\nabs path :")
+		#print(os.path.abspath("."))
+		self.py_version = python_version[-1]
 		lowercase = lambda s: s[:1].lower() + s[1:] if s else ''
 		name_list = filter(None, re.split("[, \-!?:]+", name))
 		name_list[0]=lowercase(name_list[0])
 		self.plugin_name = '_'.join(name_list)
-		self.plugin_init = """from os import getcwd\n"""\
-					+"""from app.plugin import AppPlugin\n"""\
-					+ """from .src.views import """+self.plugin_name+"""\n\n"""\
-					+"""__plugin__ = \""""+''.join(name_list).title()+"""\" \n\n"""\
-					+"""__version__ = \""""+version+"""\" """+"""\n\n\n"""\
-					+"""class """+''.join(name_list).title()+"""(AppPlugin):"""+"""\n"""\
-					+"""    def setup(self):"""+"""\n"""\
-					+"""        self.register_blueprint("""+self.plugin_name+""")\n"""
-
+		try:
+			self.user_name = current_user.username
+		except expression as e:
+			print(e)
+		
 		if plugin_requirements=="":
-			your_requirement = '''#Your dependencies here!  [pip freeze >  app/plugins/'''+name+'''/my_requirement.txt]'''
+			self.install_requirements = False
+			your_requirement = '''#Your dependencies here!  [pip freeze >  vcar/plugins/community/'''+self.user_name+'''/'''+self.plugin_name+'''/workspace/plugin_requirement.txt]'''
 		else:
 			your_requirement = plugin_requirements
 		your_license = static_contain.copyright
 		info_json = info_gen.info(self.plugin_name, author_name, desc, license_type, version, python_version)
 		authors_fild = info_gen.authors(name, author_name, author_mail, contributors_names)
-		doc_algo = '''## Hello world *DOC*'''
-		config_param = ''''''
+		doc_plugin = '''## How to start using this plugin? *DOC*'''
+		config_param = config_gen.config_template(self.plugin_name, self.user_name)
 		readme_instr = ''''''
 
 		main_contain = main_gen.set_main_algo(interfaces)
-		views_contain = views_gen.views_template(self.plugin_name)
-		template_index_contain = templates_gen.index_template(name, self.plugin_name, html_body='<p id="style_test">Body Contain!</p>')
-		template_docs_contain = templates_gen.docs_template(name, self.plugin_name)
+		service_app_contain = services_gen.app_template(self.plugin_name, self.user_name)
+		service_wsgi_contain = services_gen.wsgi_template()
 		default_contents = {
 			"dirs" : [
 				{
 					"path" : "",
-					"names": ["Docs", "workspace", "View"]
+					"names": ["workspace", "services"]
 				},
 				{
-					"path" : "View",
-					"names": ["static", "templates"]
-				},
-				{
-					"path" : "View/templates",
-					"names": [self.plugin_name]
-				},
-				{
-					"path" : "View/static",
-					"names": [self.plugin_name]
+					"path" : "workspace",
+					"names": ["config", "algorithms", "docs"]
 				}
 			], 
 			"packages" : [
-				{
-					"path" : "",
-					"names": ["src"],
-					"contains": ["from .views import "+self.plugin_name]
-				},
-				{
-					"path" : "src",
-					"names": ["algorithms"],
-					"contains": ['''''']
-				},
-				{
-					"path" : "src/algorithms",
-					"names": ["helpers", "models", "preprocess"],
-					"contains": ['''''', '''''', '''''']
-				}
+				#{
+				#	"path" : "workspace/algorithms",
+				#	"names": ["helpers", "models", "preprocess"],
+				#	"contains": ['''''', '''''', '''''']
+				#}
 			],
 			"files" : [
 				{
-					"path" : "",
-					"names": ["AUTHORS", "info.json", "LICENSE", "my_requirement.txt", "README.md"],
+					"path" : "workspace",
+					"names": ["AUTHORS", "info.json", "LICENSE", "plugin_requirement.txt", "README.md"],
 					"contains": [authors_fild, info_json, your_license, your_requirement, readme_instr] 
 				},
 				{
-					"path" : "Docs",
+					"path" : "workspace/docs",
 					"names": ["DOC.md"],
-					"contains": [doc_algo] 
+					"contains": [doc_plugin] 
 				},
 				{
-					"path" : "src",
-					"names": ["views.py"],
-					"contains": [views_contain] 
+					"path" : "workspace/config",
+					"names": ["init.conf"],
+					"contains": [config_param] 
 				},
 				{
-					"path" : "src/algorithms",
-					"names": ["main.py", "config_param.py"],
-					"contains": [main_contain, config_param] 
+					"path" : "workspace/algorithms",
+					"names": ["main.py"],
+					"contains": [main_contain] 
 				},
 				{
-					"path" : "View/templates/"+self.plugin_name,
-					"names": ["index.html", "docs.html"],
-					"contains": [template_index_contain, template_docs_contain] 
+					"path" : "services",
+					"names": ["app.py", "wsgi.py"],
+					"contains": [service_app_contain, service_wsgi_contain] 
 				}
 			]
 		}
@@ -111,12 +96,17 @@ class CreateNewPlugin:
 		
 
 	def create(self, name, contents):
-		root = os.path.join(self.base_path, name)
+		user_plugins = os.path.join(self.base_path, self.user_name)
+		if not os.path.exists(user_plugins):
+			try:
+				os.mkdir(user_plugins)
+			except Exception, e:
+				return str(e)
+		
+		root = os.path.join(user_plugins, name)
 		if not os.path.exists(root):
 			try:
 				os.mkdir(root)
-				self.new_file(root, "__init__.py", self.plugin_init)
-				print "root = ",root
 
 				for directory in contents["dirs"]:
 					for n in directory["names"]:
@@ -129,6 +119,17 @@ class CreateNewPlugin:
 				for f in contents["files"]:
 					for i in xrange(len(f["names"])):
 						self.new_file( os.path.join(root, f["path"]), f["names"][i], f["contains"][i])
+
+				env_path = os.path.join(os.path.abspath("."), root, 'workspace/.env')
+				print("env_path : "+env_path)
+				cmd1 = 'sudo virtualenv --python=python'+str(self.py_version)+' '+env_path
+				cmd2 = 'sudo '+env_path+'/bin/pip install gunicorn werkzeug'
+				cmd3 = 'sudo '+env_path+'/bin/pip install -r '+os.path.join(root, 'workspace/plugin_requirement.txt')
+				
+				os.system(cmd1)
+				os.system(cmd2)
+				if self.install_requirements:
+					os.system(cmd3)
 
 				return "True"
 			except Exception, e:
