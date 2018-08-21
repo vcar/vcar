@@ -15,5 +15,6 @@ Flask-Misaka
 marshmallow
 networkx
 PyYAML
+Gunicorn
 https://github.com/mikeboers/Flask-Images/archive/py3.zip
 https://github.com/vcar/flask-plugins/archive/master.zip

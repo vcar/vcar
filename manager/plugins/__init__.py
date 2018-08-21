@@ -2,6 +2,7 @@ import shutil
 import xmlrpc
 from xmlrpc.client import ServerProxy
 
+
 # SIGSTOP & SIGCONT for suspeding & resuming plugins
 # Remove a all plugins/ user plugins/ plugin
 #
@@ -9,7 +10,7 @@ from xmlrpc.client import ServerProxy
 class PluginManager(object):
 
     def __init__(self):
-        """Inisialize it"""
+        """Initialize it"""
         self.status = None
         self.error = None
         self.server = xmlrpc.client.ServerProxy('http://localhost:9001/RPC2')
