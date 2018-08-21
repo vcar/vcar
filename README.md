@@ -55,3 +55,4 @@ Python, FLASK, MYSQL, REDIS, ELASTIC, DOCKER, VISJS, NODEJS, BOOTSTRAP, CSS, JIN
 ## Team members
 
 boubouhkarim
+SRamah
