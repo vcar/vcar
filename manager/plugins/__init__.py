@@ -1,6 +1,8 @@
 import shutil
-import xmlrpc
-from xmlrpc.client import ServerProxy
+#import xmlrpc #py3
+import xmlrpclib #py2
+#from xmlrpc.client import ServerProxy
+from xmlrpclib import ServerProxy
 
 
 # SIGSTOP & SIGCONT for suspeding & resuming plugins
@@ -13,7 +15,8 @@ class PluginManager(object):
         """Initialize it"""
         self.status = None
         self.error = None
-        self.server = xmlrpc.client.ServerProxy('http://localhost:9001/RPC2')
+        #self.server = xmlrpc.client.ServerProxy('http://localhost:9001/RPC2')
+        self.server = xmlrpclib.ServerProxy('http://localhost:9001/RPC2')
 
     # Plugin Manager Methods --------------------------------------------------
 
@@ -75,14 +78,14 @@ class PluginManager(object):
         """Start a plugin.
                 @param string : plugin_name, user:plugin_name, or user:*
         """
-        name = f"{user}:{plugin_name}"
+        name = "{user}:{plugin_name}".format(user=user, plugin_name=plugin_name)
         return self.server.supervisor.startProcess(name)
 
     def stopPlugin(self, user, plugin_name):
         """stop a plugin by name.
                 @param string : plugin_name, user:plugin_name, or user:*
         """
-        name = f"{user}:{plugin_name}"
+        name = "{user}:{plugin_name}".format(user=user, plugin_name=plugin_name)
         return self.server.supervisor.stopProcess(name)
 
     # User Plugin Control Methods ---------------------------------------------
@@ -102,7 +105,7 @@ class PluginManager(object):
     # Help Methods ------------------------------------------------------------
 
     def help(self, name=None):
-        """Return a string showing the method’s documentation if the name is given
+        """Return a string showing the method's documentation if the name is given
             otherwise liste all available methods. """
         if name:
             return self.server.system.methodHelp(name)

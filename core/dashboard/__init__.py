@@ -27,3 +27,5 @@ from .views.status import *
 from .views.user import *
 from .views.vehicle import *
 from .views.plugin import *
+
+from . import CreateNewPlugin
