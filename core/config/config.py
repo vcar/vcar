@@ -5,6 +5,8 @@ import os
 class DefaultConfig(object):
     # Project name
     PROJECT = "vCar"
+    # project version
+    VERSION = "0.1.8"
     # Turns on debugging features in Flask
     DEBUG = True
     # secret key
@@ -24,8 +26,8 @@ class DefaultConfig(object):
     # Avater upload directory
     UPLOAD_AVATAR_DIR = os.path.join(UPLOAD_DIR, 'avatars/')
     ALLOWED_AVATAR_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
-    # IMAGES_URL = "/dashboard/imgsizer"
-    # IMAGES_PATH = "static/uploads"
+    IMAGES_URL = "/dashboard/imgsizer"
+    IMAGES_PATH = ['core/dashboard/static']
     # IMAGES_CACHE = "/tmp/flask-images"
     # Instance folder path
     INSTANCE_FOLDER_PATH = os.path.join(os.path.abspath('.'), 'instance')

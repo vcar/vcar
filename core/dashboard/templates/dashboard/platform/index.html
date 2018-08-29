@@ -59,7 +59,7 @@
                             <td><a href="{{ url_for('dashboard.showPlatform', id=platform.id) }}">{{ platform.id }}</a></td>
                             <td><a href="{{ url_for('dashboard.showPlatform', id=platform.id) }}">
                             {% if platform.logo %}
-                                <img class="avatar table-avatar" src="{{ resized_img_src(config.UPLOAD_PLATFORM + platform.logo, width=60) }}" alt="{{ platform.name }}">
+                                <img class="avatar table-avatar" src="{{url_for('images', filename=config.UPLOAD_PLATFORM + platform.logo, width=60)}}" alt="{{ platform.name }}">
                             {% else %}
                                 <img class="avatar table-avatar" src="/static{{ config.UPLOAD_PLATFORM}}/default.png">
                             {% endif %}
