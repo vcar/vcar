@@ -8,9 +8,10 @@ from .dashboard import dashboard
 from .filters import filters
 from .dashboard.models.user import User
 from .extensions import (
-    db, migrate, mail, toolbar, images, login_manager, redis,
-    plugin_manager, socketio, misaka
+    db, migrate, mail, toolbar, images, login_manager, redis, socketio, misaka
 )
+# plugin_manager
+
 
 
 __all__ = ['create_app']
@@ -55,7 +56,7 @@ def create_app(config=None, app_name=None, blueprints=None):
     # Template filters
     configure_template_filters(app)
     # Register plugins menu in g
-    register_plugins_menu(app)
+    # register_plugins_menu(app)
     # Error handling
     configure_error_handlers(app)
 
@@ -122,7 +123,7 @@ def configure_extensions(app):
     # cache.init_app(app)
 
     # initialize debug toolbar
-    # toolbar.init_app(app)
+    toolbar.init_app(app)
 
     # initialize Images utils
     images.init_app(app)
@@ -145,11 +146,11 @@ def configure_extensions(app):
     #     base_app_folder='app',
     #     plugin_folder="app/plugins"
     # )
-    plugin_manager.init_app(
-        app,
-        plugin_folder="plugins",
-        plugin_import_path='plugins',
-    )
+    # plugin_manager.init_app(
+    #     app,
+    #     plugin_folder="plugins",
+    #     plugin_import_path='plugins',
+    # )
 
     # flask-login
     login_manager.login_view = 'dashboard.login'
@@ -218,4 +219,4 @@ def configure_error_handlers(app):
 
     @app.errorhandler(500)
     def server_error_page(error):
-        return render_template("errors/server_error.html"), 500
+        return render_template("errors/server_error.html", error=error), 500

@@ -1,0 +1,2 @@
+#Your dependencies here!
+[pip freeze >  vcar/plugins/community/root/misaki_yooko/workspace/plugin_requirement.txt]

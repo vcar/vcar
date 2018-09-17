@@ -8,7 +8,11 @@ class DefaultConfig(object):
     # project version
     VERSION = "0.1.8"
     # Turns on debugging features in Flask
+    ENV = "DEVELOPMENT"
+    # Turns on debugging features in Flask
     DEBUG = True
+    # Disabling the Werkzeug PIN Confirmation
+    WERKZEUG_DEBUG_PIN = 'off'
     # secret key
     SECRET_KEY = "Zfe&45f4y5fhgse6f4e&@+-%_r4oij5hgfa&#@"
     # Redis database url

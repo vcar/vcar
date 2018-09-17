@@ -12,68 +12,68 @@ var gulp = require('gulp'),
 // Static files ===============================================================
 
 // Global Directories
-var css_dist = 'core/dashboard/static/css/';
-var js_dist = 'core/dashboard/static/js/';
+var css_dist = 'css/';
+var js_dist = 'js/';
 
 // Vendor files
 var vendor_css_files = [
-    'core/dashboard/static/vendor/bootstrap/bootstrap.css',
-    'core/dashboard/static/vendor/adminlte/adminlte.css',
-    'core/dashboard/static/vendor/font-awesome/font-awesome.css',
-    'core/dashboard/static/vendor/toastr/toastr.css',
-    'core/dashboard/static/vendor/pace/pace.css',
-    'core/dashboard/static/vendor/icheck/icheck.css',
-    'core/dashboard/static/vendor/vis/vis.min.css',
+    'vendor/bootstrap/bootstrap.css',
+    'vendor/adminlte/adminlte.css',
+    'vendor/font-awesome/font-awesome.css',
+    'vendor/toastr/toastr.css',
+    'vendor/pace/pace.css',
+    'vendor/icheck/icheck.css',
+    'vendor/vis/vis.min.css',
 ];
 var vendor_js_files = [
-    'core/dashboard/static/vendor/jquery/*.js',
-    'core/dashboard/static/vendor/jqueryui/*.js',
-    'core/dashboard/static/vendor/bootstrap/*.js',
-    'core/dashboard/static/vendor/confirmation/*.js',
-    'core/dashboard/static/vendor/toastr/*.js',
-    'core/dashboard/static/vendor/pace/*.js',
-    'core/dashboard/static/vendor/slimscroll/*.js',
-    'core/dashboard/static/vendor/fastclick/*.js',
-    'core/dashboard/static/vendor/icheck/*.js',
-    'core/dashboard/static/vendor/vis/vis.min.js',
-    'core/dashboard/static/vendor/cookie/jquery.cookie.js',
-    'core/dashboard/static/vendor/fileupload/fileupload.js',
-    'core/dashboard/static/vendor/fileupload/fileupload-process.js',
-    'core/dashboard/static/vendor/fileupload/fileupload-validate.js',
-    'core/dashboard/static/vendor/conditionize/conditionize.jquery.js',
-    'core/dashboard/static/vendor/knob/*.js',
-    'core/dashboard/static/vendor/adminlte/*.js'
+    'vendor/jquery/*.js',
+    'vendor/jqueryui/*.js',
+    'vendor/bootstrap/*.js',
+    'vendor/confirmation/*.js',
+    'vendor/toastr/*.js',
+    'vendor/pace/*.js',
+    'vendor/slimscroll/*.js',
+    'vendor/fastclick/*.js',
+    'vendor/icheck/*.js',
+    'vendor/vis/vis.min.js',
+    'vendor/cookie/jquery.cookie.js',
+    'vendor/fileupload/fileupload.js',
+    'vendor/fileupload/fileupload-process.js',
+    'vendor/fileupload/fileupload-validate.js',
+    'vendor/conditionize/conditionize.jquery.js',
+    'vendor/knob/*.js',
+    'vendor/adminlte/*.js'
 ];
 
 // Application files
 var app_css_files = [
-    'core/dashboard/static/css/styles/application.css',
-    'core/dashboard/static/css/skins/dark-theme.css',
-    'core/dashboard/static/css/skins/light-theme.css',
-    'core/dashboard/static/css/components/**/*.css',
+    'css/styles/application.css',
+    'css/skins/dark-theme.css',
+    'css/skins/light-theme.css',
+    'css/components/**/*.css',
 ];
 var app_js_files = [
-    'core/dashboard/static/js/scripts/main.js',
-    'core/dashboard/static/js/scripts/uploader.js',
+    'js/scripts/main.js',
+    'js/scripts/uploader.js',
 ];
 
 // FrontEnd files
 var front_css_files = [
-    'core/dashboard/static/vendor/bootstrap/bootstrap.css',
-    'core/dashboard/static/vendor/font-awesome/font-awesome.css',
-    'core/dashboard/static/vendor/ionicons/ionicons.css',
-    'core/dashboard/static/vendor/animate/animate.css',
-    'core/dashboard/static/css/styles/frontend.css',
+    'vendor/bootstrap/bootstrap.css',
+    'vendor/font-awesome/font-awesome.css',
+    'vendor/ionicons/ionicons.css',
+    'vendor/animate/animate.css',
+    'css/styles/frontend.css',
 ];
 var front_js_files = [
-    'core/dashboard/static/vendor/jquery/jquery.js',
-    'core/dashboard/static/vendor/bootstrap/bootstrap.js',
-    'core/dashboard/static/vendor/waypoints/jquery.waypoints.js',
-    'core/dashboard/static/vendor/parallax/jquery.parallax.js',
-    'core/dashboard/static/vendor/sticky/jquery.sticky.js',
-    'core/dashboard/static/vendor/smoothscroll/smoothscroll.js',
-    'core/dashboard/static/vendor/backstretch/backstretch.js',
-    'core/dashboard/static/js/scripts/frontend.js',
+    'vendor/jquery/jquery.js',
+    'vendor/bootstrap/bootstrap.js',
+    'vendor/waypoints/jquery.waypoints.js',
+    'vendor/parallax/jquery.parallax.js',
+    'vendor/sticky/jquery.sticky.js',
+    'vendor/smoothscroll/smoothscroll.js',
+    'vendor/backstretch/backstretch.js',
+    'js/scripts/frontend.js',
 ];
 
 // End static files ===========================================================
@@ -154,6 +154,6 @@ gulp.task('build', ['css_vendor', 'js_vendor', 'css_app', 'js_app', 'css_front',
 
 // Gulp watch -----------------------------------------------------------------
 gulp.task('watch', function (){
-  gulp.watch('core/dashboard/static/css/**/*.css', ['css']);
-  gulp.watch('core/dashboard/static/js/**/*.js', ['js']);
+  gulp.watch('css/**/*.css', ['css']);
+  gulp.watch('js/**/*.js', ['js']);
 });

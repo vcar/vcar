@@ -4,10 +4,9 @@ from flask import (
 from flask_login import login_required
 
 from . import dashboard
-from ..models.country import Country
-from ..forms.country import CountryForm
-from ..helpers.helpers import paginate
 from ..constants.constants import PER_PAGE
+from ..forms.country import CountryForm
+from ..models.country import Country
 from ...extensions import db
 
 
@@ -24,6 +23,7 @@ def indexCountry():
                            countries=countries
                            )
 
+
 # ----------------------- /dashboard/country/id : Show country ------------------- #
 
 
@@ -34,6 +34,7 @@ def showCountry(id):
     return render_template('dashboard/country/show.html',
                            country=country
                            )
+
 
 # ---------------------- /dashboard/country/new : Add country -------------------- #
 
@@ -57,6 +58,7 @@ def newCountry():
 
     return render_template('dashboard/country/new.html', form=form)
 
+
 # -------------------- /dashboard/country/id/edit : Edit country ----------------- #
 
 
@@ -74,6 +76,7 @@ def editCountry(id):
 
     return render_template('dashboard/country/edit.html', form=form, id=id)
 
+
 # ------------------ /dashboard/country/id/delete : Delete country --------------- #
 
 
@@ -88,6 +91,7 @@ def toggleCountry(id):
     msg = 'activated' if country.status is 1 else 'deactivated'
     flash('Country {}, {} successfully.'.format(country.title, msg), 'success')
     return redirect(url_for('dashboard.indexCountry'))
+
 
 # ------------------ /dashboard/country/id/delete : Delete country --------------- #
 

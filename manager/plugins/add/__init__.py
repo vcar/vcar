@@ -1,0 +1,1 @@
+from .newPlugin import CreateNewPlugin

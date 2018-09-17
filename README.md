@@ -46,6 +46,9 @@ then run :
 
 Python, FLASK, MYSQL, REDIS, ELASTIC, DOCKER, VISJS, NODEJS, BOOTSTRAP, CSS, JINJA2, HTML
 
+## Tips
+- Migrations : [Flask migrations on existing databse](https://www.elastic.co/products/elasticsearch)
+
 ## Platform Insights
 
 * Car data storages

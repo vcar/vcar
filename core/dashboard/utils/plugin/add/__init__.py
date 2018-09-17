@@ -7,7 +7,7 @@ from .src import templates_gen, views_gen, static_contain, info_gen, main_gen
 
 class CreateNewPlugin:
   """docstring for NewPlugin"""
-  base_path = "plugins"
+  base_path = "plugins/community/"
   plugin_name = ""
   plugin_init = ""
 
@@ -113,7 +113,9 @@ class CreateNewPlugin:
 
   def create(self, name, contents):
     root = os.path.join(self.base_path, name)
+    print('========================', root, os.path.exists(root))
     if not os.path.exists(root):
+      print('============================================================================')
       try:
         os.mkdir(root)
         self.new_file(root, "__init__.py", self.plugin_init)

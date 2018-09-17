@@ -1,2 +1,1 @@
-from plugins import PluginManager
-#from .plugins import ViewsManager
+from .plugins import PluginManager
