@@ -83,17 +83,13 @@ def addPlugin():
 @dashboard.route('/plugin/<identifier>/enable', methods=['GET'])
 @login_required
 def enablePlugin(identifier):
-    try:
-        enabled = flask_plugins.get_plugin_from_all(identifier)
-        flash('Plugin {}, updated successfully.'.format(identifier), 'success')
-    except Exception:
-        enabled = None
 
-    if enabled:
-        flash('Plugin {}, enabled successfully.'.format(identifier), 'success')
-    else:
-        flash('Plugin {}, not enabled.'.format(identifier), 'error')
-
+    plugin = Plugin.query.get_or_404(identifier)
+    status = plugin.status if plugin.status is not None else 0
+    plugin.status = 1 - status
+    db.session.commit()
+    msg = 'activated' if plugin.status is 1 else 'deactivated'
+    flash('Plugin {}, {} successfully.'.format(plugin.name, msg), 'success')
     return redirect(url_for('dashboard.indexPlugin'))
 
 
@@ -105,7 +101,18 @@ def enablePlugin(identifier):
 def editPlugin(id):
     """ Edit existing plugin """
 
+    plugin = Plugin.query.get_or_404(id)
+    # you need to define PluginForm before using it.
+    form = PluginForm(obj=plugin)
+
+    if form.validate_on_submit():
+        form.populate_obj(plugin)
+        db.session.commit()
+        flash('Plugin {}, updated successfully.'.format(form.name.data), 'success')
+        return redirect(url_for('dashboard.showPlugin', form=form, id=id))
+
     return render_template('dashboard/plugin/edit.html', id=id)
+
 
 
 # ------------------ /dashboard/plugin/id/delete : Delete platform --------------- #
