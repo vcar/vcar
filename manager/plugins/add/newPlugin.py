@@ -1,6 +1,6 @@
 import os
 import sys
-from struct import config_gen, services_gen, static_contain, info_gen, main_gen
+from .struct import config_gen, services_gen, static_contain, info_gen, main_gen
 import re
 from flask_login import login_required, current_user
 
@@ -10,6 +10,7 @@ class CreateNewPlugin:
 	plugin_name = ""
 	user_name = "unknown"
 	py_version = "2"
+	py_upgrade = ".7"
 	install_requirements=True
 
 	default_contents = {}
@@ -22,12 +23,12 @@ class CreateNewPlugin:
 		#print(os.path.abspath("."))
 		self.py_version = python_version[-1]
 		lowercase = lambda s: s[:1].lower() + s[1:] if s else ''
-		name_list = filter(None, re.split("[, \-!?:]+", name))
+		name_list = list(filter(None, re.split("[, \-!?:]+", name)))
 		name_list[0]=lowercase(name_list[0])
 		self.plugin_name = '_'.join(name_list)
 		try:
 			self.user_name = current_user.username
-		except expression as e:
+		except Exception as e:
 			print(e)
 		
 		if plugin_requirements=="":
@@ -53,11 +54,16 @@ class CreateNewPlugin:
 				},
 				{
 					"path" : "workspace",
-					"names": ["config", "algorithms", "docs"]
+					"names": ["config", "docs"]
 				}
 			], 
 			"packages" : [
-				#{
+				{
+					"path" : "workspace",
+					"names": ["algorithms"],
+					"contains": ['''''']
+				}
+				#,{
 				#	"path" : "workspace/algorithms",
 				#	"names": ["helpers", "models", "preprocess"],
 				#	"contains": ['''''', '''''', '''''']
@@ -100,7 +106,7 @@ class CreateNewPlugin:
 		if not os.path.exists(user_plugins):
 			try:
 				os.mkdir(user_plugins)
-			except Exception, e:
+			except Exception as e:
 				return str(e)
 		
 		root = os.path.join(user_plugins, name)
@@ -113,39 +119,41 @@ class CreateNewPlugin:
 						self.new_dir( os.path.join(root, directory["path"]), n )
 
 				for package in contents["packages"]:
-					for n in xrange(len(package["names"])):
+					for n in range(len(package["names"])):
 						self.new_package( os.path.join(root, package["path"]), package["names"][n], package["contains"][n] )
 
 				for f in contents["files"]:
-					for i in xrange(len(f["names"])):
+					for i in range(len(f["names"])):
 						self.new_file( os.path.join(root, f["path"]), f["names"][i], f["contains"][i])
 
 				env_path = os.path.join(os.path.abspath("."), root, 'workspace/.env')
 				print("env_path : "+env_path)
-				cmd1 = 'sudo virtualenv --python=python'+str(self.py_version)+' '+env_path
-				cmd2 = 'sudo '+env_path+'/bin/pip install gunicorn werkzeug'
+				cmd1 = 'sudo virtualenv --python=python'+str(self.py_version)+self.py_upgrade+' '+env_path
+				cmd2 = 'sudo '+env_path+'/bin/pip install gunicorn werkzeug flask psutil requests Pillow flask-login'
 				cmd3 = 'sudo '+env_path+'/bin/pip install -r '+os.path.join(root, 'workspace/plugin_requirement.txt')
 				
 				os.system(cmd1)
 				os.system(cmd2)
 				if self.install_requirements:
 					os.system(cmd3)
+				# Log files
+				os.system("sudo mkdir -p /usr/local/var/log/vcar/"+self.plugin_name)
 
 				return "True"
-			except Exception, e:
+			except Exception as e:
 				return str(e)
 		else:
 			return "False"
 
 	def new_dir(self, path, name):
 		dir_name = os.path.join(path, name)
-		print "directory : ",dir_name
+		print ("directory : ",dir_name)
 		if not os.path.exists(dir_name):
 			os.mkdir(dir_name)
 
 	def new_package(self, path, name, contain):
 		package_name = os.path.join(path, name)
-		print "package : ",package_name
+		print ("package : ",package_name)
 		if not os.path.exists(package_name):
 			os.mkdir(package_name)
 			self.new_file(package_name, "__init__.py", contain)
@@ -156,6 +164,6 @@ class CreateNewPlugin:
 
 	def run(self):
 		state = self.create(self.plugin_name, self.default_contents)
-		print "\nCreation state : ",state
+		print ("\nCreation state : ",state)
 		return state
 

@@ -1,10 +1,10 @@
 {
-    "identifier": "new_gen_plugin",
-    "name": "new gen plugin",
-    "author": "ramah",
+    "identifier": "gPI",
+    "name": "gPI",
+    "author": "RAMAH",
     "license": "Permissive Free Licenses (BSD)",
-    "description": "testing....",
-    "version": "1.0.0",
+    "description": "General Plugin Interface",
+    "version": "1.2.0",
     "python":"py3",
     "options": {
         "favorite": true,
@@ -12,12 +12,12 @@
         "menu": [
             {
                 "name": "Overview",
-                "action": "new_gen_plugin.index",
+                "action": "gPI.index",
                 "iclass": "fa fa-flask"
             },
             {
                 "name": "Documentation",
-                "action": "new_gen_plugin.docs",
+                "action": "gPI.docs",
                 "iclass": "fa fa-book"
             }
         ]

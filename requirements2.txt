@@ -16,3 +16,7 @@ marshmallow
 networkx
 PyYAML
 https://github.com/vcar/flask-plugins/archive/master.zip
+flask_restplus
+flask_socketio
+requests
+psutil

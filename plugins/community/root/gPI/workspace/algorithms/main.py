@@ -1,17 +1,16 @@
-def set_main_algo(interfaces):
-	main = """
+
 import requests
 from PIL import Image
 from io import BytesIO
 
 class GPI:
 	def __init__(self):
-		\"\"\"General Plugin Interface\"\"\"
+		"""General Plugin Interface"""
 		pass
 		try:
 			pass
 		except Exception as e:
-			print (\"Failed to get resources... {}\\n\".format(e))
+			print ("Failed to get resources... {}\n".format(e))
 	
 	#HTTP requests
 	def get_requests(self, url):
@@ -45,58 +44,12 @@ class GPI:
 
 
 class Main_algo(GPI):
-	\"\"\"docstring for Main_algo\"\"\"
+	"""docstring for Main_algo"""
 	def __init__(self):
 		pass
 		GPI.__init__(self)
 
 	def currentProcessInfo(self, url):
-		\"\"\"This is your First API Interface\"\"\"
+		"""This is your First API Interface"""
 		# To do !!
 		return GPI.get_requests(self, url)
-"""
-	for interface in interfaces:
-		args_dt="No args !!"
-		args=""
-		nb_args=len(interface["InputArgs"])
-		if nb_args>0:
-			args_dt=''''''
-			i = 0
-			args = args+", "
-			for arg in interface["InputArgs"]:
-				i=i+1
-				name = str(arg["ArgName"])
-				Type = str(arg["ArgType"])
-				if name=="":
-					name="arg_name_"+str(i)
-				if Type=="":
-					Type="your type"
-				args = args+name
-
-				args_dt = args_dt + '''Arg'''+str(i)+''' : 
-					'''+name+''' ('''+Type+'''): ....
-				'''
-				if (i+0)<nb_args:
-					args = args+", "
-				
-
-		main = main + '''
-	def '''+str(interface["InterfaceName"])+'''(self'''+args+'''):
-		\"\"\"
-		docstring for '''+str(interface["InterfaceName"])+''' API Interface :
-			Input :
-				'''+args_dt+'''
-			
-			Output : Json Format
-
-			Draw Format : This Output designed to be visualized as '''+str(interface["DrawFormat"])+'''
-
-		\"\"\"
-		# To do !!
-
-		# Return your result in Json Format
-		return {"key":"value"}
-'''
-
-
-	return main
