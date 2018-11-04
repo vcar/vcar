@@ -1,3 +1,4 @@
+import pprint
 from werkzeug.debug import DebuggedApplication
 from core.main import create_app
 
@@ -6,7 +7,7 @@ application = create_app()
 # Enable Flask Interactive Debugger in Development
 if application.debug:
     application.wsgi_app = DebuggedApplication(
-        application.wsgi_app, evalex=True
+        application.wsgi_app, evalex=True, pin_security=False, pin_logging=False
     )
 
 if __name__ == "__main__":

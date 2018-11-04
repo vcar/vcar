@@ -3,62 +3,114 @@
 {% from "dashboard/macros.html" import render_pagination %}
 
 {% block title %}
-    List of plugins | {{ super() }}
+List of plugins | {{ super() }}
 {% endblock %}
 
 {% block content_header %}
-	<section class="content-header">
-		<h1>
-		List of plugins
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="{{ url_for('dashboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
-			<li><a href="{{ url_for('dashboard.indexPlugin') }}">Plugin</a></li>
-			<li class="active">List of plugins</li>
-		</ol>
-	</section>
+<section class="content-header">
+    <h1>
+        List of plugins
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ url_for('dashboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li><a href="{{ url_for('dashboard.indexPlugin') }}">Plugin</a></li>
+        <li class="active">List of plugins</li>
+    </ol>
+</section>
 {% endblock content_header %}
 
 {% block content %}
+
 <div class="row">
-    {% if plugins is not none %}
-		{% for plugin in plugins %}
-			<div class="col-sm-4">
-				<div class="card">
-					<div class="card-selected">
-						<article>
-							<div class="info">
-								<div class="name">{{ plugin.name }}</div>
-								<div class="desc">{{ plugin.description }}</div>
-								<div class="author"><i class="fa fa-user"></i> {{ plugin.author }}</div>
-								<div class="version"><i class="fa fa-code-fork"></i> {{ plugin.version }}</div>
-							</div>
-							<div class="icon"><i class="fa fa-star"></i></div>
-						</article>
-						<figure style="background-image: url(/static/img/dashboard/extension.png)"></figure>
-					</div>
-					<div class="actions">
-						<div class="row">
-							<div class="col-md-4">
-								<a class="action" href="#">
-									<h1>Favorite</h1>
-									<i class="fa fa-heart{{ '-o' if not plugin.options['favorite'] }}"></i></a>
-							</div>
-							<div class="col-md-4">
-								<a class="action" href="{{ url_for('dashboard.enablePlugin', identifier=plugin.identifier) }}">
-									<h1>Status</h1><i class="fa fa-toggle-{{ 'on' if plugin.enabled == true else 'off' }}"></i>
-								</a>
-							</div>
-							<div class="col-md-4">
-								<a class="action" href="{{ url_for('dashboard.showPlugin', identifier=plugin.identifier) }}">
-									<h1>View</h1><i class="fa fa-eye"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		{% endfor %}
-    {% endif %}
+    <div class="col-md-4">
+        <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa fa-plus"></i></span>
+            <div class="info-box-content">
+                <a href="{{ url_for('dashboard.addPlugin') }}" class="info-box-text">Add a Plugin</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="info-box bg-yellow">
+            <span class="info-box-icon"><i class="fa fa-clone"></i></span>
+            <div class="info-box-content">
+                <a href="{{ url_for('dashboard.addPlugin') }}" class="info-box-text">Clone a Plugin</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="info-box bg-red">
+            <span class="info-box-icon"><i class="fa fa-server"></i></span>
+            <div class="info-box-content">
+                <a href="{{ url_for('dashboard.addPlugin') }}" class="info-box-text">Deploy a Plugin</a>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="row">
+    {% for plugin in plugins.items %}
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-selected">
+                <article>
+                    <div class="info">
+                        <div class="name">{{ plugin.name }}</div>
+                        <div class="desc">{{ plugin.description }}</div>
+                        <div class="author"><i class="fa fa-user"></i> {{ plugin.user.username }}</div>
+                        <div class="version"><i class="fa fa-code-fork"></i> {{ plugin.version }}</div>
+                    </div>
+                    <div class="icon"><i class="fa fa-star"></i></div>
+                </article>
+                {% set bg = url_for('images', filename='img/dashboard/extension.png', width=60)  %}
+                <figure style='background-image: url("{{ bg }}")'></figure>
+            </div>
+            <div class="actions">
+                <div class="row">
+                    <div class="col-md-4">
+                        <a class="action" href="#">
+                            <h1>Favorite</h1>
+                            <i class="fa fa-heart{{ '-o' if plugin.status == 1 }}"></i></a>
+                    </div>
+                    <div class="col-md-4">
+                        <a class="action" href="{{ url_for('dashboard.enablePlugin', identifier=plugin.id) }}" alt="Enabled">
+                            <h1>Status</h1>
+                            <i class="fa fa-toggle-{{ 'on' if plugin.status == 1 else 'off' }}"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a class="action" href="{{ url_for('dashboard.showPlugin', id=plugin.id) }}">
+                            <h1>View</h1><i class="fa fa-eye"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% if plugins.pages > 1 %}
+<div class="row">
+    <div class="col-md-12 pagination-box clearfix">
+        {{render_pagination(plugins)}}
+    </div>
+</div>
+{% endif %}
+
+<style>
+    .info-box-content {
+        min-height: 90px;
+        text-align: center;
+        line-height: 75px;
+        font-weight: 700;
+    }
+    .info-box-content:hover {
+        background-color: rgb(42, 42, 42);
+    }
+    .info-box-content:hover a{
+        color: yellow;
+    }
+</style>
+
 {% endblock %}

@@ -1,9 +1,17 @@
-import shutil
-import xmlrpc #py3
-#import xmlrpclib #py2
-from xmlrpc.client import ServerProxy
-#from xmlrpclib import ServerProxy
+import json
+from circus import get_arbiter
+from circus.process import Process
 
+import xmlrpc  # py3
+from xmlrpc.client import ServerProxy
+
+from circus import get_arbiter
+
+arbiter = get_arbiter([{"cmd": "myprogram", "numprocesses": 3}])
+try:
+    arbiter.start()
+finally:
+    arbiter.stop()
 
 # SIGSTOP & SIGCONT for suspeding & resuming plugins
 # Remove a all plugins/ user plugins/ plugin
@@ -11,14 +19,28 @@ from xmlrpc.client import ServerProxy
 class PluginManager(object):
 
     def __init__(self):
-        """Initialize it"""
-        self.status = None
+
+        self.arbiter = None
         self.error = None
         self.server = xmlrpc.client.ServerProxy('http://localhost:9001/RPC2')
-        #self.server = xmlrpclib.ServerProxy('http://localhost:9001/RPC2') #py2
-
 
     # Plugin Manager Methods --------------------------------------------------
+
+    @classmethod
+    def add(init):
+        """
+        add a new plugin
+        """
+        arbiter = None
+        try:
+            arbiter = get_arbiter([json.loads(init)])
+            arbiter.start()
+        finally:
+            arbiter.stop()
+        print(arbiter)
+        return True if arbiter else False
+
+
 
     def getState(self):
         """Return the plugin manager state as struct
@@ -43,7 +65,7 @@ class PluginManager(object):
         return self.server.supervisor.restart()
 
     def reload(self):
-        """Reload the configuration : 
+        """Reload the configuration :
                 @return array result [[added, changed, removed]]
         """
         return self.server.supervisor.reloadConfig()

@@ -1,98 +1,15 @@
-import json
-from multiprocessing.pool import ThreadPool
+import flask_plugins
 from flask import (
     current_app, request, render_template, flash, redirect, url_for
 )
-import flask_plugins
 from flask_login import login_required
+from json2html import *
 
 from . import dashboard
-#from ..utils.plugin.add import CreateNewPlugin
-from ... import CreateNewPlugin
-
-# -------------------- /dashboard/plugin/add  : Add new plugin ------------------ #
-
-
-@dashboard.route('/plugin/add', methods=['GET', 'POST'])
-@login_required
-def addPlugin():
-
-    used_blueprints = [str(x) for x in current_app.blueprints.keys()]
-    html_alertState = '<div id="alertState"  style="display: none"></div>'
-    visibility = '"block"'
-    if request.method == 'POST':
-        plugin_name = request.form['name']
-        desc = request.form['desc']
-        author_name = request.form['author_name']
-        author_mail = request.form['author_mail']
-        contributors_names = (
-            str(request.form['contributors_names']).replace(", ", ",")).split(',')
-        license_type = request.form['license_type']
-        plugin_version = request.form['plugin_version']
-        python_version = request.form['pythonVersion']
-        plugin_requirements = request.form['pluging_requirements']
-        some_additional_interface = json.loads(
-            str(request.form['interface_results']).replace("\r\n", ""))
-        print("========================\n\n\nAPI Interface:\n========================\n{}\n========================\n\n\n".format(
-            some_additional_interface))
-
-        #raise
-
-        try:
-            thread_function = CreateNewPlugin(plugin_name, desc, author_name, author_mail, python_version,
-                                              plugin_requirements, contributors_names, some_additional_interface, license_type, plugin_version)
-            pool = ThreadPool(processes=1)
-            async_result = pool.apply_async(thread_function.run, ())
-            return_val = async_result.get()
-
-            if return_val == "True":
-                '''Plugin has been created successfully'''
-                flash(
-                    plugin_name+' plugin has been created successfully ('+str(return_val)+') !')
-                alert_type = "alert-success"
-                msg_head = "Well done!"
-                msg_content = "Your plugin has been created successfully"
-                msg_info = "Whenever you need to, be sure to restart the server before you start using this Plugin."
-                button_html = '<a class="btn btn-primary" href="/dashboard/plugin/add" role="button">Create a New Plugin</a>'
-
-            elif return_val == "False":
-                '''Plugin name already exist'''
-                flash(plugin_name+' plugin name already exist ('+str(return_val)+') !')
-                alert_type = "alert-warning"
-                msg_head = "WARNING : the plugin name already exist!"
-                msg_content = "Please try another name"
-                msg_info = "Expamle : my name ==> my name_nbr or my name nbr ..."
-                button_html = '<button class="btn btn-primary" onclick="display_none()">' +\
-                              '<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>Try Again' +\
-                              '</button>'
-
-            else:
-                '''ERROR !'''
-                pass
-                raise
-                #ERROR = 1+"1"
-
-        except Exception as e:
-            flash('ERROR! Plugin has not been created! : {}'.format(str(e)))
-
-            alert_type = "alert-danger"
-            msg_head = "Oops! Something went wrong!"
-            msg_content = "Try again with a different Plugin name"
-            msg_info = "If you get this message again, please do not hesitate to contact us"
-            button_html = '<button class="btn btn-primary" onclick="display_none()">' +\
-                          '<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>Try Again' +\
-                          '</button>'
-
-        html_alertState = '<div id="alertState" class="col-md-11"><div class="form-group alert '+alert_type+'" role="alert">' +\
-            '<h4 class="alert-heading">'+msg_head+'</h4>' +\
-            '<p>'+msg_content+'</p>' +\
-            '<hr>' +\
-            '<p class="mb-0">'+msg_info+'</p>' +\
-            '</div>' +\
-            '<div class="form-group">'+button_html+'</div></div>'
-        visibility = '"none"'
-
-    return render_template("dashboard/plugin/add_plugin.html", form_display=visibility, state=html_alertState, blueprints_list=used_blueprints)
+from ..constants.constants import PER_PAGE
+from ..helpers.plugin import create_plugin, delete_plugin, ini2json
+from ..models.plugin import Plugin
+from ...extensions import db
 
 
 # -------------------- /dashboard/plugin/ : List of plugins ------------------ #
@@ -101,28 +18,64 @@ def addPlugin():
 @dashboard.route('/plugin/', methods=['GET'])
 @login_required
 def indexPlugin():
-    plugins = flask_plugins.get_all_plugins()
-    try:
-        plugins = flask_plugins.get_all_plugins()
-    except Exception:
-        plugins = None
-
-    # raise
+    plugins = Plugin.query.filter(Plugin.status != -1).paginate(
+        page=request.args.get('page', 1, type=int),
+        per_page=request.args.get('per_page', PER_PAGE, type=int),
+    )
 
     return render_template('dashboard/plugin/index.html', plugins=plugins)
+
 
 # -------------------- /dashboard/plugin/id : Show plugin -------------------- #
 
 
-@dashboard.route('/plugin/<identifier>', methods=['GET'])
+@dashboard.route('/plugin/<int:id>', methods=['GET'])
 @login_required
-def showPlugin(identifier):
-    try:
-        plugin = flask_plugins.get_plugin_from_all(identifier)
-    except Exception:
-        plugin = None
+def showPlugin(id):
+    plugin = Plugin.query.get_or_404(id)
+    info = json2html.convert(json=plugin.info, table_attributes='class="table table-bordered table-striped"')
+    init = json2html.convert(json=ini2json(plugin.init), table_attributes='class="table table-bordered table-striped"')
 
-    return render_template('dashboard/plugin/show.html', plugin=plugin)
+    return render_template('dashboard/plugin/show.html', plugin=plugin, info=info, init=init)
+
+
+# -------------------- /dashboard/plugin/add  : Add new plugin ------------------ #
+
+
+@dashboard.route('/plugin/add', methods=['GET', 'POST'])
+@login_required
+def addPlugin():
+    blueprints = [str(x) for x in current_app.blueprints.keys()]
+    state = '<div id="alertState"  style="display: none"></div>'
+    visibility = '"block"'
+
+    if request.method == 'POST':
+        data = request.form
+        state, visibility, return_val, created_plugin = create_plugin(data)
+
+        if return_val['state']:
+            plugin = Plugin(
+                name=data['name'],
+                identifier=created_plugin.plugin_name,
+                logo=None,
+                location=created_plugin.location,
+                description=data['desc'],
+                info=created_plugin.info_json,
+                init=created_plugin.config_param,
+                options="",
+                version=created_plugin.plugin_version,
+                status=1
+            )
+
+            db.session.add(plugin)
+            db.session.commit()
+
+            return redirect(url_for('dashboard.indexPlugin'))
+
+    return render_template(
+        "dashboard/plugin/add_plugin.html", form_display=visibility, state=state, blueprints_list=blueprints
+    )
+
 
 # -------------------- /dashboard/plugin/id/enable : Enable plugin ----------- #
 
@@ -130,15 +83,53 @@ def showPlugin(identifier):
 @dashboard.route('/plugin/<identifier>/enable', methods=['GET'])
 @login_required
 def enablePlugin(identifier):
-    try:
-        enabled = flask_plugins.get_plugin_from_all(identifier)
-        flash('Plugin {}, updated successfully.'.format(identifier), 'success')
-    except Exception:
-        enabled = None
 
-    if enabled:
-        flash('Plugin {}, enabled successfully.'.format(identifier), 'success')
+    plugin = Plugin.query.get_or_404(identifier)
+    status = plugin.status if plugin.status is not None else 0
+    plugin.status = 1 - status
+    db.session.commit()
+    msg = 'activated' if plugin.status is 1 else 'deactivated'
+    flash('Plugin {}, {} successfully.'.format(plugin.name, msg), 'success')
+    return redirect(url_for('dashboard.indexPlugin'))
+
+
+# -------------------- /dashboard/plugin/id/edit : Edit platform ----------------- #
+
+
+@dashboard.route('/plugin/<int:id>/edit', methods=['GET', 'POST'])
+@login_required
+def editPlugin(id):
+    """ Edit existing plugin """
+
+    plugin = Plugin.query.get_or_404(id)
+    # you need to define PluginForm before using it.
+    form = PluginForm(obj=plugin)
+
+    if form.validate_on_submit():
+        form.populate_obj(plugin)
+        db.session.commit()
+        flash('Plugin {}, updated successfully.'.format(form.name.data), 'success')
+        return redirect(url_for('dashboard.showPlugin', form=form, id=id))
+
+    return render_template('dashboard/plugin/edit.html', id=id)
+
+
+
+# ------------------ /dashboard/plugin/id/delete : Delete platform --------------- #
+
+
+@dashboard.route('/plugin/<int:id>/delete', methods=['GET'])
+@login_required
+def deletePlugin(id):
+    plugin = Plugin.query.get_or_404(id)
+    plugin.status = -1
+    new_location = delete_plugin(plugin)
+
+    if new_location is not False:
+        plugin.location = new_location
+        db.session.commit()
+        flash('Plugin {}, deleted successfully.'.format(plugin.name), 'success')
     else:
-        flash('Plugin {}, not enabled.'.format(identifier), 'error')
+        flash('Plugin {}, could not be deleted.'.format(plugin.name), 'error')
 
     return redirect(url_for('dashboard.indexPlugin'))

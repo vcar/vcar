@@ -326,7 +326,7 @@ hr.divider {
 }
 
 .info-box-text, .progress-description {
-    font-family: cursive;
+    /*font-family: cursive;*/
     font-size: 14px;
     display: block;
     overflow: hidden;

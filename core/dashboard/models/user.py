@@ -60,7 +60,7 @@ class User(db.Model, UserMixin):
         return self.id
 
     def __repr__(self):
-        return '{} ({})'.format(self.username, self.email)
+        return str(self.username)
 
     def get_role(self):
         return self.role

@@ -31,7 +31,7 @@ class Driver(db.Model):
         self.vars = kwargs
         self.gender = kwargs.get('gender', 3)
         self.fullname = kwargs.get('fullname', 'Anonymous driver')
-        self.user_id = user_id
+        self.user_id = c
         self.country_id = country_id
         self.avatar = kwargs.get('avatar')
         self.status_id = kwargs.get('status_id', 1)

@@ -326,7 +326,7 @@ hr.divider {
 }
 
 .info-box-text, .progress-description {
-    font-family: cursive;
+    /*font-family: cursive;*/
     font-size: 14px;
     display: block;
     overflow: hidden;
@@ -1466,6 +1466,67 @@ pre code {
     color: #fff;
 }
 
+.dark .nav-tabs-custom > .nav-tabs > li.active > a, .dark .nav-tabs-custom > .nav-tabs > li.active:hover > a{
+    color: #eee;
+    background: #2a2a2a;
+}
+.dark .nav-tabs-custom > .nav-tabs > li > a {
+	color: cadetblue;
+}
+.dark .nav-tabs-custom > .nav-tabs {
+	border-bottom-color: #363637;
+}
+.dark .nav-tabs-custom > .nav-tabs > li.active {
+	border-top-color: #7289da;
+}
+.dark .nav-tabs-custom > .nav-tabs > li.active > a {
+    border-left-color: #2a2a2a;
+	border-right-color: #363637;
+}
+.dark .box-footer {
+	border-top: none;
+	background-color: #1a2226;
+}
+
+.dark .nav-tabs-custom > .tab-content {
+	background: #2a2a2a;
+}
+.dark .nav-tabs-custom {
+	background: #2a2a2a;
+}
+
+
+.dark .table-bordered {
+	border: 1px solid #373a3d;
+}
+.dark .table-striped > tbody > tr:nth-of-type(2n+1) {
+	background-color: #2a2a2a;
+}
+.dark .table-bordered > thead > tr > th, .dark .table-bordered > tbody > tr > th, .dark .table-bordered > tfoot > tr > th, .dark .table-bordered > thead > tr > td, .dark .table-bordered > tbody > tr > td, .dark .table-bordered > tfoot > tr > td {
+	border: 1px solid #363637;
+}
+.dark .table .table {
+	background-color: #2a2a2a;
+}
+
+
+.dark .panel-default > .panel-heading {
+	color: #fff;
+	background-color: #1a2226;
+	border-color: #373a3d;
+}
+.dark .panel-default {
+	border-color: #373a3d;
+}
+.dark .panel {
+	background-color: #2a2a2a;
+}
+.dark .panel-group .panel-heading + .panel-collapse > .panel-body, .panel-group .panel-heading + .panel-collapse > .list-group {
+	border-top: 1px solid #373a3d;
+}
+
+
+
 /* .card {
     width: 200px;
     border: 0;
@@ -1554,6 +1615,8 @@ pre code {
 .card.card--template .card-selected:hover figure {
     z-index: -1;
 }
+
+
 /*
 * ----------------------------------------------------------------------------
  * Light theme
@@ -2166,12 +2229,12 @@ pre code {
 }
 
 .light .info-box-text, .light .progress-description {
-    color: #333;
+    color: #fff;
     font-weight: bold;
 }
-.light .info-box-icon{
-    background: rgb(45, 76, 105);
-}
+/*.light .info-box-icon{*/
+    /*background: rgb(45, 76, 105);*/
+/*}*/
 .light .info-box-number {
     color: #555
 }

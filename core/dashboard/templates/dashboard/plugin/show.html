@@ -3,18 +3,18 @@
 {% from "dashboard/macros.html" import render_pagination %}
 
 {% block title %}
-    Vehicle details | {{ super() }}
+    Plugin details | {{ super() }}
 {% endblock %}
 
 {% block content_header %}
 	<section class="content-header">
 		<h1>
-		Vehicle details
+		Plugin details
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="{{ url_for('dashboard.index') }}"><i class="fa fa-dashboard"></i>Home</a></li>
-			<li><a href="{{ url_for('dashboard.indexVehicle') }}">Vehicle</a></li>
-			<li class="active">Vehicle details</li>
+			<li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+			<li><a href="#">Plugin</a></li>
+			<li class="active">Plugin details</li>
 		</ol>
 	</section>
 {% endblock content_header %}
@@ -23,65 +23,96 @@
 {% block content %}
     <div class="row">
         <div class="col-md-12">
-            <div class="box">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#plugin" data-toggle="tab" aria-expanded="false">Plugin</a></li>
+                    <li class=""><a href="#info" data-toggle="tab" aria-expanded="false">Information</a></li>
+                    <li class=""><a href="#options" data-toggle="tab" aria-expanded="true">Options</a></li>
+                    <li class=""><a href="#init" data-toggle="tab" aria-expanded="true">Initialization</a></li>
+                    <li class=""></li>
 
-                <div class="box-header with-border">
-                    <h3 class="box-title">Vehicle : {{ vehicle }}</h3>
-                </div>
+                    <li class="dropdown pull-right">
+                        <a class="dropdown-toggle text-muted" data-toggle="dropdown" href="#" aria-expanded="false">
+                            <i class="fa fa-gear"></i>
+                        </a>
 
-                <div class="box-body">
+                        <ul class="dropdown-menu">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Start</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Restart</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Stop</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Pause</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Resume</a></li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Enable</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Delete</a></li>
+                        </ul>
+                    </li>
+                </ul>
 
-                    <div class="line line-right">
-                        {% if vehicle.image %}
-                            <img class="avatar" src="{{ resized_img_src(config.UPLOAD_VEHICLE + vehicle.image, width=160) }}">
-                        {% else %}
-                            <img class="avatar" src="/static{{ config.UPLOAD_VEHICLE}}/default.png">
-                        {% endif %}
+                <div class="tab-content">
+                    <div class="tab-pane active" id="plugin">
+                        <div class="box-body">
+                            <div class="line line-right">
+                                {% if plugin.logo %}
+                                    <img class="avatar" src="{{ resized_img_src(config.UPLOAD_PLUGIN + plugin.logo, width=160) }}">
+                                {% else %}
+                                    <img class="avatar" src="/static{{ config.UPLOAD_PLUGIN}}/default.png">
+                                {% endif %}
+                            </div>
+
+                            <div class="line">
+                                <strong class="line-title">ID</strong>
+                                <p class="line-body">{{ plugin.id }}</p>
+                            </div>
+
+                            <div class="line">
+                                <strong class="line-title">Name</strong>
+                                <p class="line-body"><b>{{ plugin.name }}</b></p>
+                            </div>
+
+                            <div class="line">
+                                <strong class="line-title">Description</strong>
+                                <p class="line-body"><b>{{ plugin.description }}</b></p>
+                            </div>
+
+                            <div class="line">
+                                <strong class="line-title">User</strong>
+                                <p class="line-body"><b>{{ plugin.user}}</b></p>
+                            </div>
+
+                            <div class="line">
+                                <strong class="line-title">Version</strong>
+                                <p class="line-body">{{ plugin.version }}</p>
+                            </div>
+
+                            <div class="line">
+                                <strong class="line-title">Status</strong>
+                                <p class="line-body">{{ plugin.status }}</p>
+                            </div>
+
+                            <div class="line">
+                                <strong class="line-title">Creation</strong>
+                                <p class="line-body">{{ plugin.created.strftime('%d-%m-%Y')}}</p>
+                            </div>
+                        </div>
+
+                        <div class="box-footer form-footer">
+                            <a href="{{ url_for('dashboard.editPlugin', id=plugin.id) }}" class="btn btn-success" >Edit</a>
+                            <a href="{{ url_for('dashboard.deletePlugin', id=plugin.id) }}" class="btn btn-danger" >Delete</a>
+                            <a href="{{ url_for('dashboard.indexPlugin') }}" class="btn btn-default pull-right">Back to list</a>
+                        </div>
+
                     </div>
-
-                    <div class="line">
-                        <strong class="line-title">ID</strong>
-                        <p class="line-body">{{ vehicle.id }}</p>
+                    <div class="tab-pane" id="info">
+                        {{ info | safe}}
                     </div>
-
-                    <div class="line">
-                        <strong class="line-title">User</strong>
-                        <p class="line-body">{{ vehicle.user }}</p>
+                    <div class="tab-pane" id="options">
+                        Options ...
                     </div>
-
-                    <div class="line">
-                        <strong class="line-title">Brand</strong>
-                        <p class="line-body">{{ vehicle.brand }}</p>
+                    <div class="tab-pane" id="init">
+                        {{ init | safe }}
                     </div>
-
-                    <div class="line">
-                        <strong class="line-title">Model</strong>
-                        <p class="line-body">{{ vehicle.model | default('--') }}</p>
-                    </div>
-
-                    <div class="line">
-                        <strong class="line-title">Driver</strong>
-                        <p class="line-body">{{ vehicle.driver | default('--') }}</p>
-                    </div>
-
-                    <div class="line">
-                        <strong class="line-title">Status</strong>
-                        <p class="line-body">
-                            <span class="label bg-{{ vehicle.status.color }}">{{ vehicle.status.title }}</span>
-                        </p>
-                    </div>
-
-                    <div class="line">
-                        <strong class="line-title">Creation</strong>
-                        <p class="line-body">{{ vehicle.created.strftime('%d-%m-%Y')}}</p>
-                    </div>
-
-                </div>
-
-                <div class="box-footer form-footer">
-                    <a href="{{ url_for('dashboard.editVehicle', id=vehicle.id) }}" class="btn btn-success" >Edit</a>
-                    <a href="{{ url_for('dashboard.deleteVehicle', id=vehicle.id) }}" class="btn btn-danger" >Delete</a>
-                    <a href="{{ url_for('dashboard.indexVehicle') }}" class="btn btn-default pull-right">Back to list</a>
                 </div>
             </div>
         </div>
