@@ -1,5 +1,5 @@
 import os
-
+from core.config.config import DebugConfig
 
 def config_template(plugin_name, user_name, abs_path=None):
     if abs_path is None:
@@ -14,7 +14,7 @@ command=""" + abs_path + """/plugins/community/""" + user_name + """/""" + plugi
 autostart=true
 autorestart=true
 
-stderr_logfile=/usr/local/var/log/vcar/""" + plugin_name + """/""" + plugin_name + """.err.log
+stderr_logfile= """ + DebugConfig.PLUGIN_LOG_ROOT_FOLDER + """/""" + plugin_name + """/""" + plugin_name + """.err.log
 stderr_logfile_maxbytes=2MB
-stdout_logfile=/usr/local/var/log/vcar/""" + plugin_name + """/""" + plugin_name + """.out.log
+stdout_logfile= """ + DebugConfig.PLUGIN_LOG_ROOT_FOLDER + """/""" + plugin_name + """/""" + plugin_name + """.out.log
 stdout_logfile_maxbytes=2MB"""

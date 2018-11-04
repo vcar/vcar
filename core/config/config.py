@@ -53,6 +53,9 @@ class DefaultConfig(object):
     DEBUG_TB_TEMPLATE_EDITOR_ENABLED = True
     DEBUG_TB_PROFILER_ENABLED = True
 
+    # Logs
+    PLUGIN_LOG_ROOT_FOLDER = "/var/log/vcar"
+
 
 # ---------------------------- Debug Configuration -------------------------- #
 

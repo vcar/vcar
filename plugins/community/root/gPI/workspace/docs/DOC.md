@@ -1,1 +1,0 @@
-## How to start using this plugin? *DOC*
