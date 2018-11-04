@@ -1,0 +1,22 @@
+    
+ vcar
+  ├── api                         #
+  │   ├── blog                    #  Blog-related API directory
+  │   │   ├── db_crud.py          #
+  │   │   ├── endpoints           #  API namespaces and REST methods
+  │   │   │   ├── add_plugin.py   #
+  │   │   │   └──                 #
+  │   │   ├── parsers.py          #  Argument parsers
+  │   │   └── serializers.py      #  Output serializers
+  │   └── restplus.py             #  API bootstrap file
+  │
+  ├── core
+  │   ├──
+  │   └──
+  ├── manager
+  │   ├──
+  │   └──
+  ├── plugins
+  │   ├──
+  │   └──
+  │

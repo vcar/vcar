@@ -1,5 +1,8 @@
-import xmlrpc  # py3
+import shutil
+import xmlrpc #py3
+#import xmlrpclib #py2
 from xmlrpc.client import ServerProxy
+#from xmlrpclib import ServerProxy
 
 
 # SIGSTOP & SIGCONT for suspeding & resuming plugins
@@ -12,6 +15,8 @@ class PluginManager(object):
         self.status = None
         self.error = None
         self.server = xmlrpc.client.ServerProxy('http://localhost:9001/RPC2')
+        #self.server = xmlrpclib.ServerProxy('http://localhost:9001/RPC2') #py2
+
 
     # Plugin Manager Methods --------------------------------------------------
 

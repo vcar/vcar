@@ -1,0 +1,1 @@
+#Your dependencies here!  [pip freeze >  vcar/plugins/community/root/gPI/workspace/plugin_requirement.txt]

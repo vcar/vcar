@@ -10,8 +10,8 @@ from .dashboard.models.user import User
 from .extensions import (
     db, migrate, mail, toolbar, images, login_manager, redis, socketio, misaka
 )
-# plugin_manager
 
+from api import api
 
 
 __all__ = ['create_app']
@@ -20,7 +20,8 @@ __all__ = ['create_app']
 
 DEFAULT_BLUEPRINTS = (
     dashboard,
-    filters
+    filters,
+    api
 )
 
 # ------------------------ Create a flask application ----------------------- #
