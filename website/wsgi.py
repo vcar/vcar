@@ -6,4 +6,4 @@ if application.debug:
             application.wsgi_app, evalex=True)
 
 if __name__ == "__main__":
-    application.run()
+    application.run(debug=True, use_reloader=True)

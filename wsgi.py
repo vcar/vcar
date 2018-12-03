@@ -11,7 +11,7 @@ if application.debug:
     )
 
 if __name__ == "__main__":
-    application.run()
+    app.run(debug=True, use_reloader=True)
 
 
 # mode d'affichage plugin
